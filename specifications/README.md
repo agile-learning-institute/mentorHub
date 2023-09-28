@@ -2,6 +2,18 @@
 
 The institute platform (new name needed) will help support institute operations. The platform will be built up over time by members, and will start with an SRE First approach, where we build CD to configure infrastructure, CI Pipelines to deploy code, and observable stub level components ready for further enhancements. We are starting by designing the desired developer experience. Through these gates, all future ALI engineers will pass!
 
+## Table of Contents
+
+- [Personas](#personas)
+- [Meningful Outcomes](#meaningful-outcomes)
+  - [Now](#now)
+  - [Next](#next)
+  - [Later](#later)
+- [Microservice Domains](#microservice-bounded-domains)
+- [Infrastructure](#infrastructure)
+- [Release Management](#release-management-environments)
+- [Sprint Planning](#sprint-planning)
+
 ## Personas
 
 - Sam the SRE is responsible for....
