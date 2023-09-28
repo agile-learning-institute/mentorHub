@@ -1,6 +1,6 @@
 # institute Projects
 
-the institute prefix is used for services that are designed, built, and run by our members to support the operations of the institute. See [here](https://github.com/orgs/agile-learning-institute/repositories?q=institute&type=all) for a list of active repositories.
+the institute- prefix is used for services that are designed, built, and run by our members to support the operations of the institute. See [here](https://github.com/orgs/agile-learning-institute/repositories?q=institute&type=all) for a list of active repositories.
 
 ## Design Specifications
 
