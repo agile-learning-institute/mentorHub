@@ -9,6 +9,7 @@ The institute platform (new name needed) will help support institute operations.
 - A the API Engineer
 - D the Data Engineer
 - T the QA Tester
+- P the Production User
 
 ## Meaningful Outcomes 
 
@@ -40,6 +41,9 @@ The institute platform (new name needed) will help support institute operations.
 ## Microservice Bounded Domains
 
 - Partner (a monolithic collection of Partner documents)
+- Person (Next)
+- Search (Next)
+- Identity (Next)
 
 Each domain will have
 
