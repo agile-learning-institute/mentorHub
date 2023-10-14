@@ -1,10 +1,23 @@
 # The Institute Platform
 
-The Institute Platform is made up of several microservices, and supports the operations of the institute. These services are designed, built, and run by our members to support our operations. See [here](https://github.com/orgs/agile-learning-institute/repositories?q=institute&type=all&sort=name) for a list of active repositories.
+The Institute Platform is made up of a collection of microservices, and supports the operations of the institute. These services are designed, built, and run by our members to support our operations. See [here](https://github.com/orgs/agile-learning-institute/repositories?q=institute&type=all&sort=name) for a list of active repositories.
 
 ## Design Specifications
 
 See [here](./specifications/README.md) for the Institute Platform Design specifications
+
+## Team
+
+- architect: Mike Storey
+- lead-engineer: Karmen Durbin
+- ui-engineer: TBD
+- api-engineer: TBD
+- data-engineer: TBD
+- reliability-engineer: TBD
+
+## Trello Board
+
+TODO: - Get instructions from Karmen, decide how we will do sprints. How can someone volunteer to work on a sprint?
 
 ## Before Contributing
 
