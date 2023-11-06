@@ -16,6 +16,13 @@ has a /src/docker folder with the following files:
 
 docker-build.sh uses docker build to create a single image targeted to the users architecture. docker-push.sh builds multi-architecure images that support amd64 (intel) and arm64(apple) architectures.
 
+to use docker-push.sh you must have [configured your docker client](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry) to connect to the agile-learning-institute container package registry, and you have to create and initilize a docker builder. You can do that with these commands
+
+```bash
+docker buildx create --name institutebuilder --use
+docker buildx inspect institutebuilder --bootstrap
+```
+
 ### CI Notes
 
 docker-push.sh should probably be depricated once CI is working properly.
