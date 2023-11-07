@@ -4,13 +4,14 @@ The Institute Platform is made up of a collection of microservices, and you can 
 
 ## Overview
 
-All of the [run container commands](#commands) can be used to run different combinations of services. A ~/local folder is used to fetch a docker-compose.yaml file, and executing a ```docker-compose up --detach``` command. A few seconds after executing that command you should see something similar to
+All of the [run container commands](#run-commands) can be used to run different combinations of services. Each of them will download a bash script that creates a ~/local folder, fetchs a docker-compose.yaml file, and then executes the ```docker-compose up --detach``` command. Ten to twenty seconds after executing that command you should see something similar to the following
 
 ```bash
  ✔ Network local_default                   Created
  ✔ Container local-institute-mongodb-1     Healthy
  ✔ Container local-institute-mongosh-1     Exited
  ✔ Container local-institute-person-api-1  Started
+ ✔ Container local-institute-person-ui-1   Started
  ```
 
 Once the containers are running, you can use the follwing commands to stop and start them:
@@ -31,7 +32,17 @@ docker compose down
 docker compose up --detach
 ```
 
-## Commands
+### Pull the latest containers from the registry
+
+```bash
+cd ~/local
+docker compose down
+docker image pull ghcr.io/agile-learning-institute/institute-mongosh:latest
+docker image pull ghcr.io/agile-learning-institute/institute-person-api:latest
+docker image pull ghcr.io/agile-learning-institute/institute-person-ui:latest
+```
+
+## Run Commands
 
 ### Run the person triplet
 
@@ -55,4 +66,4 @@ You can now use the [Curl Commands](https://github.com/agile-learning-institute/
 curl https://raw.githubusercontent.com/agile-learning-institute/institute/main/docker-compose/run-local-db.sh | /bin/bash
 ```
 
-You can now use the [Mongo Compass](https://github.com/agile-learning-institute/institute-mongodb#optionally) documented in the [institute-mongodb](https://github.com/agile-learning-institute/institute-mongodb) repository.
+You can now use [Mongo Compass](https://github.com/agile-learning-institute/institute-mongodb#optionally) as documented in the [institute-mongodb](https://github.com/agile-learning-institute/institute-mongodb) repository.
