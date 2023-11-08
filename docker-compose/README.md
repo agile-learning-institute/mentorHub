@@ -37,6 +37,8 @@ docker compose up --detach
 ```bash
 cd ~/local
 docker compose down
+docker image prune -f
+docker volume prune -f
 docker image pull ghcr.io/agile-learning-institute/institute-mongosh:latest
 docker image pull ghcr.io/agile-learning-institute/institute-person-api:latest
 docker image pull ghcr.io/agile-learning-institute/institute-person-ui:latest
