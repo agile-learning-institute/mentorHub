@@ -49,10 +49,10 @@ We have identified the following people as stakeholders in this system, that is 
 
 ### Later
 
-- ?Who? approves a pull request, and merges the branch into main and then multi-architectre containers are built and deployed into a cloud hosted Dev environment where initial end-to-end testing occurs.
-- ?Who? selects a domain, clicks a promote to Test button and then the selected services are promoted from the Dev environment into the Test environment.
-- ?Who? clicks a promote to Staging button and then all of the services in the Test environment are poromoted to the staging environment.
-- ?Who? clicks a Go-Live! button and then all of the services in the Staging environment are poromoted to the production environment.
+- PR Reviewer approves a pull request, and merges the branch into main and then multi-architectre containers are built and deployed into a cloud hosted Dev environment where initial end-to-end testing occurs.
+- Testing Lead uses a ```/test``` discord bot to specify a domain to be promoted to the test environment and then the selected services are promoted from the Dev environment into the Test environment.
+- Release Manager uses a ```/stage``` discord bot and then all of the services in the Test environment are poromoted to the staging environment.
+- Product Manager uses a ```/go-live!``` discord bot and then all of the services in the Staging environment are poromoted to the production environment.
 - Software Engineers execute a single bash command and then a local database, with meaningful test data, is available for testing.
 - UI/UX Engineers issue a single bash command and then a local API and Backing database are available for testing.
 - Software QA Engineers issue a single bash command and then the solution is available for local testing.
@@ -72,8 +72,8 @@ We have identified the following people as stakeholders in this system, that is 
 - Member clicks a link from a learning resource and then the system keeps track of when a member starts learning a topic.
 - Members mark a resource as completed and then the system can track rough duration to complete a resource, improve resource planning durations, and guage individual performance.
 - Mentor and  Member can co-edit the members cirriculum in real time
-- Member signs up on SquareSpace and then their information is added to the institute databases, and welcome abord email is created and sent that includes instructions on how to schedule introduction meeting, how to get a userID for the system.
-- Mentor fills out a become-a-mentor online form and then they are added to the institute databases, and a welcome aboard email is created.
+- Member signs up on SquareSpace and then their information is added to the institute databases, and welcome abord email is sent that includes instructions on how to schedule introduction meeting, how to get a userID for the system.
+- Mentor fills out a become-a-mentor online form and then they are added to the institute databases, and a welcome aboard email is sent that includes instructions on how to schedule introduction meeting, how to get a userID for the system.
 - Members achieve a level of competency and we issue digital certifications
 - Offboarding automation - data security (ForgetMe)
 - GitHub Usage stats on search dashboard
