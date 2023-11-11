@@ -26,9 +26,15 @@ We use Automatic token authentication to access the registry. See [here](https:/
 ## Access Checklist
 
 - Image Package is Linked to the Repository building the image - in Package Settings
+- Connect the Repo to the Package page
 - Package Access - Make sure repository access is Read-Write or Admin in Package settings
-- Repository Settings, Actions, General then select Read and Write
+- Repository Settings, Actions, General, Workflow permissions then select Read and Write
 
 ## Backlog
 
 - [ ] Optimize for Multi-Architecture builds
+- [ ] Is git commit hash the best patch value?
+  - Can we "search" for a hash to find code?
+  - Should we have CI create a "release"?
+- [ ] Deploy to ECS
+- [ ] Package Hook to Trigger ECS pull?
