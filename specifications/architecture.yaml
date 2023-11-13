@@ -1,0 +1,65 @@
+mentorHub:
+  domains:
+    - data: mongodb
+    - identity:
+      auth0:
+    - search:
+      elements:
+      - api:
+        docker: whichDockerfile
+        action: githubAction.yaml
+        github: repo link
+      - ui:
+        docker: whichDockerfile
+        action: githubAction.yaml
+        github: repo link
+    - person:
+      elements:
+      - api:
+        docker: whichDockerfile
+        action: githubAction.yaml
+        github: repo link
+      - ui:
+        docker: whichDockerfile
+        action: githubAction.yaml
+        github: repo link
+    - partner:
+      elements:
+      - api:
+        docker: whichDockerfile
+        action: githubAction.yaml
+        github: repo link
+      - ui:
+        docker: whichDockerfile
+        action: githubAction.yaml
+        github: repo link
+    - topics:
+      elements:
+      - api:
+        docker: whichDockerfile
+        action: githubAction.yaml
+        github: repo link
+      - ui:
+        docker: whichDockerfile
+        action: githubAction.yaml
+        github: repo link
+    - cirriculum:
+      elements:
+      - api:
+        docker: whichDockerfile
+        action: githubAction.yaml
+        github: repo link
+      - ui:
+        docker: whichDockerfile
+        action: githubAction.yaml
+        github: repo link
+    - encounters:
+      elements:
+      - api:
+        docker: whichDockerfile
+        action: githubAction.yaml
+        github: repo link
+      - ui:
+        docker: whichDockerfile
+        action: githubAction.yaml
+        github: repo link
