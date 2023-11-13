@@ -8,56 +8,55 @@ As the primary purpose of this platform is to provide experience to apprentices,
 
 We have identified the following people as stakeholders in this system, that is to say these people will be effected by this platform.
 
-- Board Members
-- Pivoters
-- Career first professionals
+- Potential Members
+  - Someone interested in ALI
+  - Curious novice unsure where to begin
+  - Pivoters
+  - Person changing careers
+  - "Career first" professionals
 
-- code schools
-- after school clubs
-
-- someone interested in. ALI
 - Members
-- Members
-- Engineers
-- person changing careers
-- apprentices
-- Software Engineers
-- API Engineers
-- curious novice unsure where to being
-- Data Engineers
-- Site Reliability Engineers
-- UI/UX Engineers
-- Apprentice
-- Apprentice Candidate
+  - Apprentice
+  - Apprentice Candidate
+  - Software Engineers
+    - API Engineers
+    - Data Engineers
+    - Site Reliability Engineers
+    - UI/UX Engineers
 
 - Staff
-- Accounting
-- Marketing
-- CFO
-- CFO
-- CFO
+  - Mentors
+  - Volunteers
+  - CFO
+  - CMO
 
-- recruiters
-- Employers
-- Businesses
-- small business pwmer
 - Partners
-- startup founders
-- Open source. contributors
-- allyship focused grooups
-- Client
-- Mentors
-- Mentors
+  - Allyship focused grooups
+  - Businesses that want to share cause
+  - Code schools
+  - After school clubs
 
-- businesses that want to share cause
-- volunteers
+- Potentail Employers
+  - Recruiters
+  - Small Business owner
+  - Startup Founders
 
-- prospective donors
+- Board Members
+
+- Prospective donors
 - Donors
+
+- Open source. contributors
+
+- Client (employee of company paying to use software)
 
 ## Personas
 
+For the purpose of documenting Hills statements, we will use the following persona's. These persona's can also act as a proxy for a RBAC Role.
+
 ### Developer Personas
+
+These personas represent members who are contributing to the institute platform to gain experience in different areas, while working with a real SDLC with software deployed through automation and change management systems.
 
 - Sam the Software Engineer approves PR's to the repos they own
 
@@ -71,7 +70,7 @@ Maven the Mentor mentors
 
 Appollo the Apprentice learns
 
-- F the Financioal Officer does the books
+F the Financioal Officer does the books
 
 - Marketer finds new members, mentors, partners, and donors
 
