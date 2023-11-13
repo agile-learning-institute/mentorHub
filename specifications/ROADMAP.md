@@ -52,27 +52,31 @@ We have identified the following people as stakeholders in this system, that is 
 
 ## Personas
 
-For the purpose of documenting Hills statements, we will use the following persona's. These persona's can also act as a proxy for a RBAC Role.
+For the purpose of documenting Hills statements, we will use the following persona's. These persona's can also act in some cases as a proxy for a RBAC Role.
 
 ### Developer Personas
 
-These personas represent members who are contributing to the institute platform to gain experience in different areas, while working with a real SDLC with software deployed through automation and change management systems.
+These personas represent software engineers who are designing, building, and running the mentorHub platform.
 
-- Sam the Software Engineer approves PR's to the repos they own
+- Sam the Software Engineer is responsible for the code in one or more repositories, and for approving pull requests in those repositories.
 
-- Tester does end-to-end testing
+- Tonya the Tester leads end-to-end testing of the code, and manages releases of components into the Testing Environment, and approves the promotion of code into the Staging environment.
 
-- Product Manager manages releases
+- Rhonda the Release Manager is responsible for coordinating the release of new versions of code with the SQA team. They work with Tonya to promote release candidates from the Testing environment into the Staging environment.
+
+- Pam the Product Manager is responsible for coordinating the release of new versions of code between Rhonda and the Marketing team.
 
 ### End User Personas
 
-Maven the Mentor mentors
+These persona's represent hands-on-keyboard Users of the mentorHub platform.
 
-Appollo the Apprentice learns
+- Maven the Mentor provides mentorship services to members, and colaborates with other Mentors to imrpove the quality of learning resources.
 
-F the Financioal Officer does the books
+- Appollo the Apprentice learns new technology by working through an agile cirriculum crafted with their mentor.
 
-- Marketer finds new members, mentors, partners, and donors
+- Fran the Financioal Officer does the books, and the taxes, and issues receipts for tax deductable donations.
+
+- Meredith the Marketer conducts marketing campaigns to find new members, mentors, partners, and donors.
 
 ## Roadmap of Meaningful Outcomes
 
