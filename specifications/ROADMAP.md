@@ -98,70 +98,79 @@ These persona's represent hands-on-keyboard Users of the mentorHub platform.
 
 #### SRE First Outcomes
 
-- Sam the Software Engineer approves a pull request, and merges the branch into main and then multi-architectre containers are built and deployed into a cloud hosted Dev environment where initial end-to-end testing occurs.
-
-- Tonya the Tester uses a /test discord bot to specify a domain to be promoted to the test environment and then the selected services are promoted from the Dev environment into the Test environment.
-
-- Rhonda the Release Manager uses a /stage discord bot and then all of the services in the Test environment are poromoted to the staging environment.
-
-- Sree the SRE uses a /go-live! discord bot and then all of the services in the Staging environment are poromoted to the production environment.
-
 - a scrum master does ??? and then the team bulids software
 
-- Sam the Software Engineer reads a repo readme and can eaisly set up their local development environment, develop and locally test their code.
+- Sam the Software Engineer reads a repo readme and can eaisly set up their local development environment, develop and locally test their code with local backing services.
 
-- Sam the Software Engineers executes a single bash command and then all the needed backing services for their work are run locally for testing.
+- Sam the Software Engineer approves a pull request, and merges a feature branch into main and then multi-architectre containers are built and deployed into a cloud hosted Dev environment where initial end-to-end testing occurs.
 
 - Tonya the Tester issues a single bash command and then the solution is available for local testing.
 
-- Sree the SRE reviews a Promethius/Grafana monitoring portal including health information from system API's, and then they can view performance and throughput metrics to support incident response.
+- Sree the SRE runs a runbook script and then services from one environment are promtoted into another.
 
 - Sree the SRE deploies a database management container and then schema constraints and migrations are executed when database configuration updates are required.
 
-- Sree the SRE opens an admin view and then they can review Versions of different components of the system, configuration values, and schema versions, and other information helpful during incident response.
+- Sree the SRE opens an admin view in a SPA and then they can review Versions of different components of the system, configuration values, and other information helpful during incident response.
 
-- Sam the Software Engineer creates black-box testing for thier components and then they can be more confident in the performance of their code, and they can provide a starting place for the SQA team to build automated end-to-end testing.
+- Sree the SRE reviews a Promethius/Grafana monitoring portal including health information from system API's, and then they can view performance and throughput metrics to support incident response.
+
+#### SRE Later
+
+- *Sam the Software Engineer creates black-box testing for thier components and then they can be more confident in the performance of their code, and they can provide a starting place for the SQA team to build automated end-to-end testing.
+
+- *Tonya the Tester uses a /test discord bot to specify a domain to be promoted to the test environment and then the selected services are promoted from the Dev environment into the Test environment.
+
+- *Rhonda the Release Manager uses a /stage discord bot and then all of the services in the Test environment are poromoted to the staging environment.
 
 #### End User Outcomes
 
-- Apollo the Apprentice clicks a button and is presented a tooling report w/ links to any failing or needed hardware or software issues to address
+- Any user confirms that they want their data removed and then their account is deleted and any PII related to their identity is removed from the system in compliance with the EU General Data Protection Regulations (GDPR).
+
+- Automated Onboarding
+  - Member signs up on SquareSpace and then their information is added to the institute databases, and welcome abord email is sent that includes instructions on how to schedule introduction meeting, how to get a userID for the system.
+
+  - Mentor fills out a become-a-mentor online form and then they are added to the institute databases, and a welcome aboard email is sent that includes instructions on how to schedule introduction meeting, how to get a userID for the system.
+
+- Apollo the Apprentice clicks a button and is presented a tooling report w/ links to any failing or needed hardware or software issues to address.
+
+- Members achieve a level of competency and we issue digital certifications
+GitHub Usage stats on search dashboard
+
+This is the big one - there is a single great hill in here somewhere, probably Slice of Function (birthday cake).
 
 - Members uses a reverse resume tool to set goals for their curriculum
   - Mentor records resume in the system
   - Dream Job Resume on dashboard
   - Member opens dashboard and can easily track progress and or accomplishments
 
-- Mentors and Members achieve goals and get gamification rewards
+This section is about the Mentor/Apprentice Encounter and Cirriculum, above concept will impact these
+
+- Mentor selects a script for an encounter, and then eaisly records notes about the encounter in the members profile and the system can analyise the data to suggest improvements.
 
 - Member reviews on-line cirriculum and can quickly see all that they have acomplished, the things they should be working on now, topics that they are probably covering next, and long term goals that they will acieve later.
 
-- Member signs up on SquareSpace and then their information is added to the institute databases, and welcome abord email is sent that includes instructions on how to schedule introduction meeting, how to get a userID for the system.
+- Mentor/Mentees get to collaborate in realtime on the best curriculum
+  - Mentor and Member can co-edit the members cirriculum in real time
+- Mentors assign learning resources to a member, and then the system warns them if they are assigning too much work based on the members historical performance and observed average time to complete a resource.
+- Member clicks a link from a learning resource and then the system keeps track of when a member starts learning a topic.
+- Members mark a resource as completed and then the system can track rough duration to complete a resource, improve resource planning durations, and guage individual performance.
+- Mentors collect and classify topical learning resources and then share between mentors
 
-- Members achieve a level of competency and we issue digital certifications
-GitHub Usage stats on search dashboard
+#### Utilities
 
-- Mentor/Mentees get to collaborate in realtime on the best curriculum,
-- Mentor and Member can co-edit the members cirriculum in real time
+- Any User opens a chatbot in the system and recieves support on how to use the system, or receives guidance on assignement or other questions.
+
+#### VR Later
+
 - Mentors and Mentees meet in Virtual Reality and then remote work and virtual workspaces become a place where people can collaborate more effectively and express themselves more fully.
 
-- Mentor fills out a become-a-mentor online form and then they are added to the institute databases, and a welcome aboard email is sent that includes instructions on how to schedule introduction meeting, how to get a userID for the system.
-
-- Mentor selects a script for an encounter, and then eaisly records notes about the encounter in the members profile.
-
-- Mentors assign learning resources to a member, and then the system warns them if they are assigning too much work based on the members historical performance and observed average time to complete a resource.
-
-- Mentors collect and learning style and level classification topical resources and then share between themselves
-  - Members mark a resource as completed and then the system can track rough duration to complete a resource, improve resource planning durations, and guage individual performance.
-
-  - Member clicks a link from a learning resource and then the system keeps track of when a member starts learning a topic.
-
-- User can use chatbot to help find information in the platform or seek help
-- Offboarding automation - data security (ForgetMe)
+#### Integrations
 
 - Marketing can use data to create graphs to easily identify and define trends
 - Marketing does ? - email campaigns, addWords campaigns, others?
+- Marketing member clicks a button and then donor receipts are sent out
+
 - Accounts and ledgers provide all needed documentation for tax purposes
-- staff member uses email list to easily send donor receipts
 - Accounts and Ledgers provide meaningful metrics to the board
 - Accountant is able to easily track spending and expenses in an easy and transparent way to share with board
 - Finance - does ? - end-of-year receipts, taxes, payroll, reporting?
