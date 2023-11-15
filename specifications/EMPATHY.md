@@ -57,7 +57,7 @@ Overview
 - Avoda Coaching
   - what do you want to ficus on today
   - what are your goals
-  - The EngineerKit mentor trainings, the coaching institute framework
+  - The EngineerKit mentor trainings, the coaching framework
   - What do you want to focus on today
 
 - Coaching as a Mentor

@@ -6,7 +6,7 @@ Hills statement
 
 ## Needs
 
-### Statement Slug
+### StatementSlug
 
 - [Persona] needs a way to [take action]
 - Story

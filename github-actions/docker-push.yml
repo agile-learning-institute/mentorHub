@@ -36,4 +36,4 @@ jobs:
           platforms: linux/amd64,linux/arm64
           file: ./src/docker/Dockerfile 
           push: true
-          tags: ghcr.io/agile-learning-institute/<<domain>><<element>>:latest
+          tags: ghcr.io/agile-learning-institute/mentorhub-<<domain>>-<<element>>:latest

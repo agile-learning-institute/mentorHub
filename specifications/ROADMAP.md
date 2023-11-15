@@ -127,9 +127,9 @@ These persona's represent hands-on-keyboard Users of the mentorHub platform.
 - Any user confirms that they want their data removed and then their account is deleted and any PII related to their identity is removed from the system in compliance with the EU General Data Protection Regulations (GDPR).
 
 - Automated Onboarding
-  - Member signs up on SquareSpace and then their information is added to the institute databases, and welcome abord email is sent that includes instructions on how to schedule introduction meeting, how to get a userID for the system.
+  - Member signs up on SquareSpace and then their information is added to the mentorHub databases, and welcome abord email is sent that includes instructions on how to schedule introduction meeting, how to get a userID for the system.
 
-  - Mentor fills out a become-a-mentor online form and then they are added to the institute databases, and a welcome aboard email is sent that includes instructions on how to schedule introduction meeting, how to get a userID for the system.
+  - Mentor fills out a become-a-mentor online form and then they are added to the mentorHub databases, and a welcome aboard email is sent that includes instructions on how to schedule introduction meeting, how to get a userID for the system.
 
 - Apollo the Apprentice clicks a button and is presented a tooling report w/ links to any failing or needed hardware or software issues to address.
 
