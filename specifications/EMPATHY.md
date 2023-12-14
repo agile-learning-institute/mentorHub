@@ -1,4 +1,50 @@
-# Persona Empathy Maps
+# Stakeholders
+
+We have identified the following people as stakeholders in this system, that is to say these people will be effected by this platform.
+
+- Potential Members
+  - Someone interested in ALI
+  - Curious novice unsure where to begin
+  - Pivoters
+  - Person changing careers
+  - "Career first" professionals
+
+- Members
+  - Apprentice
+  - Apprentice Candidate
+  - Software Engineers
+    - API Engineers
+    - Data Engineers
+    - Site Reliability Engineers
+    - UI/UX Engineers
+
+- Staff
+  - Mentors
+  - Volunteers
+  - CFO
+  - CMO
+
+- Partners
+  - Allyship focused grooups
+  - Businesses that want to share cause
+  - Code schools
+  - After school clubs
+
+- Potentail Employers
+  - Recruiters
+  - Small Business owner
+  - Startup Founders
+
+- Board Members
+
+- Prospective donors
+- Donors
+
+- Open source. contributors
+
+- Client (employee of company paying to use software)
+
+## Persona Empathy Maps
 
 Overview
 
