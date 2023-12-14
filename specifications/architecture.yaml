@@ -3,63 +3,41 @@ mentorHub:
     - data: mongodb
     - identity:
       auth0:
-    - search:
-      elements:
-      - api:
-        docker: whichDockerfile
-        action: githubAction.yaml
-        github: repo link
-      - ui:
-        docker: whichDockerfile
-        action: githubAction.yaml
-        github: repo link
     - person:
       elements:
       - api:
-        docker: whichDockerfile
-        action: githubAction.yaml
-        github: repo link
+        template: golang_api
       - ui:
-        docker: whichDockerfile
-        action: githubAction.yaml
-        github: repo link
+        template: vuejs_spa
     - partner:
       elements:
       - api:
-        docker: whichDockerfile
-        action: githubAction.yaml
-        github: repo link
+        template: java_api
       - ui:
-        docker: whichDockerfile
-        action: githubAction.yaml
-        github: repo link
+        template: react_spa
+    - search:
+      elements:
+      - api:
+        template: golang_api
+        port: 8082
+      - ui:
+        template: vuejs_spa
+        port: 82
     - topics:
       elements:
       - api:
-        docker: whichDockerfile
-        action: githubAction.yaml
-        github: repo link
+        template: ?_api
       - ui:
-        docker: whichDockerfile
-        action: githubAction.yaml
-        github: repo link
+        template: ?_sap
     - cirriculum:
       elements:
       - api:
-        docker: whichDockerfile
-        action: githubAction.yaml
-        github: repo link
+        template: ?_api
       - ui:
-        docker: whichDockerfile
-        action: githubAction.yaml
-        github: repo link
+        template: ?_sap
     - encounters:
       elements:
       - api:
-        docker: whichDockerfile
-        action: githubAction.yaml
-        github: repo link
+        template: ?_api
       - ui:
-        docker: whichDockerfile
-        action: githubAction.yaml
-        github: repo link
+        template: ?_sap
