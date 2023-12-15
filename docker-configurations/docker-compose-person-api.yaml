@@ -1,7 +1,7 @@
 version: '3.1'
 
 services:
-  institute-mongodb:
+  mentorhub-mongodb:
     image: mongo:latest
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
@@ -12,15 +12,15 @@ services:
       test: ["CMD", "mongosh", "-u", "root", "-p", "example", "--authenticationDatabase", "admin", "--eval", "db.adminCommand('ping')"]
       interval: 10s
       timeout: 10s
-      retries: 10
+      retries: 5
 
-  institute-mongosh:
-    image: ghcr.io/agile-learning-institute/institute-mongosh:latest
+  mentorhub-mongosh:
+    image: ghcr.io/agile-learning-institute/mentorhub-mongosh:latest
     depends_on:
-      institute-mongodb:
+      mentorhub-mongodb:
         condition: service_healthy
     environment:
-      - HOST=institute-mongodb
+      - HOST=mentorhub-mongodb
       - USER=root
       - PASSWORD=example
       - AUTH_DB=admin
@@ -29,5 +29,16 @@ services:
       - LOAD_TEST=true
     entrypoint: ["/src/entrypoint.sh"]
 
-
-
+  mentorhub-person-api:
+    image: ghcr.io/agile-learning-institute/mentorhub-person-api:latest
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      CONNECTION_STRING: mongodb://root:example@mentorhub-mongodb:27017/?tls=false&directConnection=true
+      PORT: ":8081"
+    depends_on:
+      mentorhub-mongosh:
+        condition: service_completed_successfully
+      
+    

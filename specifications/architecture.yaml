@@ -1,0 +1,43 @@
+mentorHub:
+  domains:
+    - data: mongodb
+    - identity:
+      auth0:
+    - person:
+      elements:
+      - api:
+        template: golang_api
+      - ui:
+        template: vuejs_spa
+    - partner:
+      elements:
+      - api:
+        template: java_api
+      - ui:
+        template: react_spa
+    - search:
+      elements:
+      - api:
+        template: golang_api
+        port: 8082
+      - ui:
+        template: vuejs_spa
+        port: 82
+    - topics:
+      elements:
+      - api:
+        template: ?_api
+      - ui:
+        template: ?_sap
+    - cirriculum:
+      elements:
+      - api:
+        template: ?_api
+      - ui:
+        template: ?_sap
+    - encounters:
+      elements:
+      - api:
+        template: ?_api
+      - ui:
+        template: ?_sap
