@@ -6,7 +6,7 @@ mentorHub is comprised of a collection of microservices that fall along bounded 
 
 ## Running Locally
 
-Instructions on how to [run components locally](./docker-compose/README.md)
+Instructions on how to [run components locally](./docker-configurations/README.md)
 
 ## Design Specifications
 
