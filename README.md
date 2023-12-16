@@ -1,6 +1,6 @@
 # The mentorHub Platform
 
-mentorHub is a cloud platform that support our operations, and serve the needs of members, mentors, partners, and donors. This platform is here to give apprentices real-world experience working in a modern computing environment, and exposure to a full design-build-run SDLC with QA controls, and CI/CD Automations.
+mentorHub is a cloud platform that supports our operations, and serves the needs of members, mentors, partners, and donors. This platform is here to give apprentices real-world experience working in a modern computing environment, and exposure to a full design-build-run SDLC with QA controls, and CI/CD Automations.
 
 mentorHub is comprised of a collection of microservices that fall along bounded domains. See [here](https://github.com/orgs/agile-learning-institute/repositories?q=mentorhub&type=all&sort=name) for a list of repositories.
 
@@ -12,23 +12,9 @@ Instructions on how to [run components locally](./docker-configurations/README.m
 
 Feature Roadmap can be found in the [Design specifications](./specifications/ROADMAP.md)
 
-## System Backlog
-
-Information on functional sprints is in the [System Backlog](./specifications/BACKLOG.md)
-
 ## CI/CD Information
 
-Information on [CI/CD Automation](./specifications/CICD.md) and runbooks
-
-## Team
-
-- architect: Mike Storey
-- product manager: Meredith Moorse
-- lead-engineer: Karmen Durbin
-- ui-engineer: TBD
-- api-engineer: Tom Sherman
-- data-engineer: TBD
-- reliability-engineer: Karmen Durbin, Graham Paash
+Information on [CI/CD Automation](./specifications/CICD.md)
 
 ## Before Contributing
 
