@@ -4,7 +4,7 @@ The Institute Platform is made up of a collection of microservices, and you can 
 
 ## Overview
 
-All of the [run container commands](#run-commands) can be used to run different combinations of services. Each of them will download a bash script that creates a ~/local folder, fetchs a docker-compose.yaml file, and then executes the ```docker-compose up --detach``` command. Ten to twenty seconds after executing that command you should see something similar to the following
+All of the [run container commands](#run-commands) can be used to run different combinations of services. Each of them will download a bash script that creates a ~/local folder, fetches a docker-compose.yaml file, and then executes the ```docker-compose up --detach``` command. Ten to twenty seconds after executing that command you should see something similar to the following
 
 ```bash
  ✔ Network local_default                   Created
@@ -14,9 +14,9 @@ All of the [run container commands](#run-commands) can be used to run different 
  ✔ Container local-mentorhub-person-ui-1   Started
  ```
 
-Once the containers are running, you can use the follwing commands to stop and start them:
+Once the containers are running, you can use the following commands to stop and start them:
 
-### Restart containers without loosing data
+### Restart containers without losing data
 
 ```bash
 cd ~/local

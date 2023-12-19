@@ -25,12 +25,12 @@ We have identified the following people as stakeholders in this system, that is 
   - CMO
 
 - Partners
-  - Allyship focused grooups
+  - Allyship focused groups
   - Businesses that want to share cause
   - Code schools
   - After school clubs
 
-- Potentail Employers
+- Potential Employers
   - Recruiters
   - Small Business owner
   - Startup Founders
@@ -61,7 +61,7 @@ Overview
   - productive
   - Uses a Google Doc for Curriculum
   - Uses a Google Sheet to tack notes about apprentice progress
-  - uses simpole language
+  - uses simple language
 
 - Heart of a Mentor
   - Actively communicates with mentees
@@ -88,16 +88,16 @@ Overview
 
 ### Maven Says
 
-- is first to say "i dont know"
+- is first to say "i don't know"
 - do you feel overwhelmed
 - Things that are more true and useful than a mentee would hear without a mentor
 - Who is involved in this
 - this is rewarding
 
 - Encouragement
-  - youre doing great
-  - im proud of you
-  - are you proud of y0ourself
+  - you're doing great
+  - I'm proud of you
+  - are you proud of yourself
   - everyone feels this way sometimes
 
 - Avoda Coaching
@@ -120,21 +120,21 @@ Overview
   - It's hard to size Now, everyone is different
   - Are they doing the work?
   - Why am I not connecting with this person
-  - premtively thinks about mentee point of view
+  - preemptively thinks about mentee point of view
   - entering the industry is hard
   - about mentee
-  - how does my mentee like tocommunicate
+  - how does my mentee like to communicate
   - what is my mentee thinking
   - what kind of experience is mentee coming in with
   - burnout
-  - what life expereienc has mentee had
+  - what life experience has mentee had
   - This apprentice is AMAZING
 
 - about Mentor (skills / goals)
   - About design thinking
   - How to better explain
   - Time management
-  - about engineerkit and other resouces
+  - about engineerkit and other resources
   - in a data driven way
   - with a design mindset
   - what are my favorite organization tools
@@ -147,8 +147,8 @@ Overview
   - i wonder if i know enough
   - I want to help
   - about creating a better future for her family
-  - software engineering has positiviely changed her life
-  - imposter syndrome
+  - software engineering has positively changed her life
+  - impostor syndrome
   - am I adding value
   - where can i find documentation
   - i have too many tabs open
@@ -183,11 +183,11 @@ Overview
   - is it enough
   - overwhelmed
 
-## Appollo the Apprentice
+## Apollo the Apprentice
 
 30's Single Parent, 2nd Career
 
-### Appollo Does
+### Apollo Does
 
 - theme
   - Studies
@@ -198,7 +198,7 @@ Overview
   - Either works or job hunts
   - tried to solve it first before asking
   - Works hard
-  - goest to work
+  - goes to work
   - Works hard
   - learns new communication skills
   - uses a computer, spectrum of skills
@@ -215,7 +215,7 @@ Overview
 - Key Traits
   - Self motivated
   - reflects
-  - Applies hisself
+  - Applies himself
   - Struggles
 
 - Outside Dependencies
@@ -224,7 +224,7 @@ Overview
   - cooks dinner while on a meeting
   - changes meeting time for teacher conference
 
-### Appollo Says
+### Apollo Says
 
 - Mentee Avoda
   - Answers: What would you like to focus on?
@@ -234,22 +234,22 @@ Overview
 - Performance
   - am i doing well
   - is this normal
-  - how cani get better
+  - how can I get better
   - is this the right way
 
 - Struggle
-  - im lost
+  - I'm lost
   - How
   - can you explain that again
   - how did you know that
-  - i dont know how to do this
+  - i don't know how to do this
   - what do you know about X, what is true about X
   - what does *acronym* mean
 
 - Celebrate
   - Wow, it worked!
-  - ive bearn earning to code
-  - i can believe I actully did tthat
+  - I've been earning to code
+  - i can believe I actually did that
   - its a lot of fun
   - woooooo hooooooo
 
@@ -259,19 +259,19 @@ Overview
   - I know how to do this
   - what they're truly interested in and passionate about
   - asks about what they haven't figured out yet
-  - i cando that
+  - i can do that
 
 - How much  money can I make
 - I ask for help after a couple of hours being stuck
 - How can I find a job
 
-### Appollo Thinks
+### Apollo Thinks
 
 - self doubt
   - am i smart enough
   - what the heck am i doing
-  - its obvious i dont know what to do
-  - maybe I can acually do this
+  - its obvious i don't know what to do
+  - maybe I can actually do this
   - Am a smart enough
   - i ask too many questions
   - Am I capable
@@ -290,9 +290,9 @@ Overview
 - Future
   - I'm doing this for my kids
   - of a great app idea
-  - will i get a jobh
+  - will i get a job
   - When will I get a ROI
-  - im doing something good
+  - I'm doing something good
   - betting on myself and it will pay off
 
 - about performance
@@ -301,7 +301,7 @@ Overview
 
 - Learning process
   - this is making sense
-  - im learning a lot
+  - I'm learning a lot
   - my brain hurts
   - i did it
   - this is hard
@@ -312,7 +312,7 @@ Overview
 - In ways that are inexperienced and ineffective
 - hidden thoughts that a mentor is locked away from
 
-### Appollo Feels
+### Apollo Feels
 
 - Empowered
 - confident
@@ -322,7 +322,7 @@ Overview
 - included
 - secure
 - empowered
-- accepteed
+- accepted
 - like a developer
 - like they are growing
 - cared for

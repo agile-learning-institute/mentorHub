@@ -12,7 +12,7 @@ These personas represent software engineers who are designing, building, and run
 
 - Uli the UI Engineer...
 
-- Sree the Site Reliability Enginner is resposible for infrastructure and ensuring that the system is always up and available.
+- Sree the Site Reliability Enginner is responsible for infrastructure and ensuring that the system is always up and available.
 
 - Tonya the Tester is responsible for Software Quality Assurance, and leads end-to-end testing of the code.
 
@@ -22,10 +22,10 @@ These personas represent software engineers who are designing, building, and run
 
 These persona's represent hands-on-keyboard Users of the mentorHub platform.
 
-- Maven the Mentor provides mentorship services to members, and colaborates with other Mentors to imrpove the quality of learning resources.
+- Maven the Mentor provides mentorship services to members, and collaborates with other Mentors to improve the quality of learning resources.
 
-- Appollo the Apprentice learns new technology by working through an agile cirriculum crafted with their mentor.
+- Apollo the Apprentice learns new technology by working through an agile curriculum crafted with their mentor.
 
-- Fran the Financioal Officer does the books, and the taxes, and issues receipts for tax deductable donations.
+- Fran the Financial Officer does the books, and the taxes, and issues receipts for tax deductible donations.
 
 - Meredith the Marketer conducts marketing campaigns to find new members, mentors, partners, and donors.

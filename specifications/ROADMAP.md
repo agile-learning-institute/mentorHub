@@ -8,41 +8,41 @@ The Roadmap below identifies that a significant portion of the "SRE First" **Now
 
 ## Now (SRE First)
 
-- [x] Sam the Software Engineer reads a repo readme and can eaisly set up their local development environment, build and locally test their code with local backing services.
+- [x] Sam the Software Engineer reads a repo readme and can easily set up their local development environment, build and locally test their code with local backing services.
 
-- [x] Sam the Software Engineer approves a pull request, and merges a feature branch into the main branch and then multi-architectre containers are built and deployed into a container registry
-- [x] Sree the SRE deploies a database management container and then schema constraints and migrations are executed when database configuration updates are required.
+- [x] Sam the Software Engineer approves a pull request, and merges a feature branch into the main branch and then multi-architecture containers are built and deployed into a container registry
+- [x] Sree the SRE deploys a database management container and then schema constraints and migrations are executed when database configuration updates are required.
 - [x] Sree the SRE opens an admin view in a SPA and then they can review Versions of different components of the system, configuration values, and other information helpful during incident response.
 - [x] Tonya the Tester issues a single bash command and then the solution is available for local testing.
-- [ ] A new container is deployed to a registry, and tagged for the DEV environment and then the development environment deployes the new container.
+- [ ] A new container is deployed to a registry, and tagged for the DEV environment and then the development environment deploys the new container.
 
 ## Next
 
-- [ ] Mentor updates an on-line cirriculum and then the system suggests content and warns if the work assigned exceeds the members commited capacity. Suggestions can be based on the following factors:
-  - Current skills and desired speciality
+- [ ] Mentor updates an on-line curriculum and then the system suggests content and warns if the work assigned exceeds the members committed capacity. Suggestions can be based on the following factors:
+  - Current skills and desired specialty
   - Advances members stated goals
 
-- [ ] Mentor reviews a self-assessment with a member, and then current skills are validated and incorporated into the cirriculum creation process.
+- [ ] Mentor reviews a self-assessment with a member, and then current skills are validated and incorporated into the curriculum creation process.
 
-- [ ] Member uses the system to follow along on their cirriculum and then the system can automatically keep track of progress and time commitments, improving the quality of resource information and adjusting the velocity of the member.
+- [ ] Member uses the system to follow along on their curriculum and then the system can automatically keep track of progress and time commitments, improving the quality of resource information and adjusting the velocity of the member.
 
 - [ ] Member researches target employers and finds a dream job description and then the system guides them through a process to create Goals that would build the perfect Dream Job Resume.
 
-- [ ] Mentor selects a script for an encounter, and then eaisly records notes about the encounter in the members profile, and updates their cirriculum for the comming period.
+- [ ] Mentor selects a script for an encounter, and then easily records notes about the encounter in the members profile, and updates their curriculum for the coming period.
 
-- [ ] Sree the SRE runs a runbook script and then services from one environment are promtoted into another.
+- [ ] Sree the SRE runs a runbook script and then services from one environment are promoted into another.
 
 - [ ] Sree the SRE reviews a Promethius/Grafana monitoring portal including health information from system API's, and then they can view performance and throughput metrics to support incident response.
 
-- [ ] Sam the Software Engineer creates black-box testing for thier components and then they can be more confident in the performance of their code, and they can provide a starting place for the SQA team to build automated end-to-end testing.
+- [ ] Sam the Software Engineer creates black-box testing for their components and then they can be more confident in the performance of their code, and they can provide a starting place for the SQA team to build automated end-to-end testing.
 
 - [ ] Any user confirms that they want their data removed and then their account is deleted and any PII related to their identity is removed from the system in compliance with the EU General Data Protection Regulations (GDPR).
 
 ## Later
 
-- [ ] Mentor/Mentees get to collaborate in realtime on the best curriculum
+- [ ] Mentor/Mentees get to collaborate in real-time on the best curriculum
 
-- [ ] Member signs up on SquareSpace and then their information is added to the mentorHub databases, and welcome abord email is sent that includes instructions on how to schedule introduction meeting, and how to get a userID for the system.
+- [ ] Member signs up on SquareSpace and then their information is added to the mentorHub databases, and welcome aboard email is sent that includes instructions on how to schedule introduction meeting, and how to get a userID for the system.
 
 - [ ] Apollo the Apprentice clicks a button and is presented a tooling report w/ links to any failing or needed hardware or software issues to address.
 
@@ -51,7 +51,7 @@ GitHub Usage stats on search dashboard
 
 - [ ] Sree the SRE uses a discord bot and names a domain, source environment, and target environment and then the containers for that domain are promoted from the source environment  to the destination environment.
 
-- [ ] Any User opens a chatbot in the system and recieves support on how to use the system, or receives guidance on assignement or other questions.
+- [ ] Any User opens a chatbot in the system and receives support on how to use the system, or receives guidance on assignment or other questions.
 
 - [ ] Humanity, does Education Revolution and then People are empowered to create value, major progress towards the biggest problems occurs (climate, war, unsafe AI)
 
