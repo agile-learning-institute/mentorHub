@@ -27,11 +27,11 @@ We use Automatic token authentication to access the registry. See [here](https:/
 
 ## Backlog
 
-### Continous Deployment Environments
+### Continuous Deployment Environments
 
-Create IaC Automation to deploy a Release Management environment (Dev, Test, etc.). Software Deployment to these environments will be acomplished through container tagging. CI will build containers and tag them with a :dev environment tag. Additional CI Automation will pull containers into an environment when they are tagged. Containers can then be promoted between environments by adding new environment tags to the containers.
+Create IaC Automation to deploy a Release Management environment (Dev, Test, etc.). Software Deployment to these environments will be accomplished through container tagging. CI will build containers and tag them with a :dev environment tag. Additional CI Automation will pull containers into an environment when they are tagged. Containers can then be promoted between environments by adding new environment tags to the containers.
 
-- [x] Multi-Architecture contianer build and push GitHub Actions
+- [x] Multi-Architecture container build and push GitHub Actions
 - [ ] Build and test environment provisioning automations
   - [ ] Deploy Dev Environment
   - [ ] Configure CI on tag image
