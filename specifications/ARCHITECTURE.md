@@ -62,6 +62,8 @@ flowchart LR
     --> EncounterDB[(Encounter)]
     --> BUS
 
+```
+
     APIG --> eMailUI([mentorhub-smtp-ui])
     subgraph SMTP Integration
         eMailUI
@@ -81,8 +83,6 @@ flowchart LR
         --> IdentityAPI
     end
     IdentityDB --> BUS
-
-```
 
     Auth0 
     --> BUS
