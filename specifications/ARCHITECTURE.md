@@ -82,6 +82,8 @@ flowchart LR
     end
     IdentityDB --> BUS
 
+```
+
     Auth0 
     --> BUS
 
@@ -94,9 +96,6 @@ flowchart LR
         IdentityDB
         eMailDB
     end
-
-
-```
 
 ## Infrastructure
 
