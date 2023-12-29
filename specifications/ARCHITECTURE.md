@@ -31,8 +31,6 @@ flowchart LR
     end
     SearchDB --> BUS
 
-```
-
     APIG
     --> PersonUI([mentorHub-person-ui])
     --> PersonAPI(mentorHub-person-api)
@@ -44,6 +42,8 @@ flowchart LR
     --> PartnerAPI(mentorHub-partner-api)
     --> PartnerDB[(Partner)]
     --> BUS
+
+```
 
     APIG    
     --> TopicsUI([mentorHub-topics-ui])
