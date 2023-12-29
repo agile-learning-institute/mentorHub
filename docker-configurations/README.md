@@ -57,7 +57,7 @@ You can now use the [Access paths](https://github.com/agile-learning-institute/m
 ### Run the person api and backing database
 
 ```bash
-/bin/bash <(curl https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/run-local-person.sh) person-api
+/bin/bash <(curl https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/run-local.sh) person-api
 ```
 
 You can now use the [Curl Commands](https://github.com/agile-learning-institute/mentorhub-person-api#local-api-testing-with-curl) documented in the [mentorhub-persion-api](https://github.com/agile-learning-institute/mentorhub-person-api) repository.
