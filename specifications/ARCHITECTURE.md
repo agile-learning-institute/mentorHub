@@ -43,8 +43,6 @@ flowchart LR
     --> PartnerDB[(Partner)]
     --> BUS
 
-```
-
     APIG    
     --> TopicsUI([mentorHub-topics-ui])
     --> TopicsAPI(mentorHub-topic-api)
@@ -62,6 +60,8 @@ flowchart LR
     --> EncounterAPI(mentorHub-encounter-api)
     --> EncounterDB[(Encounter)]
     --> BUS
+
+```
 
     APIG --> eMailUI([mentorhub-smtp-ui])
     subgraph SMTP Integration
