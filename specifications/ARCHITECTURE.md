@@ -27,8 +27,7 @@ flowchart LR
     subgraph Search Dashboard
         SearchUI
         --> SearchAPI(mentorHub-search-api)
-        --> SearchDB[(Atlas
-            Search)]
+        --> SearchDB[(Atlas Search)]
     end
     SearchDB --> BUS
 
