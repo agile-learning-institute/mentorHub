@@ -13,6 +13,10 @@ services:
       interval: 15s
       timeout: 10s
       retries: 5
+    profiles:
+      - db
+      - person
+      - person-api
 
   mentorhub-mongosh:
     image: ghcr.io/agile-learning-institute/mentorhub-mongosh:latest
@@ -28,6 +32,10 @@ services:
       - SCRIPT_PATH=/src/migrate.js
       - LOAD_TEST=true
     entrypoint: ["/src/entrypoint.sh"]
+    profiles:
+      - db
+      - person
+      - person-api
 
   mentorhub-person-api:
     image: ghcr.io/agile-learning-institute/mentorhub-person-api:latest
