@@ -1,43 +1,91 @@
 mentorHub:
   domains:
-    - data: mongodb
-    - identity:
-      auth0:
-    - person:
-      elements:
-      - api:
-        template: golang_api
-      - ui:
-        template: vuejs_spa
-    - partner:
-      elements:
-      - api:
-        template: java_api
-      - ui:
-        template: react_spa
+    - mongodb:
+      repos:
+      - db:
+        template: mongodb_schema_versioning
+        port: 
     - search:
-      elements:
+      repos:
       - api:
         template: golang_api
         port: 8082
       - ui:
         template: vuejs_spa
         port: 82
+      data-sources:
+      data-syncs:
+      - person
+      - partner
+      - cirriculum
+      - encounter
+      - topic
+      - enumerators
+    - person:
+      repos:
+      - api:
+        template: golang_api
+        port: 
+      - ui:
+        template: vuejs_spa
+        port: 
+      data-sources:
+      - person
+      data-syncs:
+      - partner
+      - enumerators
+
+    - partner:
+      repos:
+      - api:
+        template: java_api
+        port: 
+      - ui:
+        template: react_spa
+        port: 
+      data-sources:
+      - partner
+      data-syncs:
+      - person
+      - enumerators
+
     - topics:
-      elements:
+      repos:
       - api:
         template: ?_api
+        port: 
       - ui:
         template: ?_sap
+        port: 
     - cirriculum:
-      elements:
+      repos:
       - api:
         template: ?_api
+        port: 
       - ui:
         template: ?_sap
+        port: 
     - encounters:
-      elements:
+      repos:
       - api:
         template: ?_api
+        port: 
       - ui:
         template: ?_sap
+        port: 
+    - identity:
+      repos:
+      - api:
+        template: python_integration
+        port: 
+      - ui:
+        template: vuejs_spa
+        port: 
+    - smtp:
+      repos:
+      - api:
+        template: python_integration
+        port: 
+      - ui:
+        template: vuejs_spa
+        port: 
