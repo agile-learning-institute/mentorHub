@@ -22,6 +22,8 @@ flowchart LR
     BUS(AWS Event Stream)
     --> DataLake[(Data Lake)]
 
+```
+
     APIG 
     --> SearchUI([mentorHub-search-ui])
     subgraph Search Dashboard
@@ -61,8 +63,6 @@ flowchart LR
     --> EncounterAPI(mentorHub-encounter-api)
     --> EncounterDB[(Encounter)]
     --> BUS
-
-```
 
     APIG --> eMailUI([mentorhub-smtp-ui])
     subgraph SMTP Integration
