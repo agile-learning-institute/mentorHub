@@ -10,9 +10,9 @@ services:
       - "27017:27017"
     healthcheck:
       test: ["CMD", "mongosh", "-u", "root", "-p", "example", "--authenticationDatabase", "admin", "--eval", "db.adminCommand('ping')"]
-      interval: 10s
+      interval: 15s
       timeout: 10s
-      retries: 10
+      retries: 5
 
   mentorhub-mongosh:
     image: ghcr.io/agile-learning-institute/mentorhub-mongosh:latest
@@ -29,5 +29,30 @@ services:
       - LOAD_TEST=true
     entrypoint: ["/src/entrypoint.sh"]
 
+  mentorhub-person-api:
+    image: ghcr.io/agile-learning-institute/mentorhub-person-api:latest
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      CONNECTION_STRING: mongodb://root:example@mentorhub-mongodb:27017/?tls=false&directConnection=true
+      PORT: ":8081"
+    depends_on:
+      mentorhub-mongosh:
+        condition: service_completed_successfully
+    profiles:
+      - person
+      - person-api
 
-
+  mentorhub-person-ui:
+    image: ghcr.io/agile-learning-institute/mentorhub-person-ui:latest
+    restart: always
+    environment:
+      API_HOST: mentorhub-person-api
+      API_PORT: 8081
+    ports:
+      - 80:80  # Changed the container port to 80
+    depends_on:
+      - mentorhub-person-api
+    profiles:
+      - person
