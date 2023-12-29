@@ -22,8 +22,6 @@ flowchart LR
     BUS(AWS Event Stream)
     --> DataLake[(Data Lake)]
 
-```
-
     APIG 
     --> SearchUI([mentorHub-search-ui])
     subgraph Search Dashboard
@@ -33,6 +31,8 @@ flowchart LR
             Search)]
     end
     SearchDB --> BUS
+
+```
 
     APIG
     --> PersonUI([mentorHub-person-ui])
