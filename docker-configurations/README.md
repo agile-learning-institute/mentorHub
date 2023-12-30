@@ -65,7 +65,7 @@ You can now use the [Curl Commands](https://github.com/agile-learning-institute/
 ### Run the mongoDB backing database
 
 ```bash
-/bin/bash =(curl -o - https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/run-local.sh)
+/bin/bash =(curl -o - https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/run-local.sh) db
 ```
 
 You can now use [Mongo Compass](https://github.com/agile-learning-institute/mentorhub-mongodb#optionally) as documented in the [mentorhub-mongodb](https://github.com/agile-learning-institute/mentorhub-mongodb) repository.
