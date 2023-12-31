@@ -29,7 +29,7 @@ flowchart LR
         --> SearchAPI(mentorHub-search-api)
         --> SearchDB[(Atlas Search)]
     end
-    SearchDB --> BUS
+    SearchDB <--> BUS
 
     APIG
     --> PersonUI([mentorHub-person-ui])
