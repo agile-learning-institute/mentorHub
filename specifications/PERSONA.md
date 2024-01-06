@@ -12,7 +12,7 @@ These personas represent software engineers who are designing, building, and run
 
 - Uli the UI Engineer...
 
-- Sree the Site Reliability Enginner is responsible for infrastructure and ensuring that the system is always up and available.
+- Sree the Site Reliability Engineer is responsible for infrastructure and ensuring that the system is always up and available.
 
 - Tonya the Tester is responsible for Software Quality Assurance, and leads end-to-end testing of the code.
 

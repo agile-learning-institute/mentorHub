@@ -1,22 +1,22 @@
 # Solution Architecture
 
-These diagrams utilize the [mermaid flowchart library](https://mermaid.js.org/syntax/flowchart.html), you may need to install an IDE plugin to preview these diagrams. The vsCode extion bierner.markdown-mermaid is a good option.
+These diagrams utilize the [mermaid flowchart library](https://mermaid.js.org/syntax/flowchart.html), you may need to install an IDE plugin to preview these diagrams. The VS Code extension bierner.markdown-mermaid is a good option.
 
 - [Microservice Architecture](#micorservices-and-source-code-repos)
 - [Infrastructure](#infrastructure)
 - [Networking](#networking)
 - [Storage](#storage)
-- [Continous Integration](#continous-integration)
-- [Continous Delivery](#continous-delivery)
+- [Continuous Integration](#continous-integration)
+- [Continuous Delivery](#continous-delivery)
 
-## Micorservices and source code repos
+## Microservices and source code repos
 
-Bounded Domains and Eventually Consistant data, architecture.yaml has details.
+Bounded Domains and Eventually Consistent data, architecture.yaml has details.
 Domain source/sync configurations
 
 A special note about the Search domain
 
-Integration domains use request(sync)/reply(source) collections to implement asyncronous functionality. The solution can scale databases along service domains as each domain will be the source for one (or a few) collections, and other domains can use an eventually consistant copy in a read only fashion.
+Integration domains use request(sync)/reply(source) collections to implement asynchronous functionality. The solution can scale databases along service domains as each domain will be the source for one (or a few) collections, and other domains can use an eventually consistent copy in a read only fashion.
 
 ```mermaid
 flowchart LR
@@ -155,7 +155,7 @@ flowchart TD
 
 ```
 
-## Continous Integration
+## Continuous Integration
 
 ```mermaid
 flowchart LR
@@ -166,9 +166,9 @@ flowchart LR
     --> K8S(EKS)
 ```
 
-## Continous Delivery
+## Continuous Delivery
 
-The mentorHub platform utilizes four release management environments. Following the 12 factor principles the containers are built once, and then promoted between environments by adding tags to the containers. Environments are provisioned with Terraform automation. Provisioning a new environment (ie. for training or sales purposes) is achieved with Terraform, deploying code to this new environment only requires adding a new tag to the images you want to deploy.
+The mentorHub platform utilizes four release management environments. Following the 12 factor principles the containers are built once, and then promoted between environments by adding tags to the containers. Environments are provisioned with Terraform automation. Provisioning a new environment (i.e. for training or sales purposes) is achieved with Terraform, deploying code to this new environment only requires adding a new tag to the images you want to deploy.
 
 ### DEV
 
