@@ -18,7 +18,7 @@ Information on [CI/CD Automation](./specifications/CICD.md)
 
 ## Before Contributing
 
-All mentorHub repositories should be created in the agile-learning-institute organization, follow mentorhub naming standards, be public, and use one of the following templates:
+All mentorHub repositories should be created in the agile-learning-institute organization, follow mentorHub naming standards, be public, and use one of the following templates:
 
 - [x] [template-vanilla](https://github.com/agile-learning-institute/template-vanilla) a minimal repository with no language specific code.
 - [ ] [template-api-go-gorilla-mongodb](https://github.com/agile-learning-institute/template-api-go-gorilla-mongodb) - Golang / Mongo API

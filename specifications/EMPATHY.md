@@ -7,7 +7,7 @@ We have identified the following people as stakeholders in this system, that is 
   - Curious novice unsure where to begin
   - Pivoters
   - Person changing careers
-  - "Career first" professionals
+  - "Career-first" professionals
 
 - Members
   - Apprentice
@@ -25,14 +25,14 @@ We have identified the following people as stakeholders in this system, that is 
   - CMO
 
 - Partners
-  - Allyship focused groups
+  - Allyship-focused groups
   - Businesses that want to share cause
   - Code schools
-  - After school clubs
+  - After-school clubs
 
 - Potential Employers
   - Recruiters
-  - Small Business owner
+  - Small Business Owners
   - Startup Founders
 
 - Board Members
@@ -50,138 +50,133 @@ Overview
 
 ## Maven the Mentor
 
-40 yrs old, Married w/Kids, Volunteering as a Mentor
+40 yrs old, Married w/ Kids, Volunteering as a Mentor
 
 ### Maven Does
 
 - Day-to-Day Technical
-  - Research
+  - Researches
   - Prepares
   - Prioritizes tasks
-  - productive
   - Uses a Google Doc for Curriculum
   - Uses a Google Sheet to tack notes about apprentice progress
-  - uses simple language
+  - Uses simple language
 
 - Heart of a Mentor
   - Actively communicates with mentees
   - Helps mentees focus on things that matter
-  - leads in vulnerability
-  - challenges
+  - Leads in vulnerability
+  - Challenges
 
-- is an Engineer
+- Is an Engineer
   - Continues to learn
-  - goes to work
-  - juggles responsibilities
+  - Goes to work
+  - Juggles responsibilities
   - Is exceptional in their own career growth, does exceptional things like volunteering to mentor
-  - goes to work
-  - sets aside concrete time in schedule
-  - seeks a mentor for themselves
-  - learns new things
-  - lives life, raises kids
+  - Sets aside concrete time in their schedule
+  - Seeks a mentor for themselves
+  - Learns new things
+  - Lives life, raises kids
 
 - Coaching
-  - encourages
-  - supports
-  - validates
-  - engaged
+  - Encourages
+  - Supports
+  - Validates
+  - Engaged
 
 ### Maven Says
 
-- is first to say "i don't know"
-- do you feel overwhelmed
+- Is the first to say "I don't know"
+- Do you feel overwhelmed?
 - Things that are more true and useful than a mentee would hear without a mentor
 - Who is involved in this
-- this is rewarding
+- This is rewarding
 
 - Encouragement
-  - you're doing great
+  - You're doing great!
   - I'm proud of you
-  - are you proud of yourself
-  - everyone feels this way sometimes
+  - Are you proud of yourself?
+  - Everyone feels this way sometimes
 
 - Avoda Coaching
-  - what do you want to ficus on today
-  - what are your goals
+  - What do you want to focus on today?
+  - What are your goals?
   - The EngineerKit mentor trainings, the coaching framework
-  - What do you want to focus on today
 
 - Coaching as a Mentor
-  - what do you think is the next best step
-  - what surprised you most on this task
-  - what is your favorite part so far
-  - lets walk through this together
-  - How can we break this down into small pieces
-  - explain how you came to your decision
+  - What do you think is the next best step?
+  - What surprised you the most on this task?
+  - What is your favorite part so far?
+  - Let's walk through this together
+  - How can we break this down into small pieces?
+  - Explain how you came to your decision
 
 ### Maven Thinks
 
-- about Mentee
-  - It's hard to size Now, everyone is different
+- About Mentee
+  - It's hard to size now, everyone is different
   - Are they doing the work?
-  - Why am I not connecting with this person
-  - preemptively thinks about mentee point of view
-  - entering the industry is hard
-  - about mentee
-  - how does my mentee like to communicate
-  - what is my mentee thinking
-  - what kind of experience is mentee coming in with
-  - burnout
-  - what life experience has mentee had
+  - Why am I not connecting with this person?
+  - Preemptively thinks about mentee point of view
+  - Entering the industry is hard
+  - How does my mentee like to communicate?
+  - What is my mentee thinking?
+  - What kind of experience is mentee coming in with?
+  - Burnout
+  - What life experience has mentee had?
   - This apprentice is AMAZING
 
-- about Mentor (skills / goals)
+- About Mentor (skills / goals)
   - About design thinking
   - How to better explain
   - Time management
-  - about engineerkit and other resources
-  - in a data driven way
-  - with a design mindset
-  - what are my favorite organization tools
-  - How do I create real world experience
+  - About engineerkit and other resources
+  - In a data driven way
+  - With a design mindset
+  - What are my favorite organization tools?
+  - How do I create real-world experience?
 
 - Mentor Mindset
-  - what was it like for me starting out
-  - thinks, actually thinks, doesn't like to clock in and clock out, concerned about more than just getting through the day
-  - i want to add value
-  - i wonder if i know enough
+  - What was it like for me starting out?
+  - Thinks, actually thinks, doesn't like to clock in and clock out, concerned about more than just getting through the day
+  - I want to add value
+  - I wonder if I know enough
   - I want to help
-  - about creating a better future for her family
-  - software engineering has positively changed her life
-  - impostor syndrome
-  - am I adding value
-  - where can i find documentation
-  - i have too many tabs open
+  - About creating a better future for her family
+  - Software engineering has positively changed her life
+  - Impostor syndrome
+  - Am I adding value?
+  - Where can I find documentation?
+  - I have too many tabs open
 
 ### Maven Feels
 
 - Values
   - Like they have valuable insights and experience to share
-  - curious
-  - cares about mentoring and their mentees
-  - passionate about helping others enter this career path / field
-  - grateful for her previous mentors
-  - driven
-  - sense of responsibility
+  - Curious
+  - Cares about mentoring and their mentees
+  - Passionate about helping others enter this career path / field
+  - Grateful for her previous mentors
+  - Driven
+  - Sense of responsibility
 
 - Motivations - ROI
   - Charitable
   - Valued
-  - excited
+  - Excited
   - Empowered
-  - fulfilled
-  - empowered
-  - honored
-  - humble
-  - like they need to be a part of something bigger, dissatisfied
+  - Fulfilled
+  - Honored
+  - Humble
+  - Like they need to be a part of something bigger, dissatisfied
 
 - Anxiety - Subconscious fear
-  - pressed for time
-  - stressed
-  - scared
+  - Pressed for time
+  - Stressed
+  - Scared
   - Busy
-  - is it enough
-  - overwhelmed
+  - Is it enough?
+  - Overwhelmed
 
 ## Apollo the Apprentice
 
@@ -189,40 +184,39 @@ Overview
 
 ### Apollo Does
 
-- theme
+- Theme
   - Studies
-  - studies and learns
-  - achieves
-  - builds projects
-  - takes notes
+  - Studies and learns
+  - Achieves
+  - Builds projects
+  - Takes notes
   - Either works or job hunts
-  - tried to solve it first before asking
+  - Tried to solve it first before asking
   - Works hard
-  - goes to work
-  - Works hard
-  - learns new communication skills
-  - uses a computer, spectrum of skills
-  - picks up on how to lead
-  - preexisting views or bias
-  - interacts with mentor, either poorly or exceptionally
-  - has peer group with other mentees
+  - Goes to work
+  - Learns new communication skills
+  - Uses a computer, spectrum of skills
+  - Picks up on how to lead
+  - Preexisting views or bias
+  - Interacts with mentor, either poorly or exceptionally
+  - Has peer group with other mentees
   - Celebrates small wins
 
-- flakes
-  - no-call, no-show
-  - burnout
+- Flakes
+  - No-call, no-show
+  - Burnout
 
 - Key Traits
-  - Self motivated
-  - reflects
+  - Self-motivated
+  - Reflects
   - Applies himself
   - Struggles
 
 - Outside Dependencies
   - Juggles many responsibilities
   - Enjoys live music
-  - cooks dinner while on a meeting
-  - changes meeting time for teacher conference
+  - Cooks dinner while on a meeting
+  - Changes meeting time for teacher conference
 
 ### Apollo Says
 
@@ -232,120 +226,118 @@ Overview
   - Answers: During our time together, what would you like to accomplish?
 
 - Performance
-  - am i doing well
-  - is this normal
-  - how can I get better
-  - is this the right way
+  - Am I doing well?
+  - Is this normal?
+  - How can I get better?
+  - Is this the right way?
 
 - Struggle
   - I'm lost
-  - How
-  - can you explain that again
-  - how did you know that
-  - i don't know how to do this
-  - what do you know about X, what is true about X
-  - what does *acronym* mean
+  - Can you explain that again?
+  - How did you know that?
+  - I don't know how to do this
+  - What do you know about X, what is true about X?
+  - What does *acronym* mean
 
 - Celebrate
   - Wow, it worked!
-  - I've been earning to code
-  - i can believe I actually did that
-  - its a lot of fun
-  - woooooo hooooooo
+  - I've been learning to code
+  - I can't believe I actually did that
+  - It's a lot of fun
+  - Woo hoo!
 
 - Self Confidence
-  - I want to be an expert in every thing
-  - I'm not interested in   that
+  - I want to be an expert in everything
+  - I'm not interested in that
   - I know how to do this
-  - what they're truly interested in and passionate about
-  - asks about what they haven't figured out yet
-  - i can do that
+  - What they're truly interested in and passionate about
+  - Asks about what they haven't figured out yet
+  - I can do that
 
-- How much  money can I make
+- How much money can I make?
 - I ask for help after a couple of hours being stuck
-- How can I find a job
+- How can I find a job?
 
 ### Apollo Thinks
 
-- self doubt
-  - am i smart enough
-  - what the heck am i doing
-  - its obvious i don't know what to do
-  - maybe I can actually do this
-  - Am a smart enough
-  - i ask too many questions
-  - Am I capable
+- Self doubt
+  - Am I smart enough?
+  - What the heck am I doing?
+  - It's obvious I don't know what to do
+  - Maybe I can actually do this
+  - I ask too many questions
+  - Am I capable?
   - Is this foolish?
-  - Am I to old to change careers
-  - is this going to work
+  - Am I to old to change careers?
+  - Is this going to work?
   - Am I behind?
 
 - Like the process
-  - i like this
-  - i have good ideas too
-  - i like my mentor
-  - my mentor understands me
-  - about the mentor
+  - I like this
+  - I have good ideas too
+  - I like my mentor
+  - My mentor understands me
+  - About the mentor
 
 - Future
   - I'm doing this for my kids
-  - of a great app idea
-  - will i get a job
-  - When will I get a ROI
+  - Of a great app idea
+  - Will I get a job?
+  - When will I get a ROI?
   - I'm doing something good
-  - betting on myself and it will pay off
+  - Betting on myself and it will pay off
 
-- about performance
-  - whats next
+- About performance
+  - What's next?
   - Am I moving to slow?
 
 - Learning process
-  - this is making sense
+  - This is making sense
   - I'm learning a lot
-  - my brain hurts
-  - i did it
-  - this is hard
+  - My brain hurts
+  - I did it
+  - This is hard
   - I think I can get that done?
 
-- about the subject matter
-- they know, but they don't
+- About the subject matter
+- They know, but they don't
 - In ways that are inexperienced and ineffective
-- hidden thoughts that a mentor is locked away from
+- Hidden thoughts that a mentor is locked away from
 
 ### Apollo Feels
 
 - Empowered
-- confident
-- ready
+- Confident
+- Ready
 - Eager
-- attached
-- included
-- secure
-- empowered
-- accepted
-- like a developer
-- like they are growing
-- cared for
-- hopeful
-- value
-- enhanced
+- Attached
+- Included
+- Secure
+- Empowered
+- Accepted
+- Like a developer
+- Like they are growing
+- Cared for
+- Hopeful
+- Value
+- Enhanced
 - Curious
-- curious
-- smart
-- enriched
-- happy
+- Curious
+- Smart
+- Enriched
+- Happy
 - Grateful
-- grateful
+- Grateful
 - Conflicted
-- stressed
-- stuck
-- chained to the computer
-- lost
+- Stressed
+- Stuck
+- Chained to the computer
+- Lost
 - Overwhelmed
-- isolated
-- attached
-- frustrated
+- Isolated
+- Attached
+- Frustrated
 - Uncertain
-- confused
-- confused
+- Confused
+- Confused
 - Feels
