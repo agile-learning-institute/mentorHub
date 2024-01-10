@@ -4,6 +4,8 @@ These diagrams utilize the [mermaid flowchart library](https://mermaid.js.org/sy
 
 - [Microservice Architecture](#micorservices-and-source-code-repos)
 - [Infrastructure](#infrastructure)
+- [Networking](#networking)
+- [Storage](#storage)
 - [Continous Integration](#continous-integration)
 - [Continous Delivery](#continous-delivery)
 
@@ -66,7 +68,7 @@ flowchart LR
         eMailUI
         --> eMailAPI(mentorHub-smtp-api)
         --> eMailDB[(eMail)]
-        eMail>Mailchimp]
+        eMail>Mailchimp or SNS?]
         --> eMailAPI
     end
     eMailDB --> BUS
@@ -93,6 +95,17 @@ flowchart LR
         IdentityDB
         eMailDB
     end
+
+    click PersonUI href "https://github.com/agile-learning-institute/mentorHub-person-ui"
+    click PersonAPI href "https://github.com/agile-learning-institute/mentorHub-person-api"
+    click mentorHub-mongodb href "https://github.com/agile-learning-institute/mentorHub-mongodb"
+    click PersonDB href "https://github.com/agile-learning-institute/mentorHub-mongodb"
+    click TopicsDB href "https://github.com/agile-learning-institute/mentorHub-mongodb"
+    click PartnerDB href "https://github.com/agile-learning-institute/mentorHub-mongodb"
+    click CirriculumDB href "https://github.com/agile-learning-institute/mentorHub-mongodb"
+    click EncounterDB href "https://github.com/agile-learning-institute/mentorHub-mongodb"
+    click IdentityDB href "https://github.com/agile-learning-institute/mentorHub-mongodb"
+    click eMailDB href "https://github.com/agile-learning-institute/mentorHub-mongodb"
 
 ```
 
