@@ -18,9 +18,10 @@ The Roadmap below identifies that a significant portion of the "SRE First" **Now
 
 ## Next
 
-- [ ] Mentor updates an on-line curriculum and then the system suggests content and warns if the work assigned exceeds the members committed capacity. Suggestions can be based on the following factors:
-  - Current skills and desired specialty
-  - Advances members stated goals
+- [ ] Mentor colaborates with the apprentice to update their curriculum and then the system suggests content and warns if the work assigned exceeds the members committed capacity. Suggestions can be based on the following factors:
+  - Current skills in the topic
+  - Desired specialty
+  - Member goals
 
 - [ ] Mentor reviews a self-assessment with a member, and then current skills are validated and incorporated into the curriculum creation process.
 
