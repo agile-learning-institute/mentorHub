@@ -18,7 +18,7 @@ mentorHub is a cloud platform that supports our operations, and serves the needs
 - Select an issue that is **On Deck** and move it to **Active** to start your work.
 - If you need clarification about the issue, leave a comment on the issue with your question.
 - Create a branch in the repository, name the branch with a -issueNN suffix
-- Create a draft PR to ask for reviews or guidance 
+- Create a draft PR to ask for reviews or guidance
 - After you have fully tested your changes, change the PR from draft to open and ask for reviews.
 - Once your changes have been merged back into the main branch the code is deployed to Dev.
 - At this time be able to conduct preliminary end to end testing.
