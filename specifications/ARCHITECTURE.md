@@ -106,6 +106,7 @@ flowchart LR
     click EncounterDB href "https://github.com/agile-learning-institute/mentorHub-mongodb"
     click IdentityDB href "https://github.com/agile-learning-institute/mentorHub-mongodb"
     click eMailDB href "https://github.com/agile-learning-institute/mentorHub-mongodb"
+    click TopicsAPI href "https://github.com/agile-learning-institute/mentorHub-topic-api"
 
 ```
 
