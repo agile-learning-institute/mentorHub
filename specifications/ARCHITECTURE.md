@@ -117,15 +117,17 @@ The following diagram identifies the cloud infrastructure used by the mentorHub 
 flowchart LR
     ELB(ELB Elastic Load Balancer)
     --> EKS(EKS Elastic K8S Service)
-    EKS --> AEB(AWS Event Bridge)
-    EKS <--> SNS(SNS Simple Notification Service)
-    EKS --> EDB(AWS Elastic DocumentDB)
     EKS --> KMS(Key Management Service)
+    EKS <--> SNS(SNS Simple Notification Service)
+    EKS --> AEB(AWS Event Bridge)
+    AEB --> EDB(AWS Elastic DocumentDB)
+    AEB --> AOS(AWS Open Search)
     subgraph Backing Services
         AEB
         SNS
         EDB
         KMS
+        AOS
     end
 
 ```
@@ -144,11 +146,16 @@ flowchart LR
 ## Storage
 
 ```mermaid
-flowchart LR
-    S3(AWS S3 Buckets)
-    ADB(AWS DocumentDB)
-    Search(AWS OpenSearch)
-    DataLake(Data Lake Service TBD) 
+flowchart TD
+    S3(AWS S3 Buckets
+        images, logos, etc.)
+    ADB(AWS DocumentDB
+        Data for All Microservices
+        except Search)
+    Search(AWS OpenSearch
+            Elasticsearch DB)
+    DataLake(Data Lake Service
+            S3 + Athena) 
 
 ```
 
@@ -157,10 +164,13 @@ flowchart LR
 ```mermaid
 flowchart LR
     REPO(GitHub Repository)
-    --> CI(GitHub Actions) 
-    --> GCR(Github Container Registry)
-    --> Next(TBD Argo?)
-    --> K8S(EKS)
+    --> CI(GitHub Actions
+            PR Merged to main) 
+    --> GPR(Github Package Registry
+            Docker Images)
+    --> Next(TBD Helm/Argo?)
+    --> K8S(EKS
+            Cluster)
 ```
 
 ## Continous Delivery
