@@ -29,9 +29,9 @@ flowchart LR
     subgraph Search Dashboard
         SearchUI
         --> SearchAPI(mentorHub-search-api)
-        --> SearchDB[(Atlas Search)]
+        --> SearchService[(OpenSearch)]
     end
-    SearchDB <--> BUS
+    SearchService <--> BUS
 
     APIG
     --> PersonUI([mentorHub-person-ui])
@@ -117,10 +117,18 @@ The following diagram identifies the cloud infrastructure used by the mentorHub 
 flowchart LR
     ELB(ELB Elastic Load Balancer)
     --> EKS(EKS Elastic K8S Service)
-    --> AEB(AWS Event Bridge)
-    --> SNS(SNS Simple Notification Service)
-    --> EDB(AWS Elastic DocumentDB)
-    --> KMS(Key Management Service)
+    EKS --> KMS(Key Management Service)
+    EKS <--> SNS(SNS Simple Notification Service)
+    EKS --> AEB(AWS Event Bridge)
+    AEB --> EDB(AWS Elastic DocumentDB)
+    AEB --> AOS(AWS Open Search)
+    subgraph Backing Services
+        AEB
+        SNS
+        EDB
+        KMS
+        AOS
+    end
 
 ```
 
@@ -138,11 +146,16 @@ flowchart LR
 ## Storage
 
 ```mermaid
-flowchart LR
-    S3(Simple Storage Service S3 Buckets)
-    --> ADB(Amazon DocumentDB with Mongo Compatability)
-    --> DataWarehouse(Redshift Data Warehouse)
-    --> DataLake(Lake) 
+flowchart TD
+    S3(AWS S3 Buckets
+        images, logos, etc.)
+    ADB(AWS DocumentDB
+        Data for All Microservices
+        except Search)
+    Search(AWS OpenSearch
+            Elasticsearch DB)
+    DataLake(Data Lake Service
+            S3 + Athena) 
 
 ```
 
@@ -151,17 +164,31 @@ flowchart LR
 ```mermaid
 flowchart LR
     REPO(GitHub Repository)
-    --> CI(GitHub Actions) 
-    --> GCR(Github Container Registry)
-    --> Next(TBD)
+    --> CI(GitHub Actions
+            PR Merged to main) 
+    --> GPR(Github Package Registry
+            Docker Images)
+    --> Next(TBD Helm/Argo?)
+    --> K8S(EKS
+            Cluster)
 ```
 
 ## Continous Delivery
 
-```mermaid
-flowchart LR
-    DEV 
-    --> TEST 
-    --> STAGE 
-    --> PROD
-```
+The mentorHub platform utilizes four release management environments. Following the 12 factor principles the containers are built once, and then promoted between environments by adding tags to the containers. Environments are provisioned with Terraform automation. Provisioning a new environment (ie. for training or sales purposes) is achieved with Terraform, deploying code to this new environment only requires adding a new tag to the images you want to deploy.
+
+### DEV
+
+This is a cloud hosted development environment. CI Automation deploys new code directly into this environment. Backing services in this environment are based on containerized database resources which contain test data, and can return to the know starting point by redeploying the containers.
+
+### TEST
+
+This is a cloud hosted testing environment, where end-to-end testing is done to assure the quality of the system before release. This environment also uses containerized backing databases to support automated testing. Once the SQA team determines that the new release has passed quality checks in this environment it can be deployed into the Staging environment.
+
+### STAGE
+
+This is the final Pre-Production environment. In this environment data from the Production environment is replicated into the Staging environment to test database migrations. One last QA check is done in this environment before deploying the release into Production.
+
+### PROD
+
+This is the live production environment.

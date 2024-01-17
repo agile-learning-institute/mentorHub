@@ -17,11 +17,13 @@ mentorHub is a cloud platform that supports our operations, and serves the needs
 - Check the [mentorHub Project](https://github.com/orgs/agile-learning-institute/projects/3/views/2) for a Kanban of issues.
 - Select an issue that is **On Deck** and move it to **Active** to start your work.
 - If you need clarification about the issue, leave a comment on the issue with your question.
+- If someone is already assigned to the issue, check with them on how to contribute.
+- If no one is assigned to the issue, assign it to yourself.
 - Create a branch in the repository, name the branch with a -issueNN suffix
 - Create a draft PR to ask for reviews or guidance
 - After you have fully tested your changes, change the PR from draft to open and ask for reviews.
 - Once your changes have been merged back into the main branch the code is deployed to Dev.
-- At this time be able to conduct preliminary end to end testing.
+- At this time you should be able to conduct preliminary end to end testing.
 - When you are satisfied that the work is ready for integration testing, move the issue from **Active** to **Done**
 
 ### Software Quality Workflow
