@@ -147,15 +147,10 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    S3(AWS S3 Buckets
-        images, logos, etc.)
-    ADB(AWS DocumentDB
-        Data for All Microservices
-        except Search)
-    Search(AWS OpenSearch
-            Elasticsearch DB)
-    DataLake(Data Lake Service
-            S3 + Athena) 
+    S3(AWS S3 Buckets)
+    ADB(AWS DocumentDB)
+    Search(AWS OpenSearch)
+    DataLake(Athena) 
 
 ```
 
@@ -164,13 +159,10 @@ flowchart TD
 ```mermaid
 flowchart LR
     REPO(GitHub Repository)
-    --> CI(GitHub Actions
-            PR Merged to main) 
-    --> GPR(Github Package Registry
-            Docker Images)
+    --> CI(GitHub Actions) 
+    --> GPR(Github Package Registry)
     --> Next(TBD Helm/Argo?)
-    --> K8S(EKS
-            Cluster)
+    --> K8S(EKS)
 ```
 
 ## Continous Delivery
