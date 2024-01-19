@@ -22,7 +22,7 @@ The `--profile` command-line option or `COMPOSE_PROFILES` environment variable c
 
 ```bash
 cd ~/local
-docker compose stop
+docker compose --profile db stop
 docker compose --profile db start
 ```
 
@@ -30,7 +30,7 @@ docker compose --profile db start
 
 ```bash
 cd ~/local
-docker compose down
+docker compose --profile db down
 docker compose --profile db up --detach
 ```
 
@@ -38,7 +38,7 @@ docker compose --profile db up --detach
 
 ```bash
 cd ~/local
-docker compose down
+docker compose --profile db down
 docker image prune -f
 docker volume prune -f
 docker image pull ghcr.io/agile-learning-institute/mentorhub-mongosh:latest
