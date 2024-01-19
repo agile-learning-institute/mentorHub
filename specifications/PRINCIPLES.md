@@ -4,18 +4,17 @@
 
 While there is no single definition for microservices, a consensus view has evolved over time in the industry. Micro Services are small in size, messaging-enabled, bounded by contexts, autonomously developed, independently deployable, decentralized and built and released with automated processes.
 
-The micorservice principles used by, and deployed with DragonFly are aligned with the following influnces:
+The micorservice principles used by the mentorHub platform are:
 
-- The 12 Factor Application guides
-- Operations in Microservice Architectures
-- Separation of Concerns
-- Development Contracts
-- Event Driven Design Patterns
-- Service Granularity
-- Service Configurability
-- Service Disposability
-- Service Observability
-- Service Diagrams / Data
+- [The 12 Factor Application guides](#the-12-factor-app)
+- [Operations in Microservice Architectures](#operations-in-cloud-native-world)
+- [Separation of Concerns](#separation-of-concerns)
+- [Development Contracts](#development-contracts)
+- [Event Driven Design Patterns](#event-driven--messaging-enabled)
+- [Service Granularity](#service-granularity)
+- [Service Configurability](#service-configurability)
+- [Service Disposability](#service-disposability)
+- [Service Observability](#service-observability)
 
 ## The 12 Factor App
 
