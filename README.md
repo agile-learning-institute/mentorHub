@@ -18,7 +18,7 @@ mentorHub is a cloud platform that supports our operations, and serves the needs
 - Select an issue that is **On Deck** and move it to **Active** to start your work.
 - If you need clarification about the issue, leave a comment on the issue with your question.
 - If someone is already assigned to the issue, check with them on how to contribute.
-- If no one is assigned to the issue, assign it to yourself.
+- Assign the issue to yourself.
 - Create a branch in the repository, name the branch with a -issueNN suffix
 - Create a draft PR to ask for reviews or guidance
 - After you have fully tested your changes, change the PR from draft to open and ask for reviews.
@@ -30,7 +30,7 @@ mentorHub is a cloud platform that supports our operations, and serves the needs
 
 - Check the [mentorHub Project](https://github.com/orgs/agile-learning-institute/projects/3/views/2) for a Kanban of issues.
 - Select an issue that is in **Done** and move it to **Testing** to start your work.
-- Do your Cypress tests in the Testing Environment
+- Do your Cypress/Postman tests in the Testing Environment
 - When testing is complete, move the issue from **Testing** to **Complete**
 - NOTE: This workflow needs some work - TBD by SQA
 
