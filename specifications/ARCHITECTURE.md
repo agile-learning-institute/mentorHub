@@ -52,9 +52,9 @@ flowchart LR
     --> BUS
 
     APIG    
-    --> CirriculumUI([mentorHub-cirriculum-ui])
-    --> CirriculumAPI(mentorHub-cirriculum-api)
-    --> CirriculumDB[(Cirriculum)]
+    --> CurriculumUI([mentorHub-curriculum-ui])
+    --> CurriculumAPI(mentorHub-curriculum-api)
+    --> CurriculumDB[(Curriculum)]
     --> BUS
 
     APIG    
@@ -90,7 +90,7 @@ flowchart LR
         PersonDB
         TopicsDB
         PartnerDB
-        CirriculumDB
+        CurriculumDB
         EncounterDB
         IdentityDB
         eMailDB

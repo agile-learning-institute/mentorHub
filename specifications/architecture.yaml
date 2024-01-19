@@ -17,7 +17,7 @@ mentorHub:
       data-syncs:
       - person
       - partner
-      - cirriculum
+      - curriculum
       - encounter
       - topic
       - enumerators
@@ -57,7 +57,7 @@ mentorHub:
       - ui:
         template: ?_sap
         port: 
-    - cirriculum:
+    - curriculum:
       repos:
       - api:
         template: ?_api
