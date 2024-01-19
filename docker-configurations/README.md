@@ -14,29 +14,31 @@ All of the [run container commands](#run-commands) can be used to run different 
  ✔ Container local-mentorhub-person-ui-1   Started
  ```
 
-Once the containers are running, you can use the following commands to stop and start them:
+Once the containers are running, you can use `docker compose` commands to stop and start them. This Dockerfile contains different targets, called profiles, which must be specified to choose the services to run. Profile can be one of `db`, `person`, or `person-api`.
+
+The `--profile` command-line option or `COMPOSE_PROFILES` environment variable can be used to specify which profile to run. For this example, we will use the `db` profile.
 
 ### Restart containers without losing data
 
 ```bash
 cd ~/local
-docker compose stop
-docker compose start
+docker compose --profile db stop
+docker compose --profile db start
 ```
 
 ### Restart containers and Reset test data
 
 ```bash
 cd ~/local
-docker compose down
-docker compose up --detach
+docker compose --profile db down
+docker compose --profile db up --detach
 ```
 
 ### Pull the latest containers from the registry
 
 ```bash
 cd ~/local
-docker compose down
+docker compose --profile db down
 docker image prune -f
 docker volume prune -f
 docker image pull ghcr.io/agile-learning-institute/mentorhub-mongosh:latest
