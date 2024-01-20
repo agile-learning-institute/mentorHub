@@ -15,6 +15,8 @@ The Roadmap below identifies that a significant portion of the "SRE First" **Now
 - [x] Sree the SRE opens an admin view in a SPA and then they can review Versions of different components of the system, configuration values, and other information helpful during incident response.
 - [x] Tonya the Tester issues a single bash command and then the solution is available for local testing.
 - [ ] A new container is deployed to a registry, and tagged for the DEV environment and then the development environment deploys the new container.
+- [ ] Sree the SRE documents the infrastructure for an environment and runs a script and then a new cloud enviornment is provisioned and configured to deploy images with a unique tag.
+- [ ] Sree the SRE runs a "promote" runbook, and then a new tag is associated with images that contain another tag. i.e. Promte all current Dev containers to Test.
 
 ## Next
 
