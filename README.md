@@ -40,8 +40,14 @@ mentorHub is a cloud platform that supports our operations, and serves the needs
 
 ### What if I have a new idea
 
-- Create an issue for your idea, include details and add it to the project.
-- Ask for review of the issue.
+- From the mentorHub project, create an draft issue for your idea.
+  - Include all the details and repositories that will be impacted.
+  - Start off by creating a Hill statement to capture the meaningful outcome
+  - [Who] does [What] and then [Wow].
+  - Who is the user of the system, use an existing persona or RBAC role
+  - What is the action they take in the system to initiate the Wow (click...)
+  - Wow is the meaningful outcome. It answeres the question "Why are we doing this"
+- When you are satisfied that your idea is captured, ask for a review of the issue.
 - Once the issue is approved it will be placed either in the **Backlog** or the **On Deck** list.
 
 ## Before Creating new repositories
