@@ -51,23 +51,23 @@ docker image pull ghcr.io/agile-learning-institute/mentorhub-person-ui:latest
 ### Run the person triplet
 
 ```bash
-curl https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/run-local-person.sh | /bin/bash
+/bin/bash =(curl -o - https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/run-local.sh) person
 ```
 
-You can now use the [Access paths](https://github.com/agile-learning-institute/mentorhub-person-ui#access-paths) documented in the [mentorhub-persion-ui](https://github.com/agile-learning-institute/mentorhub-person-ui) repository.
+You can now use the [Access paths](https://github.com/agile-learning-institute/mentorhub-person-ui#access-paths) documented in the [mentorhub-person-ui](https://github.com/agile-learning-institute/mentorhub-person-ui) repository.
 
 ### Run the person api and backing database
 
 ```bash
-curl https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/run-local-person-api.sh | /bin/bash
+/bin/bash =(curl -o - https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/run-local.sh) person-api
 ```
 
-You can now use the [Curl Commands](https://github.com/agile-learning-institute/mentorhub-person-api#local-api-testing-with-curl) documented in the [mentorhub-persion-api](https://github.com/agile-learning-institute/mentorhub-person-api) repository.
+You can now use the [Curl Commands](https://github.com/agile-learning-institute/mentorhub-person-api#local-api-testing-with-curl) documented in the [mentorhub-person-api](https://github.com/agile-learning-institute/mentorhub-person-api) repository.
 
-### Run the mongoDB backing database
+### Run the MongoDB backing database
 
 ```bash
-curl https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/run-local-db.sh | /bin/bash
+/bin/bash =(curl -o - https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/run-local.sh) db
 ```
 
 You can now use [Mongo Compass](https://github.com/agile-learning-institute/mentorhub-mongodb#optionally) as documented in the [mentorhub-mongodb](https://github.com/agile-learning-institute/mentorhub-mongodb) repository.

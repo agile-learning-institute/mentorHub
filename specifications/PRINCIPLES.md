@@ -18,7 +18,7 @@ The micorservice principles used by the mentorHub platform are:
 
 ## The 12 Factor App
 
-The book “The 12 Factor App” by Adam Wiggins has often been sighted as a seminal work in MicroService architectures. Here is a quick review of the factors, and how we are implementing them.
+The book “The 12 Factor App” by Adam Wiggins has often been cited as a seminal work in Microservice architectures. Here is a quick review of the factors, and how we are implementing them.
 
 1. Codebase - A single codebase, deployed multiple times, re-use at the executable level
     - Orchestrated Containers, built once and promoted between environments.
@@ -70,7 +70,7 @@ In the book “Cloud Adoption Playbook” written by a team of IBM Distinguished
 
 ## Separation of Concerns
 
-One of the defining characteristics of a MicroService is that it is “autonomously developed” which requires that our architectures separate the design to allow multiple developers to work independently. Our interpretaion of this is to separate our architectures into three different layers (a triplet) that can be unit tested in isolation before being brought together for integration testing. Service boundaries should allow services to be deployed independently. Aside from service granularity, triplets can be thought of as a twist on the Model, View, Controller paradigm. When matched to the Agile Learning career path specialities, the seperation looks like this:
+One of the defining characteristics of a Microservice is that it is “autonomously developed” which requires that our architectures separate the design to allow multiple developers to work independently. Our interpretation of this is to separate our architectures into three different layers (a triplet) that can be unit tested in isolation before being brought together for integration testing. Service boundaries should allow services to be deployed independently. Aside from service granularity, triplets can be thought of as a twist on the Model, View, Controller paradigm. When matched to the Agile Learning career path specialties, the separation looks like this:
 
 - The Model (Data Guild) is responsible for:
   - Stateful Persistence at scale
@@ -104,19 +104,19 @@ One of the defining characteristics of a MicroService is that it is “autonomou
   
 ## Development Contracts
 
-Since we have separated our architecture into 3 layers we need to define design contracts that developers can use to succinctly describe the interactions between the layers. The contract between the UI and API is expressed as an Open API Specification (OAS) sometimes known as Swagger. The contract between the Controller and the Model is a set of JSON Schema, and a schmea versioning interface, that define the data structures for both the API and any ORM or Data Access libraries.
+Since we have separated our architecture into 3 layers we need to define design contracts that developers can use to succinctly describe the interactions between the layers. The contract between the UI and API is expressed as an Open API Specification (OAS) sometimes known as Swagger. The contract between the Controller and the Model is a set of JSON Schema, and a schema versioning interface, that define the data structures for both the API and any ORM or Data Access libraries.
 
-A word about API design and the separation of User Interaction and Business Logic. In general the UI should only implement the logic necessary to create a desirable user experience. Business logic should be present in the API or controller layer of the architecture. API design should keep in mind that the user of an API is the UI engineer, and the API should be designed to make the UI engineers job as easy as possible. API’s should be designed to support as few calls as possible to support the user experience. API’s should also have the intelligence to interpret the data being provided, relieving the UI developer of almost all data driven logic. API’s should always define meaningful devault values and behaviors.
+A word about API design and the separation of User Interaction and Business Logic. In general the UI should only implement the logic necessary to create a desirable user experience. Business logic should be present in the API or controller layer of the architecture. API design should keep in mind that the user of an API is the UI engineer, and the API should be designed to make the UI engineers job as easy as possible. APIs should be designed to support as few calls as possible to support the user experience. APIs should also have the intelligence to interpret the data being provided, relieving the UI developer of almost all data driven logic. APIs should always define meaningful default values and behaviors.
 
 ## Event Driven / Messaging Enabled
 
-The messaging-enabled application leverages an Asynchronous Service Bus to facilitate loosely coupled integrations within a trusted domain. An event driven architecture may use an event bus to publish and subscribe to events, however in many agile architectures the Database will provide event delivery, allowing asyncronous eventual consistency to becomes a deployment decision rather than a design constraint.
+The messaging-enabled application leverages an Asynchronous Service Bus to facilitate loosely coupled integrations within a trusted domain. An event driven architecture may use an event bus to publish and subscribe to events, however in many agile architectures the Database will provide event delivery, allowing asynchronous eventual consistency to becomes a deployment decision rather than a design constraint.
 
 Data Engineers frequently use service bus architectures to support publish/subscribe event platforms with both business systems and big data applications harvesting data from a single event streams.
 
 ## Service Granularity
 
-If a MicroService architecture divides the application into microservices one of the first questions that comes up is service granularity. In our opinion, is easy to get carried away and break an application up into dozens of services ( or serverless functions! ) when they would be better addressed with a single API on a single Model. We start by breaking an application up into services that can be independently developed, tested and deployed. We strive for services that are very simple and have 1 user interface, that communicates with 1 API, that uses 1 database. While not all solutions will use this pattern, deviations from this pattern should deserve extra consideration.
+If a Microservice architecture divides the application into microservices one of the first questions that comes up is service granularity. In our opinion, is easy to get carried away and break an application up into dozens of services ( or serverless functions! ) when they would be better addressed with a single API on a single Model. We start by breaking an application up into services that can be independently developed, tested and deployed. We strive for services that are very simple and have 1 user interface, that communicates with 1 API, that uses 1 database. While not all solutions will use this pattern, deviations from this pattern should deserve extra consideration.
 
 When identifying bounded domains there are a number of factors that can influence service size. Isolation of subsystems that have special security or performance requirements is one driving factor. Isolating identity services that have special data protection measures, and isolation of Personally Identifiable Information (PII) from access credentials is a best practice. Isolation of search use cases is another common division based on the impact of search on database performance, and allows for optimization of data structures to support search. Integrations are a third common pattern for isolation based on avoiding run-time dependencies on external services.
 
@@ -124,7 +124,7 @@ Another factor that will influence the granularity of services is the principle 
 
 ## Service Configurability
 
-Microservices are by nature small, and should be viewed as bespoke components of the system. In general, it’s best to minimize configuration options and the development, testing and release complications associated with them. That being said, every service will have need of “secret” configuration values, or other values that describe the environment the service is running in. Our services will always look to environment variables to provide this information. Services that want to support other configuration approaches are encouraged to use this heirarchy, that is if the first is not found, move on to the second and so forth:
+Microservices are by nature small, and should be viewed as bespoke components of the system. In general, it’s best to minimize configuration options and the development, testing and release complications associated with them. That being said, every service will have need of “secret” configuration values, or other values that describe the environment the service is running in. Our services will always look to environment variables to provide this information. Services that want to support other configuration approaches are encouraged to use this hierarchy, that is if the first is not found, move on to the second and so forth:
 
 - Discrete environment variable values (configuration options)
 - Discrete configuration files (secure secrets)

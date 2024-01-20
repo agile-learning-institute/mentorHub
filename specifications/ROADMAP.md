@@ -35,7 +35,7 @@ The Roadmap below identifies that a significant portion of the "SRE First" **Now
 
 - [ ] Sree the SRE runs a runbook script and then services from one environment are promoted into another.
 
-- [ ] Sree the SRE reviews a Promethius/Grafana monitoring portal including health information from system API's, and then they can view performance and throughput metrics to support incident response.
+- [ ] Sree the SRE reviews a Promethius/Grafana monitoring portal including health information from system APIs, and then they can view performance and throughput metrics to support incident response.
 
 - [ ] Sam the Software Engineer creates black-box testing for their components and then they can be more confident in the performance of their code, and they can provide a starting place for the SQA team to build automated end-to-end testing.
 
@@ -69,7 +69,7 @@ GitHub Usage stats on search dashboard
 ## Integrations
 
 - Marketing can use data to create graphs to easily identify and define trends
-- Marketing does ? - email campaigns, addWords campaigns, others?
+- Marketing does ? - email campaigns, AdWords campaigns, others?
 - Marketing member clicks a button and then donor receipts are sent out
 
 - Accounts and ledgers provide all needed documentation for tax purposes
