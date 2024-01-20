@@ -54,7 +54,7 @@ docker image pull ghcr.io/agile-learning-institute/mentorhub-person-ui:latest
 /bin/bash =(curl -o - https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/run-local.sh) person
 ```
 
-You can now use the [Access paths](https://github.com/agile-learning-institute/mentorhub-person-ui#access-paths) documented in the [mentorhub-persion-ui](https://github.com/agile-learning-institute/mentorhub-person-ui) repository.
+You can now use the [Access paths](https://github.com/agile-learning-institute/mentorhub-person-ui#access-paths) documented in the [mentorhub-person-ui](https://github.com/agile-learning-institute/mentorhub-person-ui) repository.
 
 ### Run the person api and backing database
 
@@ -62,9 +62,9 @@ You can now use the [Access paths](https://github.com/agile-learning-institute/m
 /bin/bash =(curl -o - https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/run-local.sh) person-api
 ```
 
-You can now use the [Curl Commands](https://github.com/agile-learning-institute/mentorhub-person-api#local-api-testing-with-curl) documented in the [mentorhub-persion-api](https://github.com/agile-learning-institute/mentorhub-person-api) repository.
+You can now use the [Curl Commands](https://github.com/agile-learning-institute/mentorhub-person-api#local-api-testing-with-curl) documented in the [mentorhub-person-api](https://github.com/agile-learning-institute/mentorhub-person-api) repository.
 
-### Run the mongoDB backing database
+### Run the MongoDB backing database
 
 ```bash
 /bin/bash =(curl -o - https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/run-local.sh) db
