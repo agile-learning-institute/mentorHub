@@ -112,7 +112,9 @@ flowchart LR
 
 ## Infrastructure
 
-The following diagram identifies the cloud infrastructure used by the mentorHub platform
+The following diagram identifies the cloud infrastructure used by the mentorHub platform.
+
+NOTE: This is incomplete, see the [Configure automation for Continuous Deployment Environments](https://github.com/agile-learning-institute/mentorHub/issues/12) issue for details.
 
 ```mermaid
 flowchart LR
@@ -135,6 +137,8 @@ flowchart LR
 
 ## Networking
 
+NOTE: This is incomplete, see the [Configure automation for Continuous Deployment Environments](https://github.com/agile-learning-institute/mentorHub/issues/12) issue for details.
+
 ```mermaid
 flowchart LR
     DNS(Amazon Route53 DNS)
@@ -146,6 +150,8 @@ flowchart LR
 
 ## Storage
 
+NOTE: This is incomplete, see the [Configure automation for Continuous Deployment Environments](https://github.com/agile-learning-institute/mentorHub/issues/12) issue for details.
+
 ```mermaid
 flowchart TD
     S3(AWS S3 Buckets)
@@ -156,6 +162,8 @@ flowchart TD
 ```
 
 ## Continuous Integration
+
+NOTE: This is incomplete, see the [Configure automation for Continuous Deployment Environments](https://github.com/agile-learning-institute/mentorHub/issues/12) issue for details.
 
 ```mermaid
 flowchart LR
