@@ -31,7 +31,9 @@ mentorHub is a cloud platform that supports our operations, and serves the needs
 - Check the [mentorHub Project](https://github.com/orgs/agile-learning-institute/projects/3/views/2) for a Kanban of issues.
 - Select an issue that is in **Done** and move it to **Testing** to start your work.
 - Do your Cypress/Postman tests in the Testing Environment
-- When testing is complete, move the issue from **Testing** to **Complete**
+- Open new issues for any defects found
+- When testing is complete, if there are still outstanding defects, move the issue from **Testing** to **Active**
+- When testing is complete and all known issues have been resolved, move the issue from **Testing** to **Complete**
 - NOTE: This workflow needs some work - TBD by SQA
 
 ### What if I have a new idea
