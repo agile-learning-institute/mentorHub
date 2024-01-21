@@ -102,7 +102,7 @@ flowchart LR
     click PersonDB href "https://github.com/agile-learning-institute/mentorHub-mongodb"
     click TopicsDB href "https://github.com/agile-learning-institute/mentorHub-mongodb"
     click PartnerDB href "https://github.com/agile-learning-institute/mentorHub-mongodb"
-    click CirriculumDB href "https://github.com/agile-learning-institute/mentorHub-mongodb"
+    click CurriculumDB href "https://github.com/agile-learning-institute/mentorHub-mongodb"
     click EncounterDB href "https://github.com/agile-learning-institute/mentorHub-mongodb"
     click IdentityDB href "https://github.com/agile-learning-institute/mentorHub-mongodb"
     click eMailDB href "https://github.com/agile-learning-institute/mentorHub-mongodb"
