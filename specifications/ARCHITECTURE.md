@@ -118,18 +118,17 @@ NOTE: This is incomplete, see the [Configure automation for Continuous Deploymen
 
 ```mermaid
 flowchart LR
-    ELB(ELB Elastic Load Balancer)
-    --> EKS(EKS Elastic K8S Service)
-    EKS --> KMS(Key Management Service)
-    EKS <--> SNS(SNS Simple Notification Service)
-    EKS --> AEB(AWS Event Bridge)
+    APPRUNNER(AWS App Runner)
+    APPRUNNER --> AMSSSPS(AWS Secrets Manager)
+    APPRUNNER <--> SNS(SNS Simple Notification Service)
+    APPRUNNER --> AEB(AWS Event Bridge)
     AEB --> EDB(AWS Elastic DocumentDB)
     AEB --> AOS(AWS Open Search)
     subgraph Backing Services
         AEB
         SNS
         EDB
-        KMS
+        AMSSSPS
         AOS
     end
 
@@ -169,9 +168,8 @@ NOTE: This is incomplete, see the [Configure automation for Continuous Deploymen
 flowchart LR
     REPO(GitHub Repository)
     --> CI(GitHub Actions) 
-    --> GPR(Github Package Registry)
-    --> Next(TBD Helm/Argo?)
-    --> K8S(EKS)
+    --> ECR(AWS Elastic Container Registy)
+    --> APPRUNNER(AWS App Runner)
 ```
 
 ## Continuous Delivery
