@@ -55,7 +55,7 @@ mentorHub:
         template: ?_api
         port: 
       - ui:
-        template: ?_sap
+        template: ?_spa
         port: 
     - curriculum:
       repos:
@@ -63,7 +63,7 @@ mentorHub:
         template: ?_api
         port: 
       - ui:
-        template: ?_sap
+        template: ?_spa
         port: 
     - encounters:
       repos:
@@ -71,7 +71,7 @@ mentorHub:
         template: ?_api
         port: 
       - ui:
-        template: ?_sap
+        template: ?_spa
         port: 
     - identity:
       repos:
