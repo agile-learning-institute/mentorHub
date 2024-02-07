@@ -29,10 +29,11 @@ flowchart LR
     subgraph Search Dashboard
         SearchUI
         --> SearchAPI(mentorHub-search-api)
-        --> SearchService[(OpenSearch)]
+        --> Lambda(Lambda Function)
+        <--> SearchService[(OpenSearch)]
     end
-    SearchService <--> BUS
-
+    Lambda <--> BUS
+    
     APIG
     --> PersonUI([mentorHub-person-ui])
     --> PersonAPI(mentorHub-person-api)
