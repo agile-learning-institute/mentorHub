@@ -71,3 +71,29 @@ You can now use the [Curl Commands](https://github.com/agile-learning-institute/
 ```
 
 You can now use [Mongo Compass](https://github.com/agile-learning-institute/mentorhub-mongodb#optionally) as documented in the [mentorhub-mongodb](https://github.com/agile-learning-institute/mentorhub-mongodb) repository.
+
+### Troubleshooting
+
+#### Error Encountered While Running Container Commands on WSL (Ubuntu 20.04)
+
+If you encounter an error similar to `curl: option --output-dir: is unknown`, this is because the `--output-dir` flag is only available from `curl 7.73.0` and the most recent and secure version for `Ubuntu 20.04` is `curl 7.68.0`. To bypass this, you can manually create the local folder, fetch the docker-compose.yaml file and setup the contaners by running the following commands:
+
+##### Person Triplet
+
+```bash
+mkdir ~/local && cd ~/local && curl --create-dirs --output docker-compose.yaml https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/docker-compose.yaml && docker compose --profile person up --detach
+```
+
+##### Person API and Backing Database
+
+```bash
+mkdir ~/local && cd ~/local && curl --create-dirs --output docker-compose.yaml https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/docker-compose.yaml && docker compose --profile person-api up --detach
+```
+
+##### MongoDB Backing Database
+
+```bash
+mkdir ~/local && cd ~/local && curl --create-dirs --output docker-compose.yaml https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/docker-compose.yaml && docker compose --profile db up --detach
+```
+
+After running this command, you'll be in the local directory but you should see a message similar to the one in [the overview](#overview)
