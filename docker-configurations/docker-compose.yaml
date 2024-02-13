@@ -29,9 +29,9 @@ services:
       - PASSWORD=example
       - AUTH_DB=admin
       - DB_NAME=agile-learning-institute
-      - SCRIPT_PATH=/src/migrate.js
+      - SCRIPT_PATH=/migrate.js
       - LOAD_TEST=true
-    entrypoint: ["/src/entrypoint.sh"]
+    entrypoint: ["/entrypoint.sh"]
     profiles:
       - db
       - person
