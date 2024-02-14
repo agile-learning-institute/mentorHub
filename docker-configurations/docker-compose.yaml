@@ -31,7 +31,7 @@ services:
       - DB_NAME=agile-learning-institute
       - SCRIPT_PATH=/migrate.js
       - LOAD_TEST=true
-    entrypoint: ["/entrypoint.sh"]
+    entrypoint: ["/mongosh/entrypoint.sh"]
     profiles:
       - db
       - person
