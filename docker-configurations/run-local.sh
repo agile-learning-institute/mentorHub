@@ -8,15 +8,15 @@ curl --create-dirs --output "$compose_dir/docker-compose.yaml" https://raw.githu
 docker compose --project-directory "$compose_dir" up --detach && {
 
 
-cat > compose-down.sh << EOF
+cat > /tmp/compose-down.sh << EOF
 #!/bin/sh
 
 docker compose --project-directory "$compose_dir" --profile "$1" down && rm -r "$compose_dir" && rm "\$0"
 EOF
 
 
-chmod u+x compose-down.sh
+chmod u+x /tmp/compose-down.sh
 
-echo "To stop the containers, just execute compose-down.sh"
+echo "To stop the containers, just execute /tmp/compose-down.sh"
 
 }
