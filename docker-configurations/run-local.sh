@@ -4,6 +4,7 @@ fi
 
 compose_dir="$(mktemp -d)"
 
+[ -f /tmp/compose-down.sh ] && /tmp/compose-down.sh
 curl --create-dirs --output "$compose_dir/docker-compose.yaml" https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/docker-compose.yaml
 docker compose --project-directory "$compose_dir" up --detach && {
 
