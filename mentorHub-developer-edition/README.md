@@ -12,7 +12,8 @@ Execute the following command from your terminal window, and identify an install
 
 ```bash
 # /bin/bash <(curl https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/mentorHub-DE/install)
-/bin/bash <(curl https://raw.githubusercontent.com/agile-learning-institute/mentorhub/mentorhub-developers-edition/mentorHub-DE/install)
+# /bin/bash <(curl https://raw.githubusercontent.com/agile-learning-institute/mentorHub/main/mentorHub-developer-edition/install)
+/bin/bash <(curl https://raw.githubusercontent.com/agile-learning-institute/mentorHub/mentorhub-developers-edition/mentorHub-developer-edition/install)
 ```
 
 ## Use

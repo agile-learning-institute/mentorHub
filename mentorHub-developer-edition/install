@@ -35,13 +35,12 @@ INSTALL_PATH="$INSTALL_PATH/mentorHub"
 echo "installing into $INSTALL_PATH"
 mkdir -p "$INSTALL_PATH"
 cd "$INSTALL_PATH" || exit
-pwd
 
 # Download the mh script and docker-compose configuration
-# curl -o mh https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/mentorHub-developer-edition/mh
-curl -o mh https://raw.githubusercontent.com/agile-learning-institute/mentorhub/mentorhub-developers-edition/mentorHub-developer-edition/mh
-# curl -o docker-compose.yaml https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/docker-compose.yaml
-curl -o docker-compose.yaml https://raw.githubusercontent.com/agile-learning-institute/mentorHub/mentorhub-developers-edition/docker-configurations/docker-compose.yaml
+# curl -o mh https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/mentorHub-developer-edition/mh 2> /dev/null
+curl -o mh https://raw.githubusercontent.com/agile-learning-institute/mentorhub/mentorhub-developers-edition/mentorHub-developer-edition/mh 2> /dev/null
+# curl -o docker-compose.yaml https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/docker-compose.yaml 2> /dev/null
+curl -o docker-compose.yaml https://raw.githubusercontent.com/agile-learning-institute/mentorHub/mentorhub-developers-edition/docker-configurations/docker-compose.yaml 2> /dev/null
 
 # Initilize Files
 touch CURRENT
