@@ -216,8 +216,13 @@ function update {
         docker pull "$image" >> $INSTALL_PATH/logs 2>> $INSTALL_PATH/logs
     done
     echo "fetching files"
-    curl -o "$INSTALL_PATH/mh" https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/mh 2>> $INSTALL_PATH/logs
-    curl -o "$INSTALL_PATH/docker-compose.yaml" https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/docker-compose.yaml 2>>  $INSTALL_PATH/logs
+
+#   curl -o "$INSTALL_PATH/mh" https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/mh 2>> $INSTALL_PATH/logs
+    curl -o "$INSTALL_PATH/mh" https://raw.githubusercontent.com/agile-learning-institute/mentorhub/mentorhub-developers-edition/mentorHub-developer-edition/mh 2>> $INSTALL_PATH/logs
+
+#   curl -o "$INSTALL_PATH/docker-compose.yaml" https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/docker-compose.yaml 2>>  $INSTALL_PATH/logs
+    curl -o "$INSTALL_PATH/docker-compose.yaml" https://raw.githubusercontent.com/agile-learning-institute/mentorhub/mentorhub-developers-edition/docker-configurations/docker-compose.yaml 2>> $INSTALL_PATH/logs
+
     echo "update Successful" >> $INSTALL_PATH/logs
 }
 
