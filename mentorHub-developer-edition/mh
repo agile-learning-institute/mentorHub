@@ -60,6 +60,9 @@ OPTIONS
         update the mentorHub Developer Edition
         pull a fresh copy of all containers
 
+    reset
+        delete all mh containers - usefull to reset mh if things get hosed
+
     purge
         delete all mh containers and images
 
@@ -228,7 +231,7 @@ function update {
 }
 
 ################################################################################
-# force rm all containers and images
+# force rm all containers
 ################################################################################
 function deleteContainers {
     downCurrent
@@ -238,12 +241,21 @@ function deleteContainers {
         echo "- removing container $container" 
         docker container rm -f "$container" > /dev/null 2> /dev/null
     done
+    echo "deleteContainers Successful" >> $INSTALL_PATH/logs
+}
+
+################################################################################
+# force rm all images
+################################################################################
+function deleteImages {
+    downCurrent
+    echo "deleteImages" >> $INSTALL_PATH/logs
     for image in "${IMAGES[@]}"; do
         echo "- removing image $image" >> $INSTALL_PATH/logs
         echo "- removing image $image" 
         docker image rm -f "$image"  > /dev/null
     done
-    echo "deleteContainers Successful" >> $INSTALL_PATH/logs
+    echo "deleteImages Successful" >> $INSTALL_PATH/logs
 }
 
 ################################################################################
@@ -269,8 +281,11 @@ elif [[ $COMMAND == "stop" ]]; then
     stopCurrent
 elif [[ $COMMAND == "update" ]]; then
     update
+elif [[ $COMMAND == "reset" ]]; then
+    deleteContainers
 elif [[ $COMMAND == "purge" ]]; then
     deleteContainers
+    deleteImages
 elif [[ $COMMAND == "logs" ]]; then
     tailLogs
 elif [[ $COMMAND == "current" ]]; then
