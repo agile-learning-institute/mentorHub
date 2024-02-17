@@ -20,11 +20,11 @@ Execute the following command from your terminal window, and identify an install
 After installation you can use the ``mh`` command to manage the mentorHub micro-services. Here are a few examples.
 
 ```bash
-mh up person
+mh --help
 ```
 
 ```bash
-mh start
+mh up person
 ```
 
 ```bash
@@ -32,7 +32,9 @@ mh stop
 ```
 
 ```bash
-mh down
+mh start
 ```
 
-use ``mh --help`` for more detailed information
+```bash
+mh down
+```
