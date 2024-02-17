@@ -208,6 +208,7 @@ function startCurrent {
 # Update mentorHub-DE
 ################################################################################
 function update {
+    echo "$(date) - log file reset" > $INSTALL_PATH/logs
     downCurrent
     echo "update" >> $INSTALL_PATH/logs
     for image in "${IMAGES[@]}"; do
