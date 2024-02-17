@@ -241,6 +241,7 @@ function deleteContainers {
         echo "- removing container $container" 
         docker container rm -f "$container" > /dev/null 2> /dev/null
     done
+    echo > "$INSTALL_PATH/CURRENT"
     echo "deleteContainers Successful" >> $INSTALL_PATH/logs
 }
 
