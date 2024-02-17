@@ -211,9 +211,8 @@ function startCurrent {
 # Update mentorHub-DE
 ################################################################################
 function update {
-    echo "$(date) - log file reset" > $INSTALL_PATH/logs
     downCurrent
-    echo "update" >> $INSTALL_PATH/logs
+    echo "update configurations" >> $INSTALL_PATH/logs
     for image in "${IMAGES[@]}"; do
         echo "pulling $image" >> $INSTALL_PATH/logs
         echo "pulling $image"
@@ -241,7 +240,7 @@ function deleteContainers {
         docker container rm -f "$container" > /dev/null 2> /dev/null
     done
     echo > "$INSTALL_PATH/CURRENT"
-    echo "deleteContainers Successful" >> $INSTALL_PATH/logs
+    echo "$(date) RESET - Logs Reset" > $INSTALL_PATH/logs
 }
 
 ################################################################################
