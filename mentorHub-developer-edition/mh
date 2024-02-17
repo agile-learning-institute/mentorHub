@@ -257,13 +257,6 @@ function deleteImages {
     echo "deleteImages Successful" >> $INSTALL_PATH/logs
 }
 
-################################################################################
-# tail logs file
-################################################################################
-function tailLogs {
-    tail -f $INSTALL_PATH/logs
-}
-
 ##########################################################################
 # Main 
 echo "$(date) mh start $COMMAND $NEW_PROFILE" >> "$INSTALL_PATH/logs"
@@ -286,7 +279,7 @@ elif [[ $COMMAND == "purge" ]]; then
     deleteContainers
     deleteImages
 elif [[ $COMMAND == "logs" ]]; then
-    tailLogs
+    tail -f $INSTALL_PATH/logs
 elif [[ $COMMAND == "current" ]]; then
     getCurrentProfile
     echo $CURRENT_PROFILE
