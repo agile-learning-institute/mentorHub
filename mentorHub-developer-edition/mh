@@ -1,0 +1,284 @@
+#!/bin/zsh
+
+export COMMAND="$1"
+export NEW_PROFILE="$2"
+export INSTALL_PATH=$(dirname "$(which mh)")
+
+export IMAGES=(
+    "ghcr.io/agile-learning-institute/mentorhub-mongosh:latest"
+    "ghcr.io/agile-learning-institute/mentorhub-person-api:latest"
+    "ghcr.io/agile-learning-institute/mentorhub-person-ui:latest"
+    "mongo:latest"
+)
+
+export CONTAINERS=(
+    "mongodb"
+    "mongosh"
+    "mentorhub-person-api"
+    "mentorhub-person-ui"
+)
+
+export PROFILES=(
+    "mongodb"
+    "person"
+    "person-api"
+)
+
+################################################################################
+# Print Help Screen
+################################################################################
+function help {
+cat <<END
+NAME
+       mh - mentorHub Developers Edition
+
+SYNOPSIS
+       mh command [options]
+
+DESCRIPTION
+       mh is a simple utility to run the mentorHub application, or portions 
+       of it, in local docker containers. You must have docker desktop 
+       installed
+
+OPTIONS
+    up [profile]
+        Remove existing containers and launchs the profile specified. 
+        This command will erase any existing data, and start the 
+        system with a newly initialized database.
+
+    down
+        Remove existing containers. This will permanently delete the
+        data in any existing databases.
+
+    start
+        restarts the previously stoped profile
+
+    stop
+        stop currently running profile.
+
+    update
+        update the mentorHub Developer Edition
+        pull a fresh copy of all containers
+
+    purge
+        delete all mh containers and images
+
+    version
+        print the mentorHub-DE version
+
+    logs
+        tail the mh log file, ^c to excape
+
+    current
+        print the current profile
+
+    setcurrent [profile]
+        set the current profile
+
+PROFILES
+    mongodb - the backing mongo database
+    person-api - the API supporting the person UI and the mongodb
+    person-ui - the SPA for person, and the API and backing database
+
+END
+}
+
+################################################################################
+# Make sure Docker is running
+################################################################################
+function checkAndStartDocker {
+    echo "checkAndStartDocker" >> $INSTALL_PATH/logs
+
+    if ! docker info >/dev/null 2>&1; then
+        echo "Docker is not running. Attempting to start Docker..."
+        if [[ "$(uname -s)" == "Darwin" ]]; then
+            open -a Docker
+        elif [[ "$(uname -s)" == "Linux" ]]; then
+            echo "Please ensure Docker is installed and start it manually."
+            # For Linux, starting Docker depends on the installation method
+            # systemctl start docker might work for systems using systemd
+        fi
+        # Wait a bit for Docker to start
+        sleep 10
+        if ! docker info >/dev/null 2>&1; then
+            echo "Failed to start Docker. Please start Docker manually."
+            exit 1
+        fi
+    fi
+}
+
+################################################################################
+# Get the currently running profile
+################################################################################
+function getCurrentProfile {
+    echo "getCurrentProfile" >> $INSTALL_PATH/logs
+    if [[ -f "$INSTALL_PATH/CURRENT" ]]; then
+        CURRENT_PROFILE=$(cat "$INSTALL_PATH/CURRENT")
+    else
+        CURRENT_PROFILE=""
+    fi
+    echo "CurrentProfile set: $CURRENT_PROFILE" >> $INSTALL_PATH/logs
+}
+
+################################################################################
+# Validate new Profile, prompt for valid profile
+################################################################################
+function getNewProfile {
+    echo "getNewProfile" >> $INSTALL_PATH/logs
+    local validProfile=0
+
+    # First, check if NEW_PROFILE is already valid
+    for profile in "${PROFILES[@]}"; do
+        if [[ $NEW_PROFILE == $profile ]]; then
+            validProfile=1
+            break
+        fi
+    done
+
+    # If NEW_PROFILE is not valid, prompt the user to select a valid profile
+    while [[ $validProfile -eq 0 ]]; do
+        echo "Please select a profile from the following: ${PROFILES[*]}"
+        echo -n "Enter the profile name: "  
+        read inputProfile  
+        for profile in "${PROFILES[@]}"; do
+            if [[ $inputProfile == $profile ]]; then
+                NEW_PROFILE=$inputProfile
+                validProfile=1
+                break
+            fi
+        done
+        if [[ $validProfile -eq 0 ]]; then
+            echo "Invalid profile: $inputProfile. Please try again."
+        fi
+    done
+    echo "New Profile set $NEW_PROFILE" >> $INSTALL_PATH/logs
+}
+
+################################################################################
+# docker compose down of current profile
+################################################################################
+function downCurrent {
+    checkAndStartDocker
+    getCurrentProfile
+    echo "downCurrent $CURRENT_PROFILE" >> $INSTALL_PATH/logs
+    if [[ -n $CURRENT_PROFILE ]]; then
+        docker-compose --project-directory "$INSTALL_PATH" -f "$INSTALL_PATH/docker-compose.yaml" --profile $CURRENT_PROFILE down
+        echo > "$INSTALL_PATH/CURRENT"
+        echo "downCurrent Successful" >> $INSTALL_PATH/logs
+    fi
+}
+
+################################################################################
+# docker compose up of current profile
+################################################################################
+function upProfile {
+    downCurrent    
+    getNewProfile
+    echo "upProfile $NEW_PROFILE" >> $INSTALL_PATH/logs
+    docker-compose --project-directory "$INSTALL_PATH" -f "$INSTALL_PATH/docker-compose.yaml" --profile $NEW_PROFILE up --detach
+    echo "$NEW_PROFILE" > "$INSTALL_PATH/CURRENT"
+    echo "upProfile Successful" >> $INSTALL_PATH/logs
+}
+
+################################################################################
+# docker compose stop of current profile
+################################################################################
+function stopCurrent {
+    getCurrentProfile
+    echo "stopCurrent $CURRENT_PROFILE" >> $INSTALL_PATH/logs
+    if [[ -n $CURRENT_PROFILE ]]; then
+        docker-compose --project-directory "$INSTALL_PATH" -f "$INSTALL_PATH/docker-compose.yaml" --profile $CURRENT_PROFILE stop
+    fi
+    echo "stopCurrent Successful" >> $INSTALL_PATH/logs
+}
+
+################################################################################
+# docker compose start of new profile profile
+################################################################################
+function startCurrent {
+    getCurrentProfile
+    echo "startProfile $CURRENT_PROFILE" >> $INSTALL_PATH/logs
+    if [[ -n $CURRENT_PROFILE ]]; then
+        docker-compose --project-directory "$INSTALL_PATH" --file "$INSTALL_PATH/docker-compose.yaml" --profile $CURRENT_PROFILE start 
+    fi
+    echo "startCurrent Successful" >> $INSTALL_PATH/logs
+}
+
+################################################################################
+# Update mentorHub-DE
+################################################################################
+function update {
+    downCurrent
+    echo "update" >> $INSTALL_PATH/logs
+    for image in "${IMAGES[@]}"; do
+        echo "pulling $image" >> $INSTALL_PATH/logs
+        echo "pulling $image"
+        docker pull "$image" >> $INSTALL_PATH/logs 2>> $INSTALL_PATH/logs
+    done
+    echo "fetching files"
+    curl -o "$INSTALL_PATH/mh" https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/mh 2>> $INSTALL_PATH/logs
+    curl -o "$INSTALL_PATH/docker-compose.yaml" https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/docker-compose.yaml 2>>  $INSTALL_PATH/logs
+    echo "update Successful" >> $INSTALL_PATH/logs
+}
+
+################################################################################
+# force rm all containers and images
+################################################################################
+function deleteContainers {
+    downCurrent
+    echo "deleteContainers" >> $INSTALL_PATH/logs
+    for container in "${CONTAINERS[@]}"; do
+        echo "- removing container $container" >> $INSTALL_PATH/logs
+        echo "- removing container $container" 
+        docker container rm -f "$container" > /dev/null 2> /dev/null
+    done
+    for image in "${IMAGES[@]}"; do
+        echo "- removing image $image" >> $INSTALL_PATH/logs
+        echo "- removing image $image" 
+        docker image rm -f "$image"  > /dev/null
+    done
+    echo "deleteContainers Successful" >> $INSTALL_PATH/logs
+}
+
+################################################################################
+# tail logs file
+################################################################################
+function tailLogs {
+    tail -f $INSTALL_PATH/logs
+}
+
+##########################################################################
+# Main 
+echo "$(date) mh start $COMMAND $NEW_PROFILE" >> "$INSTALL_PATH/logs"
+
+if [[ $COMMAND == "up" ]]; then
+    downCurrent
+    upProfile
+elif [[ $COMMAND == "down" ]]; then
+    downCurrent
+elif [[ $COMMAND == "start" ]]; then
+    stopCurrent
+    startCurrent
+elif [[ $COMMAND == "stop" ]]; then
+    stopCurrent
+elif [[ $COMMAND == "update" ]]; then
+    update
+elif [[ $COMMAND == "purge" ]]; then
+    deleteContainers
+elif [[ $COMMAND == "logs" ]]; then
+    tailLogs
+elif [[ $COMMAND == "current" ]]; then
+    getCurrentProfile
+    echo $CURRENT_PROFILE
+elif [[ $COMMAND == "setcurrent" ]]; then
+    getNewProfile
+    echo "Setting Profile to $NEW_PROFILE"
+    echo "$NEW_PROFILE" > "$INSTALL_PATH/CURRENT"
+elif [[ $COMMAND == "version" ]]; then
+    echo "v1.0.0"
+else
+    help
+fi
+exit 0
+# End Main 
+##########################################################################

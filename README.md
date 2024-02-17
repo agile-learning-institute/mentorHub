@@ -10,7 +10,7 @@ mentorHub is a cloud platform that supports our operations, and serves the needs
 - Review the [Architecture Principles](./specifications/PRINCIPLES.md) to understand guiding principles for the architecture
 - Review the [Architecture Diagrams](./specifications/ARCHITECTURE.md) to understand the architecture
 - Review the [CI/CD](./specifications/CICD.md) Configurations to understand how code is deployed
-- Review [instructions](./docker-configurations/README.md) on how to run the system locally
+- Install [mentorHub Developer Edition](./mentorHub-developer-edition/README.md) to run the system or any portion of it locally.
 
 ### Software Engineer Workflow
 

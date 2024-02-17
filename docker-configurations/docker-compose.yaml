@@ -14,7 +14,7 @@ services:
       timeout: 10s
       retries: 5
     profiles:
-      - db
+      - mongodb
       - person
       - person-api
 
@@ -24,16 +24,11 @@ services:
       mentorhub-mongodb:
         condition: service_healthy
     environment:
-      - HOST=mentorhub-mongodb
       - USER=root
       - PASSWORD=example
-      - AUTH_DB=admin
-      - DB_NAME=agile-learning-institute
-      - SCRIPT_PATH=/migrate.js
-      - LOAD_TEST=true
     entrypoint: ["/mongosh/entrypoint.sh"]
     profiles:
-      - db
+      - mongodb
       - person
       - person-api
 
