@@ -26,7 +26,9 @@ update_shell_config() {
 ################################################################
 # Prompt User for Install Folder
 read -p "Enter the installation path or press enter to use the default [~/Applications/MentorHub-DE]: " inputPath
-INSTALL_PATH=${inputPath:-"$HOME/Applications/MentorHub-DE"}
+INSTALL_PATH="${inputPath:-"$HOME/Applications/MentorHub-DE"}"
+
+INSTALL_PATH=${INSTALL_PATH/\~/$HOME}
 
 # Append /mentorHub to the install path
 INSTALL_PATH="$INSTALL_PATH/mentorHub"
