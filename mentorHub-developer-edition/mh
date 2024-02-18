@@ -191,7 +191,7 @@ function downCurrent {
     getCurrentProfile
     echo "downCurrent $CURRENT_PROFILE" >> $INSTALL_PATH/logs
     if [[ -n $CURRENT_PROFILE ]]; then
-        docker-compose --project-directory "$INSTALL_PATH" -f "$INSTALL_PATH/docker-compose.yaml" --profile $CURRENT_PROFILE down
+        docker compose --project-directory "$INSTALL_PATH" -f "$INSTALL_PATH/docker-compose.yaml" --profile $CURRENT_PROFILE down
         echo > "$INSTALL_PATH/CURRENT"
         echo "downCurrent Successful" >> $INSTALL_PATH/logs
     fi
@@ -204,7 +204,7 @@ function upProfile {
     downCurrent    
     getNewProfile
     echo "upProfile $NEW_PROFILE" >> $INSTALL_PATH/logs
-    docker-compose --project-directory "$INSTALL_PATH" -f "$INSTALL_PATH/docker-compose.yaml" --profile $NEW_PROFILE up --detach
+    docker compose --project-directory "$INSTALL_PATH" -f "$INSTALL_PATH/docker-compose.yaml" --profile $NEW_PROFILE up --detach
     echo "$NEW_PROFILE" > "$INSTALL_PATH/CURRENT"
     echo "upProfile Successful" >> $INSTALL_PATH/logs
 }
@@ -216,7 +216,7 @@ function stopCurrent {
     getCurrentProfile
     echo "stopCurrent $CURRENT_PROFILE" >> $INSTALL_PATH/logs
     if [[ -n $CURRENT_PROFILE ]]; then
-        docker-compose --project-directory "$INSTALL_PATH" -f "$INSTALL_PATH/docker-compose.yaml" --profile $CURRENT_PROFILE stop
+        docker compose --project-directory "$INSTALL_PATH" -f "$INSTALL_PATH/docker-compose.yaml" --profile $CURRENT_PROFILE stop
     fi
     echo "stopCurrent Successful" >> $INSTALL_PATH/logs
 }
@@ -228,7 +228,7 @@ function startCurrent {
     getCurrentProfile
     echo "startProfile $CURRENT_PROFILE" >> $INSTALL_PATH/logs
     if [[ -n $CURRENT_PROFILE ]]; then
-        docker-compose --project-directory "$INSTALL_PATH" --file "$INSTALL_PATH/docker-compose.yaml" --profile $CURRENT_PROFILE start 
+        docker compose --project-directory "$INSTALL_PATH" --file "$INSTALL_PATH/docker-compose.yaml" --profile $CURRENT_PROFILE start 
     fi
     echo "startCurrent Successful" >> $INSTALL_PATH/logs
 }
