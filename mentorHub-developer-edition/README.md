@@ -11,8 +11,7 @@ If you are a software engineer contributing to the mentorHub platform, or a soft
 Execute the following command from your terminal window, and identify an installation location when promted, and your done.
 
 ```bash
-# /bin/bash <(curl https://raw.githubusercontent.com/agile-learning-institute/mentorHub/main/mentorHub-developer-edition/install)
-/bin/bash <(curl https://raw.githubusercontent.com/agile-learning-institute/mentorHub/mentorhub-developers-edition/mentorHub-developer-edition/install)
+/bin/bash <(curl https://raw.githubusercontent.com/agile-learning-institute/mentorHub/main/mentorHub-developer-edition/install)
 ```
 
 ## Use

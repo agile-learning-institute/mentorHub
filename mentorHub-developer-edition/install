@@ -39,10 +39,7 @@ mkdir -p "$INSTALL_PATH"
 cd "$INSTALL_PATH" || exit
 
 # Download the mh script and docker-compose configuration
-#   curl -o "$INSTALL_PATH/mh" https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/mh 2>> $INSTALL_PATH/logs 2>>  /dev/null
-curl -o "$INSTALL_PATH/mh" https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/mentorHub-developer-edition/mh 2>> /dev/null
-
-#   curl -o "$INSTALL_PATH/docker-compose.yaml" https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/docker-compose.yaml 2>>  /dev/null
+curl -o "$INSTALL_PATH/mh" https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/mentorhub-developer-edition/mh 2>> /dev/null
 curl -o "$INSTALL_PATH/docker-compose.yaml" https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/docker-compose.yaml 2>>  /dev/null
 
 # Initilize Files
