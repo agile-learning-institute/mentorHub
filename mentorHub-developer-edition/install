@@ -1,0 +1,62 @@
+#!/bin/bash
+
+################################################################
+# Update PATH and shell configuration files if they exist
+################################################################
+update_shell_config() {
+    local shell_config="$1"
+    if [ -f "$shell_config" ]; then
+        if ! grep -q "$INSTALL_PATH" "$shell_config"; then
+            echo "adding $INSTALL_PATH to the PATH in $shell_config"
+
+            # Update current path
+            echo "Updating $shell_config with PATH..."
+            echo "export PATH=\$PATH:$INSTALL_PATH" >> "$shell_config"
+            export PATH=$PATH:$INSTALL_PATH
+        else
+            echo "$INSTALL_PATH is already in the PATH in $shell_config"
+        fi
+    else
+        echo "Shell Config $1 not found"
+    fi
+}
+
+################################################################
+# MAIN
+################################################################
+# Prompt User for Install Folder
+read -p "Enter the installation path or press enter to use the default [~/Applications/MentorHub-DE]: " inputPath
+INSTALL_PATH="${inputPath:-"$HOME/Applications/MentorHub-DE"}"
+
+INSTALL_PATH=${INSTALL_PATH/\~/$HOME}
+
+# Append /mentorHub to the install path
+INSTALL_PATH="$INSTALL_PATH/mentorHub"
+
+# Create the directory and navigate to it
+echo "installing into $INSTALL_PATH"
+mkdir -p "$INSTALL_PATH"
+cd "$INSTALL_PATH" || exit
+
+# Download the mh script and docker-compose configuration
+#   curl -o "$INSTALL_PATH/mh" https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/mh 2>> $INSTALL_PATH/logs 2>>  /dev/null
+curl -o "$INSTALL_PATH/mh" https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/mentorHub-developer-edition/mh 2>> /dev/null
+
+#   curl -o "$INSTALL_PATH/docker-compose.yaml" https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/docker-compose.yaml 2>>  /dev/null
+curl -o "$INSTALL_PATH/docker-compose.yaml" https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/docker-compose.yaml 2>>  /dev/null
+
+# Initilize Files
+touch CURRENT
+chmod +x mh
+echo "Files Initilized"
+
+# Add to path
+update_shell_config "$HOME/.bashrc"
+update_shell_config "$HOME/.zshrc"
+
+# Run mh update to pull the latest images and configurations
+./mh update
+
+echo "Installation completed. Please restart your terminal or source your shell configuration file to use 'mh'."
+echo "$(date) - MentorHub Developers Editioin Installed"
+

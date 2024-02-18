@@ -10,6 +10,10 @@ Repo Structure Standards have a /src/docker folder with the following files:
 docker-build.sh uses docker build to create a single image targeted to the users architecture. Multi-Architecture images are created and pushed to our GitHub Container Registry by GitHub Actions CI.
 These GitHub actions build and push containers with a :latest tag
 
+## Dockerfile Templates
+
+See the [docker-configurations](../docker-configurations/README.md) folder for our master ``docker-compose.yaml`` and tempaltes for 2-stage Dockerfiles.
+
 ## A note on Versioning
 
 All of the API and UI microservices use a semantic versioning approach, with Major and Minor version numbers that are maintained by the developer. The Patch portion of a verion number is automatically genearted by the Docker Build and placed in a text file at a specific location for use by the code. All code should have observability for these version numbers to support incident response.
