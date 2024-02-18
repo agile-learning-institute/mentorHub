@@ -7,7 +7,7 @@ update_shell_config() {
     local shell_config="$1"
     if [ -f "$shell_config" ]; then
         if ! grep -q "$INSTALL_PATH" "$shell_config"; then
-            echo "addomg $INSTALL_PATH to the PATH in $shell_config"
+            echo "adding $INSTALL_PATH to the PATH in $shell_config"
 
             # Update current path
             echo "Updating $shell_config with PATH..."
