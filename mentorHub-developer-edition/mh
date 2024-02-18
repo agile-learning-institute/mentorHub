@@ -25,9 +25,9 @@ export PROFILES=(
 )
 
 ################################################################################
-# Print Help Screen
+# Print Manual Page
 ################################################################################
-function help {
+function manual {
 cat <<END
 NAME
        mh - mentorHub Developers Edition
@@ -82,6 +82,32 @@ PROFILES
     mongodb - the backing mongo database
     person-api - the API supporting the person UI and the mongodb
     person-ui - the SPA for person, and the API and backing database
+
+END
+}
+
+################################################################################
+# Print Usage
+################################################################################
+usage() {
+  cat <<END
+
+Usage: mh COMMAND
+
+Commands:
+  up          Launch containers from a profile
+  down        Remove existing containers
+  start       Restart a profile
+  stop        Stop a profile
+  update      Update the mentorHub Developer Edition
+  reset       Delete all mh containers
+  purge       Delete all mh containers and images
+  version     Print the mentorHub-DE version
+  logs        Print the log
+  current     Print the current profile
+  setcurrent  Set the current profile
+  profile     List available profiles
+  manual      Show the manual
 
 END
 }
@@ -288,8 +314,10 @@ elif [[ $COMMAND == "setcurrent" ]]; then
     echo "$NEW_PROFILE" > "$INSTALL_PATH/CURRENT"
 elif [[ $COMMAND == "version" ]]; then
     echo "v1.0.0"
+elif [[ $COMMAND == "manual" ]]; then
+    manual
 else
-    help
+    usage
 fi
 exit 0
 # End Main 
