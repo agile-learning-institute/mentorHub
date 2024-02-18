@@ -33,14 +33,14 @@ NAME
        mh - mentorHub Developers Edition
 
 SYNOPSIS
-       mh command [options]
+       mh COMMAND
 
 DESCRIPTION
        mh is a simple utility to run the mentorHub application, or portions 
        of it, in local docker containers. You must have docker desktop 
        installed
 
-OPTIONS
+COMMANDS
     up [profile]
         Remove existing containers and launchs the profile specified. 
         This command will erase any existing data, and start the 
