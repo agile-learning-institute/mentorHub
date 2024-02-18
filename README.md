@@ -52,7 +52,16 @@ mentorHub is a cloud platform that supports our operations, and serves the needs
 
 ## Before Creating new repositories
 
-It is very unlikely that you will need to create a new repository, but if you should be lucky enough to start something from scratch, all mentorHub repositories should be created in the agile-learning-institute organization, follow mentorHub naming standards outlined below, be *public*, allow the *mentorHub* team to have *maintainer* access, and use one of the following templates:
+It is very unlikely that you will need to create a new repository, but if you should be lucky enough to start something from scratch use one of the templates below.
+
+> When viewing the template on GitHub select **Use this template**, then select **Create a new repository**. Make sure you set the repository **Owner** to "agile-learning-institute", name it as described below, and make it **public**.
+---
+> After the repository has been created, open **Settings** and make the following changes:
+>
+> - Under Collaborators and Teams, add the **mentorHub** team with **Maintain** access, and the **mentorAdmins** team with **Admin** access
+> - Under Branches click **Add a branch protection rule**, set the **Branch name pattern** to *main*, check **Require a pull request before merging** and then scroll down and click **Create**.
+
+### Templates
 
 - [x] [template-vanilla](https://github.com/agile-learning-institute/template-vanilla) a minimal repository with no language specific code.
 - [ ] [template-api-go-gorilla-mongodb](https://github.com/agile-learning-institute/template-api-go-gorilla-mongodb) - Golang / Mongo API
@@ -65,5 +74,7 @@ It is very unlikely that you will need to create a new repository, but if you sh
 - [ ] [template-sqldb](https://github.com/agile-learning-institute/) - SQL schema versioning template
 
 NOTE: If your desired template is not available (not checked off) then you can use the vanilla template, and you should consider creating a new template after you get your code to a functional state.
+
+### Naming Standards
 
 All mentorHub repositories should follow this naming convention ```mentorHub-[service]-[element]``` where service is a service boundary name such as profile, partner, search, subject, etc. and element is one of ```ui | api```. for example ```mentorHub-profile-ui``` would contain a Single Page Web App, that uses the ```mentorHub-profile-api``` api. All of the Mongo data structures and test data can be found in [```mentorHub-mongodb```](https://github.com/agile-learning-institute/mentorHub-mongodb). Also note that these names are technology agnostic, but the code deployed within a project should be a specific implementation. i.e. mentorHub-search-api could be in any language, but should be implemented in only one.
