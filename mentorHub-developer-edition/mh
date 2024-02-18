@@ -103,10 +103,9 @@ Commands:
   reset       Delete all mh containers
   purge       Delete all mh containers and images
   version     Print the mentorHub-DE version
-  logs        Print the log
+  logs        Tail the log file (use ^C to escape)
   current     Print the current profile
-  setcurrent  Set the current profile
-  profile     List available profiles
+  setcurrent  Manually set the current profile
   manual      Show the manual
 
 END
