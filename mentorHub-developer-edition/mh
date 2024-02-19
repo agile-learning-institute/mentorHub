@@ -286,41 +286,86 @@ function uninstall {
 # Main 
 echo "$(date) mh start $COMMAND $NEW_PROFILE" >> "$INSTALL_PATH/logs"
 
-if [[ $COMMAND == "up" ]]; then
+case $COMMAND in
+
+  "up")
+
     downCurrent
     upProfile
-elif [[ $COMMAND == "down" ]]; then
+    ;;
+
+  "down")
+
     downCurrent
-elif [[ $COMMAND == "start" ]]; then
+    ;;
+
+  "start")
+
     stopCurrent
     startCurrent
-elif [[ $COMMAND == "stop" ]]; then
+    ;;
+
+  "stop")
+
     stopCurrent
-elif [[ $COMMAND == "update" ]]; then
+    ;;
+
+  "update")
+
     update
-elif [[ $COMMAND == "reset" ]]; then
+    ;;
+
+  "reset")
+
     deleteContainers
-elif [[ $COMMAND == "purge" ]]; then
+    ;;
+
+  "purge")
+
     deleteContainers
     deleteImages
-elif [[ $COMMAND == "logs" ]]; then
+    ;;
+
+  "logs")
+
     tail -f $INSTALL_PATH/logs
-elif [[ $COMMAND == "current" ]]; then
+    ;;
+
+  "current")
+
     getCurrentProfile
     echo $CURRENT_PROFILE
-elif [[ $COMMAND == "setcurrent" ]]; then
+    ;;
+
+  "setcurrent")
+
     getNewProfile
     echo "Setting Profile to $NEW_PROFILE"
     echo "$NEW_PROFILE" > "$INSTALL_PATH/CURRENT"
-elif [[ $COMMAND == "version" ]]; then
+    ;;
+
+  "version")
+
     echo "v1.0.0"
-elif [[ $COMMAND == "manual" ]]; then
+    ;;
+
+  "manual")
+
     manual
-elif [[ $COMMAND == "uninstall" ]]; then
+    ;;
+
+  "uninstall")
+
     uninstall
-else
+    ;;
+
+  *)
+
     usage
-fi
+    ;;
+
+  esac
+
 exit 0
 # End Main 
 ##########################################################################
