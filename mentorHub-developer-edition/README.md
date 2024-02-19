@@ -4,8 +4,10 @@ If you are a software engineer contributing to the mentorHub platform, or a soft
 
 ## Prerequisites
 
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-- Zsh [for linux users](https://phoenixnap.com/kb/install-zsh-ubuntu)
+- [ ] MacOS or Linux.
+  - If you are a Windows user follow the Virtual Machine, or WSL instructions from [Odin Foundations installations lesson](https://www.theodinproject.com/lessons/foundations-installations#os-installation)
+- [ ] [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- [ ] zsh Shell, Defaut for MacOS, [install for linux users](https://phoenixnap.com/kb/install-zsh-ubuntu)
 
 ## Installation
 
