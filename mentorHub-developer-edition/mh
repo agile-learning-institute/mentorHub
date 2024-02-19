@@ -78,6 +78,9 @@ COMMANDS
     setcurrent [profile]
         set the current profile
 
+    uninstall
+        Removes mentorHub-DE completely
+
 PROFILES
     mongodb - the backing mongo database
     person-api - the API supporting the person UI and the mongodb
@@ -107,6 +110,7 @@ Commands:
   current     Print the current profile
   setcurrent  Manually set the current profile
   manual      Show the manual
+  uninstall   Remove mh and all associated files
 
 END
 }
@@ -278,6 +282,19 @@ function deleteImages {
     echo "deleteImages Successful" >> $INSTALL_PATH/logs
 }
 
+################################################################################
+# Uninstall mentorHub-DE
+################################################################################
+function uninstall {
+    echo "uninstalling mentorHub Developer's Edition"
+    deleteContainers
+    deleteImages
+
+    rm -rf $INSTALL_PATH
+
+    echo "Done"
+}
+
 ##########################################################################
 # Main 
 echo "$(date) mh start $COMMAND $NEW_PROFILE" >> "$INSTALL_PATH/logs"
@@ -312,6 +329,8 @@ elif [[ $COMMAND == "version" ]]; then
     echo "v1.0.0"
 elif [[ $COMMAND == "manual" ]]; then
     manual
+elif [[ $COMMAND == "uninstall" ]]; then
+    uninstall
 else
     usage
 fi
