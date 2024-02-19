@@ -8,6 +8,7 @@ export IMAGES=(
     "ghcr.io/agile-learning-institute/mentorhub-mongosh:latest"
     "ghcr.io/agile-learning-institute/mentorhub-person-api:latest"
     "ghcr.io/agile-learning-institute/mentorhub-person-ui:latest"
+    "ghcr.io/agile-learning-institute/mentorhub-search-opensearch:latest"
     "mongo:latest"
 )
 
@@ -16,12 +17,18 @@ export CONTAINERS=(
     "mongosh"
     "mentorhub-person-api"
     "mentorhub-person-ui"
+    "search-db"
+    "search-api"
+    "search-ui"
 )
 
 export PROFILES=(
     "mongodb"
     "person"
     "person-api"
+    "search"
+    "search-db"
+    "search-api"
 )
 
 ################################################################################

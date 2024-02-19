@@ -59,3 +59,25 @@ services:
       - mentorhub-person-api
     profiles:
       - person
+
+  mentorhub-searchdb:
+    image: opensearchproject/opensearch:latest
+    environment:
+      discover.type: node
+      cluster-name: mentorHub
+      plugins.security.disabled: true
+    ports:
+      - "9200:9200"
+    profiles:
+      - search
+      - search-db
+      - search-api
+
+  mentorhub-opensearch:
+    image: ghcr.io/agile-learning-institute/mentorhub-search-opensearch:latest
+    environment:
+      HOST: mentorhub-searchdb
+    profiles:
+      - search
+      - search-db
+      - search-api
