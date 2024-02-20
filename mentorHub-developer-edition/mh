@@ -4,13 +4,7 @@ export COMMAND="$1"
 export NEW_PROFILE="$2"
 export INSTALL_PATH=$(dirname "$(which mh)")
 
-export IMAGES=(
-    "ghcr.io/agile-learning-institute/mentorhub-mongosh:latest"
-    "ghcr.io/agile-learning-institute/mentorhub-person-api:latest"
-    "ghcr.io/agile-learning-institute/mentorhub-person-ui:latest"
-    "ghcr.io/agile-learning-institute/mentorhub-search-opensearch:latest"
-    "mongo:latest"
-)
+export IMAGES=($(docker compose -f "$INSTALL_PATH/docker-compose.yaml" --profile '*' config --images))
 
 export CONTAINERS=($(docker compose -f "$INSTALL_PATH/docker-compose.yaml" --profile '*' config --services))
 
