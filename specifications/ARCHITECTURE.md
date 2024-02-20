@@ -2,12 +2,12 @@
 
 These diagrams utilize the [mermaid flowchart library](https://mermaid.js.org/syntax/flowchart.html), you may need to install an IDE plugin to preview these diagrams. The VS Code extension bierner.markdown-mermaid is a good option.
 
-- [Microservice Architecture](#micorservices-and-source-code-repos)
+- [Microservice Architecture](#microservices-and-source-code-repos)
 - [Infrastructure](#infrastructure)
 - [Networking](#networking)
 - [Storage](#storage)
-- [Continuous Integration](#continous-integration)
-- [Continuous Delivery](#continous-delivery)
+- [Continuous Integration](#continuous-integration)
+- [Continuous Delivery](#continuous-delivery)
 
 ## Microservices and source code repos
 
@@ -24,13 +24,12 @@ flowchart LR
     BUS(AWS Event Stream)
     --> DataLake[(Data Lake)]
 
-    APIG 
-    --> SearchUI([mentorHub-search-ui])
-    subgraph Search Dashboard
+    APIG --> SearchUI([mentorHub-search-ui])
+    subgraph SMTP Search
         SearchUI
         --> SearchAPI(mentorHub-search-api)
-        --> Lambda(Lambda Function)
-        <--> SearchService[(OpenSearch)]
+        --> SearchService[(OpenSearch)]
+        Lambda --> SearchService
     end
     Lambda <--> BUS
     
