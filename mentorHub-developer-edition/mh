@@ -4,32 +4,11 @@ export COMMAND="$1"
 export NEW_PROFILE="$2"
 export INSTALL_PATH=$(dirname "$(which mh)")
 
-export IMAGES=(
-    "ghcr.io/agile-learning-institute/mentorhub-mongosh:latest"
-    "ghcr.io/agile-learning-institute/mentorhub-person-api:latest"
-    "ghcr.io/agile-learning-institute/mentorhub-person-ui:latest"
-    "ghcr.io/agile-learning-institute/mentorhub-search-opensearch:latest"
-    "mongo:latest"
-)
+export IMAGES=($(docker compose -f "$INSTALL_PATH/docker-compose.yaml" --profile '*' config --images))
 
-export CONTAINERS=(
-    "mongodb"
-    "mongosh"
-    "mentorhub-person-api"
-    "mentorhub-person-ui"
-    "search-db"
-    "search-api"
-    "search-ui"
-)
+export CONTAINERS=($(docker compose -f "$INSTALL_PATH/docker-compose.yaml" --profile '*' config --services))
 
-export PROFILES=(
-    "mongodb"
-    "person"
-    "person-api"
-    "search"
-    "search-db"
-    "search-api"
-)
+export PROFILES=($(docker compose -f "$INSTALL_PATH/docker-compose.yaml" config --profiles))
 
 ################################################################################
 # Print Manual Page
@@ -176,7 +155,8 @@ function getNewProfile {
 
     # If NEW_PROFILE is not valid, prompt the user to select a valid profile
     while [[ $validProfile -eq 0 ]]; do
-        echo "Please select a profile from the following: ${PROFILES[*]}"
+        IFS=$'\n'
+        echo "Please select a profile from the following:\n${PROFILES[*]}"
         echo -n "Enter the profile name: "  
         read inputProfile  
         for profile in "${PROFILES[@]}"; do
