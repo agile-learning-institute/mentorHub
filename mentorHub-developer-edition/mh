@@ -1,5 +1,8 @@
 #!/bin/zsh
 
+# By default zsh indexes arrays starting at 1, unlike bash. Will remove once migrated to bash
+setopt KSH_ARRAYS
+
 export COMMAND="$1"
 export NEW_PROFILE="$2"
 export INSTALL_PATH=$(dirname "$(which mh)")
@@ -156,16 +159,14 @@ function getNewProfile {
     # If NEW_PROFILE is not valid, prompt the user to select a valid profile
     while [[ $validProfile -eq 0 ]]; do
         IFS=$'\n'
-        echo "Please select a profile from the following:\n${PROFILES[*]}"
-        echo -n "Enter the profile name: "  
+        echo "Please select a profile from the following:"
+        echo "${PROFILES[*]}" | nl
+        echo -n "Select the profile: "
         read inputProfile  
-        for profile in "${PROFILES[@]}"; do
-            if [[ $inputProfile == $profile ]]; then
-                NEW_PROFILE=$inputProfile
-                validProfile=1
-                break
-            fi
-        done
+        if [[ ! -z "${PROFILES[$inputProfile-1]}" && $inputProfile -ge 1 ]]; then
+            NEW_PROFILE="${PROFILES[$inputProfile-1]}"
+            validProfile=1
+        fi
         if [[ $validProfile -eq 0 ]]; then
             echo "Invalid profile: $inputProfile. Please try again."
         fi
@@ -346,7 +347,7 @@ case $COMMAND in
 
   "version")
 
-    echo "v1.0.0"
+    echo "v1.1.0"
     ;;
 
   "manual")
