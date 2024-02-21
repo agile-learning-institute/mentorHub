@@ -82,7 +82,7 @@ services:
     image: ghcr.io/agile-learning-institute/mentorhub-search-opensearch:latest
     depends_on:
       mentorhub-searchdb:
-        condition: service_health
+        condition: service_healthy
     environment:
       PROTOCOL: http
       HOST: mentorhub-searchdb
