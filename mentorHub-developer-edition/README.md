@@ -17,15 +17,6 @@ Execute the following command from your terminal window, and identify an install
 /bin/bash <(curl https://raw.githubusercontent.com/agile-learning-institute/mentorHub/main/mentorHub-developer-edition/install)
 ```
 
-## Troubleshooting
-
-##### mh command not working on WSL after install
-If you've run the install script without errors but still get `mh: command not found`, check your .bashrc file. Here's an example: 
-```bash
-sudo nano ~/.bashrc
-``` 
-This will open a terminal text editor. In the text editor you can use the arrow keys (←↑→↓) to move the cursor. Hold the down (↓) arrow key to until you get to the bottom of the file. You might see something like ![image](https://github.com/agile-learning-institute/mentorHub/assets/67389882/1d7ecdd5-1f32-44d1-9b67-a0947e1f86bd) Navigate your cursor to the line with the long comment, move the cursor to the `e` in `export`, and press `enter` to create a new line. To save and exit, press `control + x` then `y` to confirm, then hit `enter` to confirm again. After that, run `source ~/.bashrc` (or where ever your `.bashrc` file is) and try `mh` again. It should work. If not, try restarting your WSL terminal.
-
 ## Use
 
 After installation you can use the ``mh`` command to manage the mentorHub micro-services. Here are a few examples.
@@ -49,3 +40,36 @@ mh start
 ```bash
 mh down
 ```
+
+## Troubleshooting
+
+### Install fails with the following errors
+
+```bash
+Shell Config .zshrc not found
+Shell Config .zshrc not found
+```
+
+This indicates that you do not have an initilization file. Issue the following command, and then re-run the install.
+
+#### Mac
+
+```bash
+touch ~/.zshrc
+```
+
+#### Linux
+
+```bash
+touch ~/.bashrc
+```
+
+### mh command not working on WSL after install
+
+If you've run the install script without errors but still get `mh: command not found`, check your .bashrc file. Here's an example:
+
+```bash
+sudo nano ~/.bashrc
+```
+
+This will open a terminal text editor. In the text editor you can use the arrow keys (←↑→↓) to move the cursor. Hold the down (↓) arrow key to until you get to the bottom of the file. You might see something like ![image](https://github.com/agile-learning-institute/mentorHub/assets/67389882/1d7ecdd5-1f32-44d1-9b67-a0947e1f86bd) Navigate your cursor to the line with the long comment, move the cursor to the `e` in `export`, and press `enter` to create a new line. To save and exit, press `control + x` then `y` to confirm, then hit `enter` to confirm again. After that, run `source ~/.bashrc` (or where ever your `.bashrc` file is) and try `mh` again. It should work. If not, try restarting your WSL terminal.
