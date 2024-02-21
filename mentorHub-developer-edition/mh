@@ -347,7 +347,7 @@ case $COMMAND in
 
   "version")
 
-    echo "v1.0.0"
+    echo "v1.1.0"
     ;;
 
   "manual")
