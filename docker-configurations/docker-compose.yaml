@@ -63,11 +63,16 @@ services:
   mentorhub-searchdb:
     image: opensearchproject/opensearch:latest
     environment:
-      discover.type: node
+      discovery.type: single-node
       cluster-name: mentorHub
       plugins.security.disabled: true
     ports:
       - "9200:9200"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -s http://localhost:9200/_cluster/health | grep -q '\"status\":\"green\"' || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
     profiles:
       - search
       - search-db
@@ -75,8 +80,16 @@ services:
 
   mentorhub-opensearch:
     image: ghcr.io/agile-learning-institute/mentorhub-search-opensearch:latest
+    depends_on:
+      mentorhub-searchdb:
+        condition: service_health
     environment:
+      PROTOCOL: http
       HOST: mentorhub-searchdb
+      AUTH: admin:admin
+      PORT: 9200
+      OPENSEARCH_INDEX: search-index
+      LOAD_TEST: true
     profiles:
       - search
       - search-db
