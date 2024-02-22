@@ -78,8 +78,8 @@ services:
       - search-db
       - search-api
 
-  mentorhub-opensearch:
-    image: ghcr.io/agile-learning-institute/mentorhub-search-opensearch:latest
+  mentorhub-searchinit:
+    image: ghcr.io/agile-learning-institute/mentorhub-search-searchinit:latest
     depends_on:
       mentorhub-searchdb:
         condition: service_healthy
