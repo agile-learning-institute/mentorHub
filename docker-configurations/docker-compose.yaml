@@ -61,11 +61,12 @@ services:
       - person
 
   mentorhub-searchdb:
-    image: opensearchproject/opensearch:latest
+    image: opensearchproject/opensearch:2.12.0
     environment:
       discovery.type: single-node
       cluster-name: mentorHub
       plugins.security.disabled: true
+      OPENSEARCH_INITIAL_ADMIN_PASSWORD: 55CKoK;9|'g{8i<4|Gny6pUX
     ports:
       - "9200:9200"
     healthcheck:
@@ -74,6 +75,7 @@ services:
       timeout: 10s
       retries: 5
     profiles:
+      - opensearchonly
       - search
       - search-db
       - search-api
@@ -83,13 +85,6 @@ services:
     depends_on:
       mentorhub-searchdb:
         condition: service_healthy
-    environment:
-      PROTOCOL: http
-      HOST: mentorhub-searchdb
-      AUTH: admin:admin
-      PORT: 9200
-      OPENSEARCH_INDEX: search-index
-      LOAD_TEST: true
     profiles:
       - search
       - search-db
