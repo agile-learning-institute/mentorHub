@@ -227,7 +227,7 @@ function update {
     downCurrent
     echo "update configurations" >> $INSTALL_PATH/logs
 
-    curl -o "$INSTALL_PATH/mh" https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/mentorhub-developer-edition/mh 2>> /dev/null
+    curl -o "$INSTALL_PATH/mh" https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/mentorHub-developer-edition/mh 2>> /dev/null
     curl -o "$INSTALL_PATH/docker-compose.yaml" https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/docker-compose.yaml 2>> /dev/null
 
     IMAGES="$(docker compose -f "$INSTALL_PATH/docker-compose.yaml" --profile '*' config --images)"
