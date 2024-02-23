@@ -2,22 +2,22 @@ version: '3.1'
 
 services:
   mentorhub-mongodb:
-      image: mongo:7.0.5
-      environment:
-        MONGO_INITDB_ROOT_USERNAME: root
-        MONGO_INITDB_ROOT_PASSWORD: example
-      ports:
-        - "27017:27017"
-      healthcheck:
-        test: ["CMD", "mongosh", "-u", "root", "-p", "example", "--authenticationDatabase", "admin", "--eval", "db.adminCommand('ping')"]
-        interval: 15s
-        timeout: 10s
-        retries: 5
-      profiles:
-        - mongoonly
-        - mongodb
-        - person
-        - person-api
+    image: mongo:7.0.5
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - "27017:27017"
+    healthcheck:
+      test: ["CMD", "mongosh", "-u", "root", "-p", "example", "--authenticationDatabase", "admin", "--eval", "db.adminCommand('ping')"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+    profiles:
+      - mongoonly
+      - mongodb
+      - person
+      - person-api
   mentorhub-mongosh:
     image: ghcr.io/agile-learning-institute/mentorhub-mongosh:latest
     depends_on:
