@@ -7,11 +7,7 @@ export COMMAND="$1"
 export NEW_PROFILE="$2"
 export INSTALL_PATH=$(dirname "$(which mh)")
 
-export IMAGES=($(docker compose -f "$INSTALL_PATH/docker-compose.yaml" --profile '*' config --images))
-
-export CONTAINERS=($(docker compose -f "$INSTALL_PATH/docker-compose.yaml" --profile '*' config --services))
-
-export PROFILES=($(docker compose -f "$INSTALL_PATH/docker-compose.yaml" config --profiles))
+source $INSTALL_PATH/vars
 
 ################################################################################
 # Print Manual Page
@@ -230,15 +226,30 @@ function startCurrent {
 function update {
     downCurrent
     echo "update configurations" >> $INSTALL_PATH/logs
+
+    curl -o "$INSTALL_PATH/mh" https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/mentorHub-developer-edition/mh 2>> /dev/null
+    curl -o "$INSTALL_PATH/docker-compose.yaml" https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/docker-compose.yaml 2>> /dev/null
+
+    IMAGES="$(docker compose -f "$INSTALL_PATH/docker-compose.yaml" --profile '*' config --images)"
+
+    CONTAINERS="$(docker compose -f "$INSTALL_PATH/docker-compose.yaml" --profile '*' config --services)"
+
+    PROFILES="$(docker compose -f "$INSTALL_PATH/docker-compose.yaml" config --profiles)"
+
+    cat > $INSTALL_PATH/vars <<EOF
+export IMAGES=(${IMAGES[@]})
+
+export CONTAINERS=(${CONTAINERS[@]})
+
+export PROFILES=(${PROFILES[@]})
+EOF
+
     for image in "${IMAGES[@]}"; do
         echo "pulling $image" >> $INSTALL_PATH/logs
         echo "pulling $image"
         docker pull "$image" >> $INSTALL_PATH/logs 2>> $INSTALL_PATH/logs
     done
     echo "fetching files"
-
-    curl -o "$INSTALL_PATH/mh" https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/mentorHub-developer-edition/mh 2>> /dev/null
-    curl -o "$INSTALL_PATH/docker-compose.yaml" https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/docker-compose.yaml 2>> /dev/null
 
     echo "update Successful" >> $INSTALL_PATH/logs
 }
