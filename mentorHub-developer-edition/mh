@@ -232,14 +232,10 @@ function update {
 
     IMAGES="$(docker compose -f "$INSTALL_PATH/docker-compose.yaml" --profile '*' config --images)"
 
-    CONTAINERS="$(docker compose -f "$INSTALL_PATH/docker-compose.yaml" --profile '*' config --services)"
-
     PROFILES="$(docker compose -f "$INSTALL_PATH/docker-compose.yaml" config --profiles)"
 
     cat > $INSTALL_PATH/vars <<EOF
 export IMAGES=(${IMAGES[@]})
-
-export CONTAINERS=(${CONTAINERS[@]})
 
 export PROFILES=(${PROFILES[@]})
 EOF
