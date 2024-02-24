@@ -232,14 +232,10 @@ function update {
 
     IMAGES="$(docker compose -f "$INSTALL_PATH/docker-compose.yaml" --profile '*' config --images)"
 
-    CONTAINERS="$(docker compose -f "$INSTALL_PATH/docker-compose.yaml" --profile '*' config --services)"
-
     PROFILES="$(docker compose -f "$INSTALL_PATH/docker-compose.yaml" config --profiles)"
 
     cat > $INSTALL_PATH/vars <<EOF
 export IMAGES=(${IMAGES[@]})
-
-export CONTAINERS=(${CONTAINERS[@]})
 
 export PROFILES=(${PROFILES[@]})
 EOF
@@ -259,7 +255,7 @@ EOF
 ################################################################################
 function deleteContainers {
     echo "deleteContainers" >> $INSTALL_PATH/logs
-    for container in "${CONTAINERS[@]}"; do
+    for container in $(docker compose -f $INSTALL_PATH/docker-compose.yaml ps -a --format '{{ .Names }}'); do
         echo "- removing container $container" >> $INSTALL_PATH/logs
         echo "- removing container $container" 
         docker container rm -f "$container" > /dev/null 2> /dev/null
