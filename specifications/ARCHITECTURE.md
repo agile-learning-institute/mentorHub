@@ -25,7 +25,7 @@ flowchart LR
     --> DataLake[(Data Lake)]
 
     APIG --> SearchUI([mentorHub-search-ui])
-    subgraph SMTP Search
+    subgraph Search
         SearchUI
         --> SearchAPI(mentorHub-search-api)
         --> SearchService[(OpenSearch)]
