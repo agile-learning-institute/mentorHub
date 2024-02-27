@@ -248,7 +248,7 @@ function update {
 ################################################################################
 function deleteContainers {
     echo "deleteContainers" >> "$INSTALL_PATH/logs"
-    docker container ls -a | awk 'NR > 1 {print $1}' | while read -r container; do
+    docker container ls -a  --format "{{.ID}}" | while read -r container; do
         echo "- removing container $container" >> "$INSTALL_PATH/logs"
         echo "- removing container $container" 
         docker container rm -f "$container" > /dev/null 2>&1
@@ -262,7 +262,7 @@ function deleteContainers {
 ################################################################################
 function deleteImages {
     echo "deleteImages" >> $INSTALL_PATH/logs
-    docker image ls -a | awk 'NR > 1 {print $3}' | while read -r image; do
+    docker image ls -a  --format "{{.ID}}" | while read -r image; do
         echo "- removing image $image" >> $INSTALL_PATH/logs
         echo "- removing image $image" 
         docker image rm -f "$image"  2>>&1 $INSTALL_PATH/logs
@@ -271,7 +271,7 @@ function deleteImages {
     docker volume ls | awk 'NR > 1 {print $2}' | while read -r volume; do
         echo "- removing volume $volume" >> $INSTALL_PATH/logs
         echo "- removing volume $volume"
-        docker volume rm -f "$volume" >>&1 $INSTALL_PATH/logs
+        docker volume rm -f "$volume" 2>>&1 $INSTALL_PATH/logs
     done
 
     echo "deleteImages Successful" >> $INSTALL_PATH/logs
