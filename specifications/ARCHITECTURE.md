@@ -108,6 +108,7 @@ flowchart LR
     click eMailDB href "https://github.com/agile-learning-institute/mentorHub-mongodb"
     click TopicsAPI href "https://github.com/agile-learning-institute/mentorHub-topic-api"
     click PartnerAPI href "https://github.com/agile-learning-institute/mentorHub-partner-api"
+    click PartnerUI href "https://github.com/agile-learning-institute/mentorHub-partner-ui"
 
 ```
 
