@@ -178,6 +178,7 @@ function downCurrent {
     echo "downCurrent $CURRENT_PROFILE" >> $INSTALL_PATH/logs
     if [[ -n $CURRENT_PROFILE ]]; then
         docker compose --project-directory "$INSTALL_PATH" -f "$INSTALL_PATH/docker-compose.yaml" --profile $CURRENT_PROFILE down
+        docker volume prune -f
         echo > "$INSTALL_PATH/CURRENT"
         echo "downCurrent Successful" >> $INSTALL_PATH/logs
     fi
