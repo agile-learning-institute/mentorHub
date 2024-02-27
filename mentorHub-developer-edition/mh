@@ -7,8 +7,6 @@ export COMMAND="$1"
 export NEW_PROFILE="$2"
 export INSTALL_PATH=$(dirname "$(which mh)")
 
-source $INSTALL_PATH/vars
-
 ################################################################################
 # Print Manual Page
 ################################################################################
@@ -141,33 +139,34 @@ function getCurrentProfile {
 # Validate new Profile, prompt for valid profile
 ################################################################################
 function getNewProfile {
-    echo "getNewProfile" >> $INSTALL_PATH/logs
+    echo "getNewProfile" >> "$INSTALL_PATH/logs"
     local validProfile=0
 
+    # Populate the PROFILES variable
+    PROFILES=$(docker compose -f "$INSTALL_PATH/docker-compose.yaml" config --profiles)
+
     # First, check if NEW_PROFILE is already valid
-    for profile in "${PROFILES[@]}"; do
+    while IFS= read -r profile; do
         if [[ $NEW_PROFILE == $profile ]]; then
             validProfile=1
             break
         fi
-    done
+    done <<< "$PROFILES"
 
     # If NEW_PROFILE is not valid, prompt the user to select a valid profile
     while [[ $validProfile -eq 0 ]]; do
-        IFS=$'\n'
         echo "Please select a profile from the following:"
-        echo "${PROFILES[*]}" | nl
+        nl -w 3 -s ') ' <<< "$PROFILES"
         echo -n "Select the profile: "
-        read inputProfile  
-        if [[ ! -z "${PROFILES[$inputProfile-1]}" && $inputProfile -ge 1 ]]; then
-            NEW_PROFILE="${PROFILES[$inputProfile-1]}"
+        read -r inputProfile
+        if [[ $inputProfile -ge 1 && $inputProfile -le $(wc -l <<< "$PROFILES") ]]; then
+            NEW_PROFILE=$(sed -n "${inputProfile}p" <<< "$PROFILES")
             validProfile=1
-        fi
-        if [[ $validProfile -eq 0 ]]; then
+        else
             echo "Invalid profile: $inputProfile. Please try again."
         fi
     done
-    echo "New Profile set $NEW_PROFILE" >> $INSTALL_PATH/logs
+    echo "New Profile set $NEW_PROFILE" >> "$INSTALL_PATH/logs"
 }
 
 ################################################################################
@@ -227,29 +226,18 @@ function update {
     downCurrent
     echo "update configurations" >> $INSTALL_PATH/logs
 
-    curl -o "$INSTALL_PATH/mh" https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/mentorHub-developer-edition/mh 2>> /dev/null
+    echo "fetching docker-compose.yaml"
     curl -o "$INSTALL_PATH/docker-compose.yaml" https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/docker-compose.yaml 2>> /dev/null
 
-    IMAGES="$(docker compose -f "$INSTALL_PATH/docker-compose.yaml" --profile '*' config --images)"
-
-    CONTAINERS="$(docker compose -f "$INSTALL_PATH/docker-compose.yaml" --profile '*' config --services)"
-
-    PROFILES="$(docker compose -f "$INSTALL_PATH/docker-compose.yaml" config --profiles)"
-
-    cat > $INSTALL_PATH/vars <<EOF
-export IMAGES=(${IMAGES[@]})
-
-export CONTAINERS=(${CONTAINERS[@]})
-
-export PROFILES=(${PROFILES[@]})
-EOF
-
-    for image in "${IMAGES[@]}"; do
+    echo "Pulling Images"
+    docker compose -f "$INSTALL_PATH/docker-compose.yaml" --profile '*' config --images | while read -r image; do
         echo "pulling $image" >> $INSTALL_PATH/logs
         echo "pulling $image"
-        docker pull "$image" >> $INSTALL_PATH/logs 2>> $INSTALL_PATH/logs
+        docker pull "$image" 2>> $INSTALL_PATH/logs
     done
-    echo "fetching files"
+
+    echo "fetching mh"
+    curl -o "$INSTALL_PATH/mh" https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/mentorHub-developer-edition/mh 2>> /dev/null
 
     echo "update Successful" >> $INSTALL_PATH/logs
 }
@@ -258,14 +246,14 @@ EOF
 # force rm all containers
 ################################################################################
 function deleteContainers {
-    echo "deleteContainers" >> $INSTALL_PATH/logs
-    for container in "${CONTAINERS[@]}"; do
-        echo "- removing container $container" >> $INSTALL_PATH/logs
+    echo "deleteContainers" >> "$INSTALL_PATH/logs"
+    docker container ls -a | awk 'NR > 1 {print $1}' | while read -r container; do
+        echo "- removing container $container" >> "$INSTALL_PATH/logs"
         echo "- removing container $container" 
-        docker container rm -f "$container" > /dev/null 2> /dev/null
+        docker container rm -f "$container" > /dev/null 2>&1
     done
     echo > "$INSTALL_PATH/CURRENT"
-    echo "$(date) RESET - Logs Reset" > $INSTALL_PATH/logs
+    echo "$(date) RESET - Logs Reset" > "$INSTALL_PATH/logs"
 }
 
 ################################################################################
@@ -273,11 +261,18 @@ function deleteContainers {
 ################################################################################
 function deleteImages {
     echo "deleteImages" >> $INSTALL_PATH/logs
-    for image in "${IMAGES[@]}"; do
+    docker image ls -a | awk 'NR > 1 {print $3}' | while read -r image; do
         echo "- removing image $image" >> $INSTALL_PATH/logs
         echo "- removing image $image" 
-        docker image rm -f "$image"  > /dev/null
+        docker image rm -f "$image"  2>>&1 $INSTALL_PATH/logs
     done
+
+    docker volume ls | awk 'NR > 1 {print $2}' | while read -r volume; do
+        echo "- removing volume $volume" >> $INSTALL_PATH/logs
+        echo "- removing volume $volume"
+        docker volume rm -f "$volume" >>&1 $INSTALL_PATH/logs
+    done
+
     echo "deleteImages Successful" >> $INSTALL_PATH/logs
 }
 
