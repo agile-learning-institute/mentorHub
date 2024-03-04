@@ -1,91 +1,121 @@
 mentorHub:
   domains:
-    - mongodb:
+    - mongodb: Mongo Database configurations
+      data:
+        sources:
+          - enumerators
+        syncs:
       repos:
-      - db:
-        template: mongodb_schema_versioning
-        port: 
-    - search:
+        - repo: none
+          image: mongo:7.0.5
+          port: 27017:27017
+        - repo: mentorhub-mongoDb
+          image: ghcr.io/agile-learning-institute/mentorhub-mongosh:latest
+          port:
+    - search: Search Dashboard and backing services
+      data:
+        sources:
+          - activity
+        syncs:
+          - people
+          - partner
+          - topic
+          - resource
+          - skill
+          - curriculum
+          - rating
+          - encounter
+          - plan
       repos:
-      - api:
-        template: golang_api
-        port: 8082
-      - ui:
-        template: vuejs_spa
-        port: 82
-      data-sources:
-      data-syncs:
-      - person
-      - partner
-      - curriculum
-      - encounter
-      - topic
-      - enumerators
-    - person:
+        - repo: none
+          image: opensearchproject/opensearch:2.12.0
+          port: 9200:9200
+        - repo: mentorHub-search-opensearch
+          image: ghcr.io/agile-learning-institute/mentorhub-search-searchinit:latest
+          port:
+        - repo: mentorHub-search-api
+          image: ghcr.io/agile-learning-institute/mentorhub-search-api:latest
+          port: 8081:8081
+        - repo: mentorHub-search-ui
+          image: ghcr.io/agile-learning-institute/mentorhub-search-ui:latest
+          port: 8080:80
+    - people: Person editor
+      data:
+        sources:
+          - people
+        syncs:
+          - partner
+          - enumerators
       repos:
-      - api:
-        template: golang_api
-        port: 
-      - ui:
-        template: vuejs_spa
-        port: 
-      data-sources:
-      - person
-      data-syncs:
-      - partner
-      - enumerators
-
-    - partner:
+        - repo: mentorHub-person-api
+          image: ghcr.io/agile-learning-institute/mentorhub-person-api:latest
+          port: 8082:8082
+        - repo: mentorHub-person-ui
+          image: ghcr.io/agile-learning-institute/mentorhub-person-ui:latest
+          port: 8083:80
+    - partners: Partner editor
+      data:
+        sources:
+          - partner
+        syncs:
+          - people
+          - enumerators
       repos:
-      - api:
-        template: java_api
-        port: 
-      - ui:
-        template: react_spa
-        port: 
-      data-sources:
-      - partner
-      data-syncs:
-      - person
-      - enumerators
-
-    - topics:
+        - repo: mentorHub-partner-api
+          image: ghcr.io/agile-learning-institute/mentorhub-partner-api:latest
+          port: 8084:8084
+        - repo: mentorHub-partner-ui
+          image: ghcr.io/agile-learning-institute/mentorhub-partner-ui:latest
+          port: 8085:80
+    - topics: Topic editor
+      data:
+        sources:
+          - topics
+          - skills
+          - resources
+        syncs:
+          - people
+          - enumerators
+          - ratings
       repos:
-      - api:
-        template: ?_api
-        port: 
-      - ui:
-        template: ?_spa
-        port: 
-    - curriculum:
+        - repo: mentorHub-topic-api
+          image: ghcr.io/agile-learning-institute/mentorhub-topic-api:latest
+          port: 8086:8086
+        - repo: mentorHub-topic-ui
+          image: ghcr.io/agile-learning-institute/mentorhub-topic-ui:latest
+          port: 8087:80
+    - curriculum: Apprentice Curriculum Interface
+      data:
+        sources:
+          - curriculum
+          - ratings
+        syncs:
+          - people
+          - enumerators
+          - resources
       repos:
-      - api:
-        template: ?_api
-        port: 
-      - ui:
-        template: ?_spa
-        port: 
-    - encounters:
+        - repo: mentorHub-curriculum-api
+          image: ghcr.io/agile-learning-institute/mentorhub-curriculum-api:latest
+          port: 8088:8088
+        - repo: mentorHub-curriculum-ui
+          image: ghcr.io/agile-learning-institute/mentorhub-curriculum-ui:latest
+          port: 8089:80
+    - encounters: Mentor Encounter Interface
+      data:
+        sources:
+          - encounters
+          - plans
+        syncs:
+          - people
+          - enumerators
+          - topics
+          - resources
+          - skills
+          - ratings
       repos:
-      - api:
-        template: ?_api
-        port: 
-      - ui:
-        template: ?_spa
-        port: 
-    - identity:
-      repos:
-      - api:
-        template: python_integration
-        port: 
-      - ui:
-        template: vuejs_spa
-        port: 
-    - smtp:
-      repos:
-      - api:
-        template: python_integration
-        port: 
-      - ui:
-        template: vuejs_spa
-        port: 
+        - repo: mentorHub-encounter-api
+          image: ghcr.io/agile-learning-institute/mentorhub-encounter-ui:latest
+          port: 8090:8090
+        - repo: mentorHub-encounter-ui
+          image: ghcr.io/agile-learning-institute/mentorhub-encounter-ui:latest
+          port: 8091:80
