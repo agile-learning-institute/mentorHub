@@ -1,0 +1,93 @@
+version: '3.1'
+
+services:
+  mentorhub-mongodb:
+    image: mongo:7.0.5
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - "27017:27017"
+    healthcheck:
+      test: ["CMD", "mongosh", "-u", "root", "-p", "example", "--authenticationDatabase", "admin", "--eval", "db.adminCommand('ping')"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+    profiles:
+      - mongoonly
+      - mongodb
+      - person
+      - person-api
+  mentorhub-mongosh:
+    image: 105886329607.dkr.ecr.us-east-1.amazonaws.com/mentorhub-mongosh:latest
+    depends_on:
+      mentorhub-mongodb:
+        condition: service_healthy
+    environment:
+      - USER=root
+      - PASSWORD=example
+    entrypoint: ["/mongosh/entrypoint.sh"]
+    profiles:
+      - mongodb
+      - person
+      - person-api
+
+  mentorhub-person-api:
+    image: 105886329607.dkr.ecr.us-east-1.amazonaws.com/mentorhub-person-api:latest
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      CONNECTION_STRING: mongodb://root:example@mentorhub-mongodb:27017/?tls=false&directConnection=true
+      PORT: ":8081"
+    depends_on:
+      mentorhub-mongosh:
+        condition: service_completed_successfully
+    profiles:
+      - person
+      - person-api
+
+  mentorhub-person-ui:
+    image: 105886329607.dkr.ecr.us-east-1.amazonaws.com/mentorhub-person-ui:latest
+    restart: always
+    environment:
+      API_HOST: mentorhub-person-api
+      API_PORT: 8081
+    ports:
+      - 80:80  # Changed the container port to 80
+    depends_on:
+      - mentorhub-person-api
+    profiles:
+      - person
+
+  mentorhub-searchdb:
+    image: opensearchproject/opensearch:2.12.0
+    environment:
+      discovery.type: single-node
+      cluster-name: mentorHub
+      plugins.security.disabled: true
+      OPENSEARCH_INITIAL_ADMIN_PASSWORD: 55CKoK;9|'g{8i<4|Gny6pUX
+    ports:
+      - "9200:9200"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -s http://localhost:9200/_cluster/health | grep -q '\"status\":\"green\"' || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+    profiles:
+      - opensearchonly
+      - search
+      - search-db
+      - search-api
+
+  mentorhub-searchinit:
+    image: 105886329607.dkr.ecr.us-east-1.amazonaws.com/mentorhub-search-searchinit:latest
+    depends_on:
+      mentorhub-searchdb:
+        condition: service_healthy
+    environment:
+      HOST: mentorhub-searchdb
+    profiles:
+      - search
+      - search-db
+      - search-api

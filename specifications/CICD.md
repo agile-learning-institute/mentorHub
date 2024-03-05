@@ -42,3 +42,18 @@ To make sure that the CI GitHub Actions have the proper access to the registry
 ## AWS Elastic Container Registrey ([ECR](https://aws.amazon.com/ecr/))
 
 We will need to update all of the CI to leverage ECR in place of the GitHub Container Registry. This will be required to address deployment to any of the AWS mangaed container services.
+
+## Research
+
+- Installed [AWS CLI](https://aws.amazon.com/cli/)
+- Read up on [What is the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html)
+- Follow [Using ECR with AWS CLI](https://docs.aws.amazon.com/AmazonECR/latest/userguide/getting-started-cli.html) tutorial
+- Used [MoveImageToEcr.sh](./ecrMigration/MoveImageToEcr.sh) script to move mongosh, person-api, person-ui, search-searchinit images
+- Updated docker-compose.yaml to be [ecr-compose.yaml](./ecrMigration/ecr-compose.yaml) with new image names
+- Tested with ``docker compose -f "ecr-compose.yaml" --profile person up --detach`` command - and looking at the person UI.
+
+This proved out that we can push images, and all of them are multi-platform images, to ECR. I was confused for a while by the ECR terminology, but I now understand that a repositorey in ECR terms is a "container image name" with multiple taged versions of that image. Once I understood that I was able to create a smalls script to move a contaier image from ghcr to ecr. 
+
+## Next Steps
+
+- Should we make these Public repositories, or requre members to setup an AWS account, install and configure the AWS CLI, and authenticate Docker to access the repositories. As I typed that out I became a huge fan of a public approach - public to pull, authenticated to create and push. 
