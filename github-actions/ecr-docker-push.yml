@@ -1,5 +1,5 @@
-name: Build and Push Docker Image
-run-name: ${{ github.actor }} ran Build and Push
+name: ECR Build and Push Docker Image
+run-name: ${{ github.actor }} ran ECR Build and Push
 
 on:
   pull_request:
@@ -10,6 +10,7 @@ on:
 
 jobs:
   if_merged:
+    # if: false # disabled workflow
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
@@ -24,12 +25,10 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      # Set up QEMU emulator for Buildx
-      - name: Set up QEMU
+      - name: Set up QEMU platform emulator for Buildx
         uses: docker/setup-qemu-action@v3
 
-      # Set up Buildx for multi-architecture image builds
-      - name: Set up Docker Buildx
+      - name: Set up Docker Buildx for multi-architecture image builds
         uses: docker/setup-buildx-action@v3
 
       - name: Login to Amazon ECR
@@ -43,4 +42,4 @@ jobs:
           platforms: linux/amd64,linux/arm64
           file: ./src/docker/Dockerfile
           push: true
-          tags: 105886329607.dkr.ecr.us-east-1.amazonaws.com/mentorhub-DOMAIN-ELEMENT:latest
+          tags: 105886329607.dkr.ecr.us-east-1.amazonaws.com/mentorhub-DOMAIN-PART:latest

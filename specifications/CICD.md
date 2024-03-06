@@ -65,6 +65,7 @@ This proved out that we can push images, and all of them are multi-platform imag
 
 ### Next Steps
 
-- Move secrets to organizatin level
-- Move to a public ECR
-- Research best-practices and consider role based access. 
+- [x] Move secrets to organizatin level
+- [ ] Move to a public ECR
+  - https://docs.aws.amazon.com/AmazonECR/latest/public/getting-started-cli.html#cli-authenticate-registry
+- [ ] Research best-practices and consider role based access. 
