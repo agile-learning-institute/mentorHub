@@ -36,10 +36,9 @@ services:
     image: ghcr.io/agile-learning-institute/mentorhub-person-api:latest
     restart: always
     ports:
-      - 8081:8081
+      - 8082:8082
     environment:
       CONNECTION_STRING: mongodb://root:example@mentorhub-mongodb:27017/?tls=false&directConnection=true
-      PORT: ":8081"
     depends_on:
       mentorhub-mongosh:
         condition: service_completed_successfully
@@ -52,7 +51,7 @@ services:
     restart: always
     environment:
       API_HOST: mentorhub-person-api
-      API_PORT: 8081
+      API_PORT: 8082
     ports:
       - 80:80  # Changed the container port to 80
     depends_on:
