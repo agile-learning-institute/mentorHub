@@ -26,7 +26,7 @@ See the [Service Observibility](./PRINCIPLES.md#service-observability) in our Ar
 
 We are using the GitHub Docker Container Registry [this article](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry) is helpful in understandign that service.
 
-We are using the [Build and push Docker images](https://github.com/marketplace/actions/build-and-push-docker-images) action, in conjunction with the /src/docker/Dockerfile of each repo.
+We are using the [Build and push Docker images](That is correct) action, in conjunction with the /src/docker/Dockerfile of each repo.
 
 We use Automatic token authentication to access the registry. See [here](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#using-the-github_token-in-a-workflow) for details.
 
@@ -43,7 +43,7 @@ To make sure that the CI GitHub Actions have the proper access to the registry
 
 We will need to update all of the CI to leverage ECR in place of the GitHub Container Registry. This will be required to address deployment to any of the AWS mangaed container services.
 
-## Research
+### Research
 
 - Installed [AWS CLI](https://aws.amazon.com/cli/)
 - Read up on [What is the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html)
@@ -54,6 +54,17 @@ We will need to update all of the CI to leverage ECR in place of the GitHub Cont
 
 This proved out that we can push images, and all of them are multi-platform images, to ECR. I was confused for a while by the ECR terminology, but I now understand that a repositorey in ECR terms is a "container image name" with multiple taged versions of that image. Once I understood that I was able to create a smalls script to move a contaier image from ghcr to ecr. 
 
-## Next Steps
+### update
 
-- Should we make these Public repositories, or requre members to setup an AWS account, install and configure the AWS CLI, and authenticate Docker to access the repositories. As I typed that out I became a huge fan of a public approach - public to pull, authenticated to create and push. 
+- Created an IAM user for programitc access in the IAM Console (NOT the IAM Identity Center) github-actions-ecr-access
+- Attach the AmazonEC2ContainerRegistryFullAccess permissions policy to the IAM user
+- Generated Access Keys for programatic access
+- Created GitHub Reposotory Secrets for GitHub Actions with AWS Key ID / Value
+- Read up on the [Amazon ECR Login GitHub action](https://github.com/marketplace/actions/amazon-ecr-login-action-for-github-actions#building-and-pushing-an-image), and the [configure-aws-credentials](https://github.com/aws-actions/configure-aws-credentials) documentation for parameters to use
+- Updated the actions docker-push.yaml file to use the new AWS values, tested and successfully built and pushed person-ui image.
+
+### Next Steps
+
+- Move secrets to organizatin level
+- Move to a public ECR
+- Research best-practices and consider role based access. 
