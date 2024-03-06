@@ -63,9 +63,16 @@ This proved out that we can push images, and all of them are multi-platform imag
 - Read up on the [Amazon ECR Login GitHub action](https://github.com/marketplace/actions/amazon-ecr-login-action-for-github-actions#building-and-pushing-an-image), and the [configure-aws-credentials](https://github.com/aws-actions/configure-aws-credentials) documentation for parameters to use
 - Updated the actions docker-push.yaml file to use the new AWS values, tested and successfully built and pushed person-ui image.
 
+### another update
+
+- tied in knots about configuring permission sets, roles, groups, etc. I think I have it down
+- Added AmazonElasticContainerRegistryPublicFullAccess policy to the System Administrator permission set
+
 ### Next Steps
 
 - [x] Move secrets to organizatin level
 - [ ] Move to a public ECR
   - https://docs.aws.amazon.com/AmazonECR/latest/public/getting-started-cli.html#cli-authenticate-registry
 - [ ] Research best-practices and consider role based access. 
+
+###
