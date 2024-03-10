@@ -4,21 +4,35 @@
 # Update PATH and shell configuration files if they exist
 ################################################################
 update_shell_config() {
-    local shell_config="$1"
-    if [ -f "$shell_config" ]; then
-        if ! grep -q "$INSTALL_PATH" "$shell_config"; then
-            echo "adding $INSTALL_PATH to the PATH in $shell_config"
 
-            # Update current path
-            echo "Updating $shell_config with PATH..."
-            echo "export PATH=\$PATH:$INSTALL_PATH" >> "$shell_config"
-            export PATH=$PATH:$INSTALL_PATH
-        else
-            echo "$INSTALL_PATH is already in the PATH in $shell_config"
-        fi
-    else
-        echo "Shell Config $1 not found"
-    fi
+	shell="$(basename $SHELL)"
+	shell_config="~/.${shell}rc"
+
+	if [[ "$shell" == "bash" || "$shell" == "zsh" ]]; then
+		if [ ! -z "$(grep ":$INSTALL_PATH:" <<< ":$PATH:")" ]; then
+			echo "$INSTALL_PATH is already in PATH"
+		else
+			while read -p "$INSTALL_PATH is not in PATH. Modify shell config file? [y/n] " answer; do
+				case "$answer" in
+					"y")
+						if [[ ( $shell == "zsh" && "$PATH" != "$(/usr/bin/env -i zsh +o RCS -o GLOBAL_RCS -c 'echo $PATH')") || ( $shell == "bash" && "$PATH" != "$(/usr/bin/env -i bash --noprofile --rcfile /etc/bash.bashrc --initfile /etc/profile -c 'echo $PATH')" ) ]]; then
+							echo "PATH has already been modified by one or more user shell config files. Cannot proceed"
+							break
+						else
+							echo "export PATH=\$PATH:$INSTALL_PATH" >> $shell_config
+						fi
+						;;
+					"n")
+						echo "Shell config not modified"
+						exit
+						;;
+				esac
+			done
+		fi
+	else
+		echo "$shell not supported"
+	fi
+
 }
 
 ################################################################
@@ -47,8 +61,7 @@ chmod +x mh
 echo "Files Initilized"
 
 # Add to path
-update_shell_config "$HOME/.bashrc"
-update_shell_config "$HOME/.zshrc"
+update_shell_config
 
 # Run mh update to pull the latest images and configurations
 ./mh update
