@@ -285,7 +285,8 @@ function uninstall {
     deleteContainers
     deleteImages
 
-    rm -rf $INSTALL_PATH
+    echo "Preparing to remove $INSTALL_PATH"
+    rm -rI $INSTALL_PATH
 
     echo "Done"
 }
