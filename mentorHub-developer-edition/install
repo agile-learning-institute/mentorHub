@@ -24,7 +24,7 @@ update_shell_config() {
 						;;
 					"n")
 						echo "Shell config not modified"
-						exit
+						break
 						;;
 				esac
 			done
