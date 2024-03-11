@@ -248,7 +248,7 @@ function update {
 ################################################################################
 function deleteContainers {
     echo "deleteContainers" >> "$INSTALL_PATH/logs"
-    docker container ls -a  --format "{{.ID}}" | while read -r container; do
+    docker compose -f $INSTALL_PATH/docker-compose.yaml ps -a --format '{{ .Names }}' | while read -r container; do
         echo "- removing container $container" >> "$INSTALL_PATH/logs"
         echo "- removing container $container" 
         docker container rm -f "$container" > /dev/null 2>&1
@@ -262,7 +262,7 @@ function deleteContainers {
 ################################################################################
 function deleteImages {
     echo "deleteImages" >> $INSTALL_PATH/logs
-    docker image ls -a  --format "{{.ID}}" | while read -r image; do
+    docker compose -f "$INSTALL_PATH/docker-compose.yaml" --profile '*' config --images | while read -r image; do
         echo "- removing image $image" >> $INSTALL_PATH/logs
         echo "- removing image $image" 
         docker image rm -f "$image"  2>>&1 $INSTALL_PATH/logs
