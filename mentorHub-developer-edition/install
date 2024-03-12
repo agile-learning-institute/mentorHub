@@ -6,7 +6,7 @@
 update_shell_config() {
 
 	shell="$(basename $SHELL)"
-	shell_config="~/.${shell}rc"
+	shell_config=~/".${shell}rc"
 
 	if [[ "$shell" == "bash" || "$shell" == "zsh" ]]; then
 		if [ ! -z "$(grep ":$INSTALL_PATH:" <<< ":$PATH:")" ]; then
