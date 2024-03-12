@@ -19,6 +19,9 @@ update_shell_config() {
 							echo "PATH has already been modified by one or more user shell config files. Cannot proceed"
 							break
 						else
+							# Add newline to end of file if absent
+							[ -n "$(tail -c1 $shell_config)" ] && echo >> $shell_config
+
 							echo "export PATH=\$PATH:$INSTALL_PATH" >> $shell_config
 							break
 						fi
