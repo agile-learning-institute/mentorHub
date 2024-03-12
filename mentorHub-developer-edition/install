@@ -20,6 +20,7 @@ update_shell_config() {
 							break
 						else
 							echo "export PATH=\$PATH:$INSTALL_PATH" >> $shell_config
+							break
 						fi
 						;;
 					"n")
