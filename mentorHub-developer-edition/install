@@ -16,7 +16,8 @@ update_shell_config() {
 				case "$answer" in
 					"y")
 						if [[ ( $shell == "zsh" && "$PATH" != "$(/usr/bin/env -i zsh +o RCS -o GLOBAL_RCS -c 'echo $PATH')") || ( $shell == "bash" && "$PATH" != "$(/usr/bin/env -i bash --noprofile --rcfile /etc/bash.bashrc --init-file /etc/profile -c 'echo $PATH')" ) ]]; then
-							echo "PATH has already been modified by one or more user shell config files. Cannot proceed"
+							echo "PATH has already been modified by one or more user shell config files. Cannot proceed, , use this command if needed"
+                                                        echo `echo "export PATH=\$PATH:$INSTALL_PATH" >> $shell_config`
 							break
 						else
 							# Add newline to end of file if absent
@@ -27,7 +28,8 @@ update_shell_config() {
 						fi
 						;;
 					"n")
-						echo "Shell config not modified"
+						echo "Shell config not modified, use this command if needed"
+                                                echo `echo "export PATH=\$PATH:$INSTALL_PATH" >> $shell_config`
 						break
 						;;
 				esac
