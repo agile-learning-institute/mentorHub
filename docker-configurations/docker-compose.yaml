@@ -90,3 +90,17 @@ services:
       - search
       - search-db
       - search-api
+
+  mentorhub-search-api:
+    image: ghcr.io/agile-learning-institute/mentorhub-search-api:latest
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      HOST: mentorhub-searchdb
+    depends_on:
+      mentorhub-searchinit:
+        condition: service_completed_successfully
+    profiles:
+      - search
+      - search-api
