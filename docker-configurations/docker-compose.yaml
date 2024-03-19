@@ -18,6 +18,7 @@ services:
       - mongodb
       - person
       - person-api
+      - topic-api
   mentorhub-mongosh:
     image: ghcr.io/agile-learning-institute/mentorhub-mongosh:latest
     depends_on:
@@ -31,6 +32,7 @@ services:
       - mongodb
       - person
       - person-api
+      - topic-api
 
   mentorhub-person-api:
     image: ghcr.io/agile-learning-institute/mentorhub-person-api:latest
@@ -104,3 +106,16 @@ services:
     profiles:
       - search
       - search-api
+
+  mentorhub-topic-api:
+    image: ghcr.io/agile-learning-institute/mentorhub-topic-api:latest
+    ports:
+      - 8086:8086
+    environment:
+      CONNECTION_STRING: mongodb://root:example@mentorhub-mongodb:27017/?tls=false&directConnection=true
+    depends_on:
+      mentorhub-mongosh:
+        condition: service_completed_successfully
+    profiles:
+      - topic
+      - topic-api
