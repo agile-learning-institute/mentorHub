@@ -237,7 +237,7 @@ function update {
         docker pull "$image" 2>> $INSTALL_PATH/logs
     done
 
-    echo "Housekeeping orphaned images
+    echo "Housekeeping orphaned images"
     docker image prune -f 2>> $INSTALL_PATH/logs
 
     echo "fetching mh"
