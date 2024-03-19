@@ -248,7 +248,7 @@ function update {
 ################################################################################
 function deleteContainers {
     echo "deleteContainers" >> "$INSTALL_PATH/logs"
-    docker container ls -a --filter "dangling=false" --format "{{ .Names }}" | while read -r container; do
+    docker container ls -a --format "{{ .Names }}" | while read -r container; do
         echo "- removing container $container" >> "$INSTALL_PATH/logs"
         echo "- removing container $container" 
         docker container rm -f "$container" > /dev/null 2>&1
