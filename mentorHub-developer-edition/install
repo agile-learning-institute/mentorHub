@@ -1,47 +1,6 @@
 #!/bin/bash
 
 ################################################################
-# Update PATH and shell configuration files if they exist
-################################################################
-update_shell_config() {
-
-	shell="$(basename $SHELL)"
-	shell_config=~/".${shell}rc"
-
-	if [[ "$shell" == "bash" || "$shell" == "zsh" ]]; then
-		if [ ! -z "$(grep ":$INSTALL_PATH:" <<< ":$PATH:")" ]; then
-			echo "$INSTALL_PATH is already in PATH"
-		else
-			while read -p "$INSTALL_PATH is not in PATH. Modify shell config file? [y/n] " answer; do
-				case "$answer" in
-					"y")
-						if [[ ( $shell == "zsh" && "$PATH" != "$(/usr/bin/env -i zsh +o RCS -o GLOBAL_RCS -c 'echo $PATH')") || ( $shell == "bash" && "$PATH" != "$(/usr/bin/env -i bash --noprofile --rcfile /etc/bash.bashrc --init-file /etc/profile -c 'echo $PATH')" ) ]]; then
-							echo "PATH has already been modified by one or more user shell config files. Cannot proceed, , use this command if needed"
-                                                        echo "echo \"export PATH=\$PATH:$INSTALL_PATH\" >> $shell_config"
-							break
-						else
-							# Add newline to end of file if absent
-							[ -n "$(tail -c1 $shell_config)" ] && echo >> $shell_config
-
-							echo "export PATH=\$PATH:$INSTALL_PATH" >> $shell_config
-							break
-						fi
-						;;
-					"n")
-						echo "Shell config not modified, use this command if needed"
-                                                echo "echo \"export PATH=\$PATH:$INSTALL_PATH\" >> $shell_config"
-						break
-						;;
-				esac
-			done
-		fi
-	else
-		echo "$shell not supported"
-	fi
-
-}
-
-################################################################
 # MAIN
 ################################################################
 # Prompt User for Install Folder
@@ -67,7 +26,9 @@ chmod +x mh
 echo "Files Initilized"
 
 # Add to path
-update_shell_config
+echo "Use these commands to add mh to your PATH"
+echo '[[ -w ~/.bashrc && -n "$(tail -c1 ~/.bashrc)" ]] && echo >> ~/.bashrc; echo "export PATH=\$PATH:$INSTALL_PATH" >> ~/.bashrc'
+echo '[[ -w ~/.zshrc && -n "$(tail -c1 ~/.zshrc)" ]] && echo >> ~/.zshrc; echo "export PATH=\$PATH:$INSTALL_PATH" >> ~/.zshrc'
 
 # Run mh update to pull the latest images and configurations
 ./mh update
