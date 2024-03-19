@@ -5,7 +5,7 @@ setopt KSH_ARRAYS
 
 export COMMAND="$1"
 export NEW_PROFILE="$2"
-export INSTALL_PATH=$(dirname "$(which mh)")
+export INSTALL_PATH=$(dirname "$0")
 
 ################################################################################
 # Print Manual Page
