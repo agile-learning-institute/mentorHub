@@ -33,5 +33,5 @@ echo "$(date) - MentorHub Developers Editioin Installed"
 
 # Add to path
 echo "Use one of these commands to add mh to your PATH"
-echo 'echo "\nexport PATH=\$PATH:$INSTALL_PATH" >> ~/.zshrc'
-echo 'echo "\nexport PATH=\$PATH:$INSTALL_PATH" >> ~/.bashrc'
+echo 'echo "\\nexport PATH=\$PATH:'$INSTALL_PATH'" >> ~/.zshrc'
+echo 'echo "\\nexport PATH=\$PATH:'$INSTALL_PATH'" >> ~/.bashrc'
