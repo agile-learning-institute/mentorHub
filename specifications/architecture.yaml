@@ -10,6 +10,7 @@ mentorHub:
       - EventBus:
       - Lamda:
       - OpenSearch:
+      - ecr:
     - name: Test 
       tag: TEST
       services: 
@@ -20,6 +21,7 @@ mentorHub:
       - EventBus:
       - Lamda:
       - OpenSearch:
+      - ecr:
     - name: Staging
       tag: STAGE
       services: 
@@ -30,6 +32,7 @@ mentorHub:
       - EventBus:
       - Lamda:
       - OpenSearch:
+      - ecr:
     - name: Production
       tag: PROD
       services: 
@@ -40,6 +43,7 @@ mentorHub:
       - EventBus:
       - Lamda:
       - OpenSearch:
+      - ecr:
   contexts:
     - mongodb: Mongo Database configurations
       data:
