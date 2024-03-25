@@ -25,14 +25,13 @@ touch CURRENT
 chmod +x mh
 echo "Files Initilized"
 
-# Add to path
-echo "Use these commands to add mh to your PATH"
-echo '[[ -w ~/.bashrc && -n "$(tail -c1 ~/.bashrc)" ]] && echo >> ~/.bashrc; echo "export PATH=\$PATH:$INSTALL_PATH" >> ~/.bashrc'
-echo '[[ -w ~/.zshrc && -n "$(tail -c1 ~/.zshrc)" ]] && echo >> ~/.zshrc; echo "export PATH=\$PATH:$INSTALL_PATH" >> ~/.zshrc'
-
 # Run mh update to pull the latest images and configurations
 ./mh update
 
 echo "Installation completed. Please restart your terminal or source your shell configuration file to use 'mh'."
 echo "$(date) - MentorHub Developers Editioin Installed"
 
+# Add to path
+echo "Use these commands to add mh to your PATH"
+echo '[[ -w ~/.bashrc && -n "$(tail -c1 ~/.bashrc)" ]] && echo >> ~/.bashrc; echo "export PATH=\$PATH:$INSTALL_PATH" >> ~/.bashrc'
+echo '[[ -w ~/.zshrc && -n "$(tail -c1 ~/.zshrc)" ]] && echo >> ~/.zshrc; echo "export PATH=\$PATH:$INSTALL_PATH" >> ~/.zshrc'
