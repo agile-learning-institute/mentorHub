@@ -1,5 +1,46 @@
 mentorHub:
-  domains:
+  environments:
+    - name: Development
+      tag: DEV
+      services:
+      - Secrets:
+      - DNS:
+      - AppServer:
+      - DocumentDb:
+      - EventBus:
+      - Lamda:
+      - OpenSearch:
+    - name: Test 
+      tag: TEST
+      services: 
+      - Secrets:
+      - DNS:
+      - AppServer:
+      - DocumentDb:
+      - EventBus:
+      - Lamda:
+      - OpenSearch:
+    - name: Staging
+      tag: STAGE
+      services: 
+      - Secrets:
+      - DNS:
+      - AppServer:
+      - DocumentDb:
+      - EventBus:
+      - Lamda:
+      - OpenSearch:
+    - name: Production
+      tag: PROD
+      services: 
+      - Secrets:
+      - DNS:
+      - AppServer:
+      - DocumentDb:
+      - EventBus:
+      - Lamda:
+      - OpenSearch:
+  contexts:
     - mongodb: Mongo Database configurations
       data:
         sources:
