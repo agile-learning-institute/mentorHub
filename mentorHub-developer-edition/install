@@ -32,6 +32,6 @@ echo "Installation completed. Please restart your terminal or source your shell 
 echo "$(date) - MentorHub Developers Editioin Installed"
 
 # Add to path
-echo "Use these commands to add mh to your PATH"
-echo '[[ -w ~/.bashrc && -n "$(tail -c1 ~/.bashrc)" ]] && echo >> ~/.bashrc; echo "export PATH=\$PATH:$INSTALL_PATH" >> ~/.bashrc'
-echo '[[ -w ~/.zshrc && -n "$(tail -c1 ~/.zshrc)" ]] && echo >> ~/.zshrc; echo "export PATH=\$PATH:$INSTALL_PATH" >> ~/.zshrc'
+echo "Use one of these commands to add mh to your PATH"
+echo 'echo "\nexport PATH=\$PATH:$INSTALL_PATH" >> ~/.zshrc'
+echo 'echo "\nexport PATH=\$PATH:$INSTALL_PATH" >> ~/.bashrc'
