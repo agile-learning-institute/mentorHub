@@ -184,7 +184,7 @@ services:
       API_HOST: mentorhub-encounter-api
       API_PORT: 8090
     ports:
-      - 8090:80
+      - 8091:80
     depends_on:
       - mentorhub-encounter-api
     profiles:
