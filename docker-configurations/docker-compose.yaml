@@ -225,7 +225,7 @@ services:
     ports:
       - 80:80
     depends_on:
-      - mentorhub-person-api
+      - mentorhub-search-api
     profiles:
       - search
 
