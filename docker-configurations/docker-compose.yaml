@@ -16,10 +16,16 @@ services:
     profiles:
       - mongoonly
       - mongodb
+      - curriculum
+      - encounter
+      - partner
       - person
+      - topic
+      - curriculum-api
+      - encounter-api
+      - partner-api
       - person-api
       - topic-api
-      - topic
 
   mentorhub-searchdb:
     image: opensearchproject/opensearch:2.12.0
@@ -52,10 +58,16 @@ services:
     entrypoint: ["/mongosh/entrypoint.sh"]
     profiles:
       - mongodb
+      - curriculum
+      - encounter
+      - partner
       - person
+      - topic
+      - curriculum-api
+      - encounter-api
+      - partner-api
       - person-api
       - topic-api
-      - topic
 
   mentorhub-searchinit:
     image: ghcr.io/agile-learning-institute/mentorhub-search-searchinit:latest
