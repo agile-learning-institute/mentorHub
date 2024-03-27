@@ -20,61 +20,6 @@ services:
       - person-api
       - topic-api
       - topic
-  mentorhub-mongosh:
-    image: ghcr.io/agile-learning-institute/mentorhub-mongosh:latest
-    depends_on:
-      mentorhub-mongodb:
-        condition: service_healthy
-    environment:
-      - USER=root
-      - PASSWORD=example
-    entrypoint: ["/mongosh/entrypoint.sh"]
-    profiles:
-      - mongodb
-      - person
-      - person-api
-      - topic-api
-      - topic
-
-  mentorhub-person-api:
-    image: ghcr.io/agile-learning-institute/mentorhub-person-api:latest
-    restart: always
-    ports:
-      - 8082:8082
-    environment:
-      CONNECTION_STRING: mongodb://root:example@mentorhub-mongodb:27017/?tls=false&directConnection=true
-    depends_on:
-      mentorhub-mongosh:
-        condition: service_completed_successfully
-    profiles:
-      - person
-      - person-api
-
-  mentorhub-person-ui:
-    image: ghcr.io/agile-learning-institute/mentorhub-person-ui:latest
-    restart: always
-    environment:
-      API_HOST: mentorhub-person-api
-      API_PORT: 8082
-    ports:
-      - 8083:80
-    depends_on:
-      - mentorhub-person-api
-    profiles:
-      - person
-
-  mentorhub-topic-ui:
-    image: ghcr.io/agile-learning-institute/mentorhub-person-ui:latest
-    restart: always
-    environment:
-      API_HOST: mentorhub-topic-api
-      API_PORT: 8082
-    ports:
-      - 8083:80
-    depends_on:
-      - mentorhub-topic-api
-    profiles:
-      - topic
 
   mentorhub-searchdb:
     image: opensearchproject/opensearch:2.12.0
@@ -96,6 +41,22 @@ services:
       - search-db
       - search-api
 
+  mentorhub-mongosh:
+    image: ghcr.io/agile-learning-institute/mentorhub-mongosh:latest
+    depends_on:
+      mentorhub-mongodb:
+        condition: service_healthy
+    environment:
+      - USER=root
+      - PASSWORD=example
+    entrypoint: ["/mongosh/entrypoint.sh"]
+    profiles:
+      - mongodb
+      - person
+      - person-api
+      - topic-api
+      - topic
+
   mentorhub-searchinit:
     image: ghcr.io/agile-learning-institute/mentorhub-search-searchinit:latest
     depends_on:
@@ -107,6 +68,46 @@ services:
       - search
       - search-db
       - search-api
+
+  mentorhub-person-api:
+    image: ghcr.io/agile-learning-institute/mentorhub-person-api:latest
+    restart: always
+    ports:
+      - 8082:8082
+    environment:
+      CONNECTION_STRING: mongodb://root:example@mentorhub-mongodb:27017/?tls=false&directConnection=true
+    depends_on:
+      mentorhub-mongosh:
+        condition: service_completed_successfully
+    profiles:
+      - person
+      - person-api
+
+  mentorhub-topic-ui:
+    image: ghcr.io/agile-learning-institute/mentorhub-person-ui:latest
+    restart: always
+    environment:
+      API_HOST: mentorhub-topic-api
+      API_PORT: 8082
+    ports:
+      - 8083:80
+    depends_on:
+      - mentorhub-topic-api
+    profiles:
+      - topic
+
+  mentorhub-person-ui:
+    image: ghcr.io/agile-learning-institute/mentorhub-person-ui:latest
+    restart: always
+    environment:
+      API_HOST: mentorhub-person-api
+      API_PORT: 8082
+    ports:
+      - 8083:80
+    depends_on:
+      - mentorhub-person-api
+    profiles:
+      - person
 
   mentorhub-search-api:
     image: ghcr.io/agile-learning-institute/mentorhub-search-api:latest
