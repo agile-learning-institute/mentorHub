@@ -83,6 +83,20 @@ services:
       - curriculum
       - curriculum-api
 
+  mentorhub-encounter-api:
+    image: ghcr.io/agile-learning-institute/mentorhub-encounter-api:latest
+    restart: always
+    ports:
+      - 8090:8090
+    environment:
+      CONNECTION_STRING: mongodb://root:example@mentorhub-mongodb:27017/?tls=false&directConnection=true
+    depends_on:
+      mentorhub-mongosh:
+        condition: service_completed_successfully
+    profiles:
+      - encounter
+      - encounter-api
+
   mentorhub-partner-api:
     image: ghcr.io/agile-learning-institute/mentorhub-partner-api:latest
     restart: always
@@ -150,6 +164,19 @@ services:
       - mentorhub-curriculum-api
     profiles:
       - curriculum
+
+  mentorhub-encounter-ui:
+    image: ghcr.io/agile-learning-institute/mentorhub-encounter-ui:latest
+    restart: always
+    environment:
+      API_HOST: mentorhub-encounter-api
+      API_PORT: 8090
+    ports:
+      - 8090:80
+    depends_on:
+      - mentorhub-encounter-api
+    profiles:
+      - encounter
 
   mentorhub-partner-ui:
     image: ghcr.io/agile-learning-institute/mentorhub-partner-ui:latest
