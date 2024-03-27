@@ -69,6 +69,20 @@ services:
       - search-db
       - search-api
 
+  mentorhub-partner-api:
+    image: ghcr.io/agile-learning-institute/mentorhub-partner-api:latest
+    restart: always
+    ports:
+      - 8084:8084
+    environment:
+      CONNECTION_STRING: mongodb://root:example@mentorhub-mongodb:27017/?tls=false&directConnection=true
+    depends_on:
+      mentorhub-mongosh:
+        condition: service_completed_successfully
+    profiles:
+      - partner
+      - partner-api
+
   mentorhub-person-api:
     image: ghcr.io/agile-learning-institute/mentorhub-person-api:latest
     restart: always
@@ -109,6 +123,19 @@ services:
     profiles:
       - topic
       - topic-api
+
+  mentorhub-partner-ui:
+    image: ghcr.io/agile-learning-institute/mentorhub-partner-ui:latest
+    restart: always
+    environment:
+      API_HOST: mentorhub-partner-api
+      API_PORT: 8084
+    ports:
+      - 8085:80
+    depends_on:
+      - mentorhub-partner-api
+    profiles:
+      - partner
 
   mentorhub-person-ui:
     image: ghcr.io/agile-learning-institute/mentorhub-person-ui:latest
