@@ -227,7 +227,7 @@ services:
     depends_on:
       - mentorhub-person-api
     profiles:
-      - person
+      - search
 
   mentorhub-topic-ui:
     image: ghcr.io/agile-learning-institute/mentorhub-person-ui:latest
