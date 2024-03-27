@@ -232,9 +232,9 @@ function update {
 
     echo "Pulling Images"
     docker compose -f "$INSTALL_PATH/docker-compose.yaml" --profile '*' config --images | while read -r image; do
-        echo "pulling $image" >> $INSTALL_PATH/logs
+        echo "pulling $image" >> $INSTALL_PATH/logs 
         echo "pulling $image"
-        docker pull "$image" 2>> $INSTALL_PATH/logs
+        docker pull "$image" >> $INSTALL_PATH/logs 2>&1
     done
 
     echo "Housekeeping orphaned images"
