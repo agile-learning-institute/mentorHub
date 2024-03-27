@@ -19,47 +19,7 @@ services:
       - person
       - person-api
       - topic-api
-  mentorhub-mongosh:
-    image: ghcr.io/agile-learning-institute/mentorhub-mongosh:latest
-    depends_on:
-      mentorhub-mongodb:
-        condition: service_healthy
-    environment:
-      - USER=root
-      - PASSWORD=example
-    entrypoint: ["/mongosh/entrypoint.sh"]
-    profiles:
-      - mongodb
-      - person
-      - person-api
-      - topic-api
-
-  mentorhub-person-api:
-    image: ghcr.io/agile-learning-institute/mentorhub-person-api:latest
-    restart: always
-    ports:
-      - 8082:8082
-    environment:
-      CONNECTION_STRING: mongodb://root:example@mentorhub-mongodb:27017/?tls=false&directConnection=true
-    depends_on:
-      mentorhub-mongosh:
-        condition: service_completed_successfully
-    profiles:
-      - person
-      - person-api
-
-  mentorhub-person-ui:
-    image: ghcr.io/agile-learning-institute/mentorhub-person-ui:latest
-    restart: always
-    environment:
-      API_HOST: mentorhub-person-api
-      API_PORT: 8082
-    ports:
-      - 8083:80
-    depends_on:
-      - mentorhub-person-api
-    profiles:
-      - person
+      - topic
 
   mentorhub-searchdb:
     image: opensearchproject/opensearch:2.12.0
@@ -81,6 +41,22 @@ services:
       - search-db
       - search-api
 
+  mentorhub-mongosh:
+    image: ghcr.io/agile-learning-institute/mentorhub-mongosh:latest
+    depends_on:
+      mentorhub-mongodb:
+        condition: service_healthy
+    environment:
+      - USER=root
+      - PASSWORD=example
+    entrypoint: ["/mongosh/entrypoint.sh"]
+    profiles:
+      - mongodb
+      - person
+      - person-api
+      - topic-api
+      - topic
+
   mentorhub-searchinit:
     image: ghcr.io/agile-learning-institute/mentorhub-search-searchinit:latest
     depends_on:
@@ -92,6 +68,62 @@ services:
       - search
       - search-db
       - search-api
+
+  mentorhub-curriculum-api:
+    image: ghcr.io/agile-learning-institute/mentorhub-curriculum-api:latest
+    restart: always
+    ports:
+      - 8088:8088
+    environment:
+      CONNECTION_STRING: mongodb://root:example@mentorhub-mongodb:27017/?tls=false&directConnection=true
+    depends_on:
+      mentorhub-mongosh:
+        condition: service_completed_successfully
+    profiles:
+      - curriculum
+      - curriculum-api
+
+  mentorhub-encounter-api:
+    image: ghcr.io/agile-learning-institute/mentorhub-encounter-api:latest
+    restart: always
+    ports:
+      - 8090:8090
+    environment:
+      CONNECTION_STRING: mongodb://root:example@mentorhub-mongodb:27017/?tls=false&directConnection=true
+    depends_on:
+      mentorhub-mongosh:
+        condition: service_completed_successfully
+    profiles:
+      - encounter
+      - encounter-api
+
+  mentorhub-partner-api:
+    image: ghcr.io/agile-learning-institute/mentorhub-partner-api:latest
+    restart: always
+    ports:
+      - 8084:8084
+    environment:
+      CONNECTION_STRING: mongodb://root:example@mentorhub-mongodb:27017/?tls=false&directConnection=true
+    depends_on:
+      mentorhub-mongosh:
+        condition: service_completed_successfully
+    profiles:
+      - partner
+      - partner-api
+
+  mentorhub-person-api:
+    image: ghcr.io/agile-learning-institute/mentorhub-person-api:latest
+    restart: always
+    ports:
+      - 8082:8082
+    environment:
+      CONNECTION_STRING: mongodb://root:example@mentorhub-mongodb:27017/?tls=false&directConnection=true
+    depends_on:
+      mentorhub-mongosh:
+        condition: service_completed_successfully
+    profiles:
+      - person
+      - person-api
 
   mentorhub-search-api:
     image: ghcr.io/agile-learning-institute/mentorhub-search-api:latest
@@ -119,3 +151,82 @@ services:
     profiles:
       - topic
       - topic-api
+
+  mentorhub-curriculum-ui:
+    image: ghcr.io/agile-learning-institute/mentorhub-curriculum-ui:latest
+    restart: always
+    environment:
+      API_HOST: mentorhub-curriculum-api
+      API_PORT: 8088
+    ports:
+      - 8089:80
+    depends_on:
+      - mentorhub-curriculum-api
+    profiles:
+      - curriculum
+
+  mentorhub-encounter-ui:
+    image: ghcr.io/agile-learning-institute/mentorhub-encounter-ui:latest
+    restart: always
+    environment:
+      API_HOST: mentorhub-encounter-api
+      API_PORT: 8090
+    ports:
+      - 8090:80
+    depends_on:
+      - mentorhub-encounter-api
+    profiles:
+      - encounter
+
+  mentorhub-partner-ui:
+    image: ghcr.io/agile-learning-institute/mentorhub-partner-ui:latest
+    restart: always
+    environment:
+      API_HOST: mentorhub-partner-api
+      API_PORT: 8084
+    ports:
+      - 8085:80
+    depends_on:
+      - mentorhub-partner-api
+    profiles:
+      - partner
+
+  mentorhub-person-ui:
+    image: ghcr.io/agile-learning-institute/mentorhub-person-ui:latest
+    restart: always
+    environment:
+      API_HOST: mentorhub-person-api
+      API_PORT: 8082
+    ports:
+      - 8083:80
+    depends_on:
+      - mentorhub-person-api
+    profiles:
+      - person
+
+  mentorhub-search-ui:
+    image: ghcr.io/agile-learning-institute/mentorhub-search-ui:latest
+    restart: always
+    environment:
+      API_HOST: mentorhub-search-api
+      API_PORT: 8081
+    ports:
+      - 80:80
+    depends_on:
+      - mentorhub-person-api
+    profiles:
+      - person
+
+  mentorhub-topic-ui:
+    image: ghcr.io/agile-learning-institute/mentorhub-person-ui:latest
+    restart: always
+    environment:
+      API_HOST: mentorhub-topic-api
+      API_PORT: 8086
+    ports:
+      - 8087:80
+    depends_on:
+      - mentorhub-topic-api
+    profiles:
+      - topic
+
