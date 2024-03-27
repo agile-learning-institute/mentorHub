@@ -83,32 +83,6 @@ services:
       - person
       - person-api
 
-  mentorhub-topic-ui:
-    image: ghcr.io/agile-learning-institute/mentorhub-person-ui:latest
-    restart: always
-    environment:
-      API_HOST: mentorhub-topic-api
-      API_PORT: 8082
-    ports:
-      - 8083:80
-    depends_on:
-      - mentorhub-topic-api
-    profiles:
-      - topic
-
-  mentorhub-person-ui:
-    image: ghcr.io/agile-learning-institute/mentorhub-person-ui:latest
-    restart: always
-    environment:
-      API_HOST: mentorhub-person-api
-      API_PORT: 8082
-    ports:
-      - 8083:80
-    depends_on:
-      - mentorhub-person-api
-    profiles:
-      - person
-
   mentorhub-search-api:
     image: ghcr.io/agile-learning-institute/mentorhub-search-api:latest
     restart: always
@@ -135,3 +109,43 @@ services:
     profiles:
       - topic
       - topic-api
+
+  mentorhub-person-ui:
+    image: ghcr.io/agile-learning-institute/mentorhub-person-ui:latest
+    restart: always
+    environment:
+      API_HOST: mentorhub-person-api
+      API_PORT: 8082
+    ports:
+      - 8083:80
+    depends_on:
+      - mentorhub-person-api
+    profiles:
+      - person
+
+  mentorhub-search-ui:
+    image: ghcr.io/agile-learning-institute/mentorhub-search-ui:latest
+    restart: always
+    environment:
+      API_HOST: mentorhub-search-api
+      API_PORT: 8081
+    ports:
+      - 80:80
+    depends_on:
+      - mentorhub-person-api
+    profiles:
+      - person
+
+  mentorhub-topic-ui:
+    image: ghcr.io/agile-learning-institute/mentorhub-person-ui:latest
+    restart: always
+    environment:
+      API_HOST: mentorhub-topic-api
+      API_PORT: 8086
+    ports:
+      - 8087:80
+    depends_on:
+      - mentorhub-topic-api
+    profiles:
+      - topic
+
