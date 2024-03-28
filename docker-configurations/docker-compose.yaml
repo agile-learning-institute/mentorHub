@@ -230,7 +230,7 @@ services:
       - search
 
   mentorhub-topic-ui:
-    image: ghcr.io/agile-learning-institute/mentorhub-person-ui:latest
+    image: ghcr.io/agile-learning-institute/mentorhub-topic-ui:latest
     restart: always
     environment:
       API_HOST: mentorhub-topic-api
@@ -241,4 +241,3 @@ services:
       - mentorhub-topic-api
     profiles:
       - topic
-
