@@ -6,12 +6,12 @@ setopt KSH_ARRAYS
 export COMMAND="$1"
 export NEW_PROFILE="$2"
 export INSTALL_PATH=$(dirname "$0")
-export LOCALHOST_IP=$(ifconfig | grep "inet " | grep -v "127.0.0.1" | awk '{print $2}')
+
+# Initilize HOST_NAME for use in configuring cross domain links
+export HOST_NAME=$(ifconfig | grep "inet " | grep -v "127.0.0.1" | awk '{print $2}')
 
 # Initilize CONFIGURATIONS environment variable used by msm services
-if [ -z "$CONFIGURATIONS" ]; then
-    export CONFIGURATIONS=$(pwd)/configurations/
-fi
+export CONFIGURATIONS=$(pwd)/configurations/
 
 
 ################################################################################
