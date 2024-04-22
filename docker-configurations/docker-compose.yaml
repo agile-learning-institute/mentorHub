@@ -10,9 +10,9 @@ services:
       - "27017:27017"
     healthcheck:
       test: ["CMD", "mongosh", "-u", "root", "-p", "example", "--authenticationDatabase", "admin", "--eval", "db.adminCommand('ping')"]
-      interval: 15s
-      timeout: 10s
-      retries: 5
+      interval: 3s
+      timeout: 2s
+      retries: 15
     profiles:
       - mongoonly
       - mongodb
@@ -26,6 +26,7 @@ services:
       - partner-api
       - person-api
       - topic-api
+      - msm
 
   mentorhub-searchdb:
     image: opensearchproject/opensearch:2.12.0
@@ -47,15 +48,29 @@ services:
       - search-db
       - search-api
 
+  msm:
+    image: ghcr.io/agile-learning-institute/msm:latest
+    depends_on:
+      mentorhub-mongodb:
+        condition: service_healthy
+    environment:
+      - CONNECTION_STRING="mongodb://root:example@mongodb-server:27017"
+      - LOAD_TEST_DATA=true
+      - DB_NAME=mentorHub
+    volumes:
+      - ./configurations:/opt/mongoSchemaManager/configurations
+    profiles: 
+      - msm
+
   mentorhub-mongosh:
     image: ghcr.io/agile-learning-institute/mentorhub-mongosh:latest
     depends_on:
       mentorhub-mongodb:
         condition: service_healthy
     environment:
-      - USER=root
-      - PASSWORD=example
-    entrypoint: ["/mongosh/entrypoint.sh"]
+      - CONNECTION_STRING="mongodb://root:example@mongodb-server:27017"
+      - LOAD_TEST_DATA=true
+      - DB_NAME=mentorHub
     profiles:
       - mongodb
       - curriculum
