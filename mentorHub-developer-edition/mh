@@ -45,7 +45,7 @@ COMMANDS
     stop
         stop currently running profile.
 
-    tail
+    tail [service]
         tail the logs for a service
 
     update
@@ -90,19 +90,20 @@ usage() {
 Usage: mh COMMAND
 
 Commands:
-  up          Launch containers from a profile
-  down        Remove existing containers
-  start       Restart a profile
-  stop        Stop a profile
-  update      Update the mentorHub Developer Edition
-  reset       Delete all mh containers
-  purge       Delete all mh containers and images
-  version     Print the mentorHub-DE version
-  logs        Tail the log file (use ^C to escape)
-  current     Print the current profile
-  setcurrent  Manually set the current profile
-  manual      Show the manual
-  uninstall   Remove mh and all associated files
+  up             Launch containers from a profile
+  down           Remove existing containers
+  start          Restart a profile
+  stop           Stop a profile
+  tail           Tail a service log
+  update         Update the mentorHub Developer Edition
+  reset          Delete all mh containers
+  purge          Delete all mh containers and images
+  version        Print the mentorHub-DE version
+  logs           Tail the log file (use ^C to escape)
+  current        Print the current profile
+  setcurrent     Manually set the current profile
+  manual         Show the manual
+  uninstall      Remove mh and all associated files
 
 END
 }
