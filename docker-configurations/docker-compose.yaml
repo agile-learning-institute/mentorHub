@@ -62,8 +62,8 @@ services:
     profiles: 
       - msm
 
-  mentorhub-mongosh:
-    image: ghcr.io/agile-learning-institute/mentorhub-mongosh:latest
+  mentorhub-mongomsm:
+    image: ghcr.io/agile-learning-institute/mentorhub-msm:latest
     depends_on:
       mentorhub-mongodb:
         condition: service_healthy
