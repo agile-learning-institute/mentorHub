@@ -7,6 +7,12 @@ export COMMAND="$1"
 export NEW_PROFILE="$2"
 export INSTALL_PATH=$(dirname "$0")
 
+# Initilize CONFIGURATIONS environment variable used by msm services
+if [ -z "$CONFIGURATIONS" ]; then
+    export CONFIGURATIONS=$(pwd)/configurations/
+fi
+
+
 ################################################################################
 # Print Manual Page
 ################################################################################
