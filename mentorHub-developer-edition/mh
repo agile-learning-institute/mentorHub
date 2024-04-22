@@ -39,6 +39,9 @@ COMMANDS
     stop
         stop currently running profile.
 
+    tail
+        tail the logs for a service
+
     update
         update the mentorHub Developer Edition
         pull a fresh copy of all containers
@@ -221,6 +224,17 @@ function startCurrent {
 }
 
 ################################################################################
+# docker compose logs
+################################################################################
+function tailServiceLogs {
+    echo "startTail $NEW_PROFILE" >> $INSTALL_PATH/logs
+    if [[ -n $NEW_PROFILE ]]; then
+        docker compose --project-directory "$INSTALL_PATH" logs -f $NEW_PROFILE 
+    fi
+    echo "tail completed" >> $INSTALL_PATH/logs
+}
+
+################################################################################
 # Update mentorHub-DE
 ################################################################################
 function update {
@@ -319,6 +333,11 @@ case $COMMAND in
   "stop")
 
     stopCurrent
+    ;;
+
+  "tail")
+
+    tailServiceLogs
     ;;
 
   "update")
