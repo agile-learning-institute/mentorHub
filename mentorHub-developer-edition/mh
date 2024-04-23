@@ -7,6 +7,13 @@ export COMMAND="$1"
 export NEW_PROFILE="$2"
 export INSTALL_PATH=$(dirname "$0")
 
+# Initilize HOST_NAME for use in configuring cross domain links
+export HOST_NAME=$(ifconfig | grep "inet " | grep -v "127.0.0.1" | awk '{print $2}')
+
+# Initilize CONFIGURATIONS environment variable used by msm services
+export CONFIGURATIONS=$(pwd)/configurations/
+
+
 ################################################################################
 # Print Manual Page
 ################################################################################
@@ -38,6 +45,9 @@ COMMANDS
 
     stop
         stop currently running profile.
+
+    tail [service]
+        tail the logs for a service
 
     update
         update the mentorHub Developer Edition
@@ -84,22 +94,21 @@ usage() {
 Usage: mh COMMAND
 
 Commands:
-  up          Launch containers from a profile
-  down        Remove existing containers
-  start       Restart a profile
-  stop        Stop a profile
-  update      Update the mentorHub Developer Edition
-  reset       Delete all mh containers
-  clean       Delete mentorHub-specific containers and images
-  purge       Delete all docker containers and images
-  version     Print the mentorHub-DE version
-  logs        Tail the log file (use ^C to escape)
-  current     Print the current profile
-  setcurrent  Manually set the current profile
-  manual      Show the manual
-  uninstall   Remove mh and all associated files
-
-END
+  up             Launch containers from a profile
+  down           Remove existing containers
+  start          Restart a profile
+  stop           Stop a profile
+  tail           Tail a service log
+  update         Update the mentorHub Developer Edition
+  reset          Delete all mh containers
+  clean          Delete mentorHub-specific containers and images
+  purge          Delete all mh containers and images
+  version        Print the mentorHub-DE version
+  logs           Tail the log file (use ^C to escape)
+  current        Print the current profile
+  setcurrent     Manually set the current profile
+  manual         Show the manual
+  uninstall      Remove mh and all associated files
 }
 
 ################################################################################
@@ -222,6 +231,17 @@ function startCurrent {
         docker compose --project-directory "$INSTALL_PATH" --file "$INSTALL_PATH/docker-compose.yaml" --profile $CURRENT_PROFILE start 
     fi
     echo "startCurrent Successful" >> $INSTALL_PATH/logs
+}
+
+################################################################################
+# docker compose logs
+################################################################################
+function tailServiceLogs {
+    echo "startTail $NEW_PROFILE" >> $INSTALL_PATH/logs
+    if [[ -n $NEW_PROFILE ]]; then
+        docker compose --project-directory "$INSTALL_PATH" logs -f $NEW_PROFILE 
+    fi
+    echo "tail completed" >> $INSTALL_PATH/logs
 }
 
 ################################################################################
@@ -353,6 +373,11 @@ case $COMMAND in
   "stop")
 
     stopCurrent
+    ;;
+
+  "tail")
+
+    tailServiceLogs
     ;;
 
   "update")

@@ -10,9 +10,9 @@ services:
       - "27017:27017"
     healthcheck:
       test: ["CMD", "mongosh", "-u", "root", "-p", "example", "--authenticationDatabase", "admin", "--eval", "db.adminCommand('ping')"]
-      interval: 15s
-      timeout: 10s
-      retries: 5
+      interval: 3s
+      timeout: 2s
+      retries: 15
     profiles:
       - mongoonly
       - mongodb
@@ -26,6 +26,7 @@ services:
       - partner-api
       - person-api
       - topic-api
+      - msm
 
   mentorhub-searchdb:
     image: opensearchproject/opensearch:2.12.0
@@ -47,15 +48,29 @@ services:
       - search-db
       - search-api
 
-  mentorhub-mongosh:
-    image: ghcr.io/agile-learning-institute/mentorhub-mongosh:latest
+  msm:
+    image: ghcr.io/agile-learning-institute/msm:latest
     depends_on:
       mentorhub-mongodb:
         condition: service_healthy
     environment:
-      - USER=root
-      - PASSWORD=example
-    entrypoint: ["/mongosh/entrypoint.sh"]
+      - CONNECTION_STRING=mongodb://root:example@mentorhub-mongodb:27017
+      - LOAD_TEST_DATA=true
+      - DB_NAME=mentorHub
+    volumes:
+      - ${CONFIGURATIONS}:/opt/mongoSchemaManager/configurations
+    profiles: 
+      - msm
+
+  mentorhub-mongomsm:
+    image: ghcr.io/agile-learning-institute/mentorhub-msm:latest
+    depends_on:
+      mentorhub-mongodb:
+        condition: service_healthy
+    environment:
+      - CONNECTION_STRING=mongodb://root:example@mentorhub-mongodb:27017
+      - LOAD_TEST_DATA=true
+      - DB_NAME=mentorHub
     profiles:
       - mongodb
       - curriculum
@@ -89,7 +104,7 @@ services:
     environment:
       CONNECTION_STRING: mongodb://root:example@mentorhub-mongodb:27017/?tls=false&directConnection=true
     depends_on:
-      mentorhub-mongosh:
+      mentorhub-mongomsm:
         condition: service_completed_successfully
     profiles:
       - curriculum
@@ -103,7 +118,7 @@ services:
     environment:
       CONNECTION_STRING: mongodb://root:example@mentorhub-mongodb:27017/?tls=false&directConnection=true
     depends_on:
-      mentorhub-mongosh:
+      mentorhub-mongomsm:
         condition: service_completed_successfully
     profiles:
       - encounter
@@ -117,7 +132,7 @@ services:
     environment:
       CONNECTION_STRING: mongodb://root:example@mentorhub-mongodb:27017/?tls=false&directConnection=true
     depends_on:
-      mentorhub-mongosh:
+      mentorhub-mongomsm:
         condition: service_completed_successfully
     profiles:
       - partner
@@ -131,7 +146,7 @@ services:
     environment:
       CONNECTION_STRING: mongodb://root:example@mentorhub-mongodb:27017/?tls=false&directConnection=true
     depends_on:
-      mentorhub-mongosh:
+      mentorhub-mongomsm:
         condition: service_completed_successfully
     profiles:
       - person
@@ -158,7 +173,7 @@ services:
     environment:
       CONNECTION_STRING: mongodb://root:example@mentorhub-mongodb:27017/?tls=false&directConnection=true
     depends_on:
-      mentorhub-mongosh:
+      mentorhub-mongomsm:
         condition: service_completed_successfully
     profiles:
       - topic
