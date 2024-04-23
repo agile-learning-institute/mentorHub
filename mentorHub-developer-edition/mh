@@ -109,6 +109,7 @@ Commands:
   setcurrent     Manually set the current profile
   manual         Show the manual
   uninstall      Remove mh and all associated files
+END
 }
 
 ################################################################################
