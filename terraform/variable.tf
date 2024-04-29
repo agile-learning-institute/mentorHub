@@ -1,7 +1,7 @@
 # ---------------- root ---------------------
 variable "region" {
   type    = string
-  default = "us-east-2"
+  default = "us-east-1"
 }
 
 variable "Environment" {
@@ -17,7 +17,7 @@ variable "Service" {
 variable "azs" {
   type        = list(string)
   description = "Availability Zones"
-  default     = ["us-east-2a", "us-east-2b", "us-east-1c"]
+  default     = ["us-east-1a", "us-east-1b", "us-east-1c"]
 }
 
 variable "public_subnet_cidrs" {
