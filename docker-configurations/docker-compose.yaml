@@ -11,7 +11,7 @@ services:
     healthcheck:
       test: ["CMD", "mongosh", "-u", "root", "-p", "example", "--authenticationDatabase", "admin", "--eval", "db.adminCommand('ping')"]
       interval: 3s
-      timeout: 2s
+      timeout: 6s
       retries: 15
     profiles:
       - mongoonly
