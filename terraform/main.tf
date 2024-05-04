@@ -36,6 +36,19 @@ resource "aws_internet_gateway" "igw" {
   }
 }
 
+# Add NAT Gateway for private access
+resource "aws_eip" "nat_eip" {
+  vpc = yes
+}
+resource "aws_nat_gateway" "nat_gateway" {
+  allocation_id = aws_eip.nat_eip.id
+  count = length(var.private_subnet_cidrs)
+  subnet_id = element(aws_subnet.private_subnets[*].id, count.index)
+  tags = {
+    Name = "mentorHub-nat-gateway"
+  }
+  depends_on = [aws_internet_gateway.igw]
+}
 
 # Route table
 resource "aws_route_table" "public_main_rt" {
