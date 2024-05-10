@@ -31,7 +31,7 @@ DESCRIPTION
        installed
 
 COMMANDS
-    up [profile]
+    up [profile1, profile2, ...]
         Remove existing containers and launchs the profile specified. 
         This command will erase any existing data, and start the 
         system with a newly initialized database.
@@ -141,12 +141,11 @@ function checkAndStartDocker {
 ################################################################################
 function getCurrentProfile {
     echo "getCurrentProfile" >> $INSTALL_PATH/logs
+    CURRENT_PROFILES=()
     if [[ -f "$INSTALL_PATH/CURRENT" ]]; then
-        CURRENT_PROFILE=$(cat "$INSTALL_PATH/CURRENT")
-    else
-        CURRENT_PROFILE=""
+        CURRENT_PROFILES=( ${(s:,:)$(cat "$INSTALL_PATH/CURRENT")} )
     fi
-    echo "CurrentProfile set: $CURRENT_PROFILE" >> $INSTALL_PATH/logs
+    echo "CurrentProfile set: ${CURRENT_PROFILES[@]}" >> $INSTALL_PATH/logs
 }
 
 ################################################################################
@@ -155,31 +154,36 @@ function getCurrentProfile {
 function getNewProfile {
     echo "getNewProfile" >> "$INSTALL_PATH/logs"
     local validProfile=0
+    if [[ "$NEW_PROFILE" != *","* ]]; then 
+        # Populate the PROFILES variable
+        PROFILES=$(docker compose -f "$INSTALL_PATH/docker-compose.yaml" config --profiles)
 
-    # Populate the PROFILES variable
-    PROFILES=$(docker compose -f "$INSTALL_PATH/docker-compose.yaml" config --profiles)
+        # First, check if NEW_PROFILE is already valid
+        while IFS= read -r profile; do
+            if [[ $NEW_PROFILE == $profile ]]; then
+                validProfile=1
+                break
+            fi
+        done <<< "$PROFILES"
 
-    # First, check if NEW_PROFILE is already valid
-    while IFS= read -r profile; do
-        if [[ $NEW_PROFILE == $profile ]]; then
-            validProfile=1
-            break
-        fi
-    done <<< "$PROFILES"
-
-    # If NEW_PROFILE is not valid, prompt the user to select a valid profile
-    while [[ $validProfile -eq 0 ]]; do
-        echo "Please select a profile from the following:"
-        nl -w 3 -s ') ' <<< "$PROFILES"
-        echo -n "Select the profile: "
-        read -r inputProfile
-        if [[ $inputProfile -ge 1 && $inputProfile -le $(wc -l <<< "$PROFILES") ]]; then
-            NEW_PROFILE=$(sed -n "${inputProfile}p" <<< "$PROFILES")
-            validProfile=1
-        else
-            echo "Invalid profile: $inputProfile. Please try again."
-        fi
-    done
+        # If NEW_PROFILE is not valid, prompt the user to select a valid profile
+        while [[ $validProfile -eq 0 ]]; do
+            echo "Please select a profile from the following:"
+            nl -w 3 -s ') ' <<< "$PROFILES"
+            echo -n "Select the profile: "
+            read -r inputProfile
+            if [[ $inputProfile -ge 1 && $inputProfile -le $(wc -l <<< "$PROFILES") ]]; then
+                NEW_PROFILE=$(sed -n "${inputProfile}p" <<< "$PROFILES")
+                validProfile=1
+            else
+                echo "Invalid profile: $inputProfile. Please try again."
+            fi
+        done
+    else
+    # Split comma-separated list into an array
+        NEW_PROFILE=( ${(s:,:)NEW_PROFILE} )
+        validProfile=1
+    fi
     echo "New Profile set $NEW_PROFILE" >> "$INSTALL_PATH/logs"
 }
 
@@ -189,9 +193,13 @@ function getNewProfile {
 function downCurrent {
     checkAndStartDocker
     getCurrentProfile
-    echo "downCurrent $CURRENT_PROFILE" >> $INSTALL_PATH/logs
-    if [[ -n $CURRENT_PROFILE ]]; then
-        docker compose --project-directory "$INSTALL_PATH" -f "$INSTALL_PATH/docker-compose.yaml" --profile $CURRENT_PROFILE down
+    echo "downCurrent $CURRENT_PROFILES" >> $INSTALL_PATH/logs
+    if [[ -n $CURRENT_PROFILES ]]; then
+    docker_compose_args=("--project-directory" "$INSTALL_PATH" "-f" "$INSTALL_PATH/docker-compose.yaml")
+    for profile in "${CURRENT_PROFILES[@]}"; do
+        docker_compose_args+=("--profile" "$profile")
+    done
+        docker compose "${docker_compose_args[@]}" down
         docker volume prune -f
         echo > "$INSTALL_PATH/CURRENT"
         echo "downCurrent Successful" >> $INSTALL_PATH/logs
@@ -204,8 +212,12 @@ function downCurrent {
 function upProfile {
     downCurrent    
     getNewProfile
+    docker_compose_args=("--project-directory" "$INSTALL_PATH" "-f" "$INSTALL_PATH/docker-compose.yaml")
+    for profile in "${NEW_PROFILE[@]}"; do
+        docker_compose_args+=("--profile" "$profile")
+    done
     echo "upProfile $NEW_PROFILE" >> $INSTALL_PATH/logs
-    docker compose --project-directory "$INSTALL_PATH" -f "$INSTALL_PATH/docker-compose.yaml" --profile $NEW_PROFILE up --detach
+    docker compose "${docker_compose_args[@]}" up --detach
     echo "$NEW_PROFILE" > "$INSTALL_PATH/CURRENT"
     echo "upProfile Successful" >> $INSTALL_PATH/logs
 }
@@ -215,9 +227,13 @@ function upProfile {
 ################################################################################
 function stopCurrent {
     getCurrentProfile
-    echo "stopCurrent $CURRENT_PROFILE" >> $INSTALL_PATH/logs
-    if [[ -n $CURRENT_PROFILE ]]; then
-        docker compose --project-directory "$INSTALL_PATH" -f "$INSTALL_PATH/docker-compose.yaml" --profile $CURRENT_PROFILE stop
+    echo "stopCurrent $CURRENT_PROFILES" >> $INSTALL_PATH/logs
+    if [[ -n $CURRENT_PROFILES ]]; then
+        docker_compose_args=("--project-directory" "$INSTALL_PATH" "-f" "$INSTALL_PATH/docker-compose.yaml")
+        for profile in "${CURRENT_PROFILES[@]}"; do
+            docker_compose_args+=("--profile" "$profile")
+        done
+    docker compose "${docker_compose_args[@]}" stop
     fi
     echo "stopCurrent Successful" >> $INSTALL_PATH/logs
 }
@@ -227,9 +243,13 @@ function stopCurrent {
 ################################################################################
 function startCurrent {
     getCurrentProfile
-    echo "startProfile $CURRENT_PROFILE" >> $INSTALL_PATH/logs
-    if [[ -n $CURRENT_PROFILE ]]; then
-        docker compose --project-directory "$INSTALL_PATH" --file "$INSTALL_PATH/docker-compose.yaml" --profile $CURRENT_PROFILE start 
+    echo "startProfile $CURRENT_PROFILES" >> $INSTALL_PATH/logs
+    if [[ -n $CURRENT_PROFILES ]]; then
+        docker_compose_args=("--project-directory" "$INSTALL_PATH" "-f" "$INSTALL_PATH/docker-compose.yaml")
+            for profile in "${CURRENT_PROFILES[@]}"; do
+                docker_compose_args+=("--profile" "$profile")
+            done
+        docker compose "${docker_compose_args[@]}" start 
     fi
     echo "startCurrent Successful" >> $INSTALL_PATH/logs
 }
@@ -238,9 +258,13 @@ function startCurrent {
 # docker compose logs
 ################################################################################
 function tailServiceLogs {
-    echo "startTail $NEW_PROFILE" >> $INSTALL_PATH/logs
+    echo "startTail ${NEW_PROFILE[@]}" >> $INSTALL_PATH/logs
     if [[ -n $NEW_PROFILE ]]; then
-        docker compose --project-directory "$INSTALL_PATH" logs -f $NEW_PROFILE 
+        docker_compose_args=("--project-directory" "$INSTALL_PATH" "logs")
+        for profile in "${NEW_PROFILE[@]}"; do
+            docker_compose_args+=("-f" "$profile")
+        done
+        docker compose "${docker_compose_args[@]}"
     fi
     echo "tail completed" >> $INSTALL_PATH/logs
 }
@@ -410,7 +434,7 @@ case $COMMAND in
   "current")
 
     getCurrentProfile
-    echo $CURRENT_PROFILE
+    echo $CURRENT_PROFILES
     ;;
 
   "setcurrent")
