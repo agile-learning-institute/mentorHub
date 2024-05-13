@@ -31,10 +31,9 @@ DESCRIPTION
        installed
 
 COMMANDS
-    up [profile1, profile2, ...]
-        Remove existing containers and launchs the profile specified. 
-        This command will erase any existing data, and start the 
-        system with a newly initialized database.
+    up [profile1,profile2,...]
+        Launches the profile(s) specified.
+        Start the system with a newly initialized database if not already running.
 
     down
         Remove existing containers. This will permanently delete the
