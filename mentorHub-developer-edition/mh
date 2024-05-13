@@ -198,7 +198,7 @@ function getNewProfile {
 function downCurrent {
     checkAndStartDocker
     getCurrentProfile
-    echo "downCurrent $CURRENT_PROFILES" >> $INSTALL_PATH/logs
+    echo "downCurrent ${CURRENT_PROFILES[@]}" >> $INSTALL_PATH/logs
     if [[ -n $CURRENT_PROFILES ]]; then
     docker_compose_args=("--project-directory" "$INSTALL_PATH" "-f" "$INSTALL_PATH/docker-compose.yaml")
     for profile in "${CURRENT_PROFILES[@]}"; do
@@ -215,7 +215,6 @@ function downCurrent {
 # docker compose up of current profile
 ################################################################################
 function upProfile {
-    downCurrent    
     getNewProfile
     docker_compose_args=("--project-directory" "$INSTALL_PATH" "-f" "$INSTALL_PATH/docker-compose.yaml")
     for profile in "${NEW_PROFILE[@]}"; do
@@ -223,7 +222,11 @@ function upProfile {
     done
     echo "upProfile $NEW_PROFILE" >> $INSTALL_PATH/logs
     docker compose "${docker_compose_args[@]}" up --detach
-    echo "$NEW_PROFILE" >> "$INSTALL_PATH/CURRENT"
+    if [[ -n $(<"$INSTALL_PATH/CURRENT") ]]; then
+        echo "${NEW_PROFILE[@]}" >> "$INSTALL_PATH/CURRENT"
+    else 
+        echo "${NEW_PROFILE[@]}" > "$INSTALL_PATH/CURRENT"
+    fi
     echo "upProfile Successful" >> $INSTALL_PATH/logs
 }
 
