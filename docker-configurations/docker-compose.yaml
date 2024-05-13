@@ -30,22 +30,23 @@ services:
       - msm
 
   mentorhub-searchdb:
-    image: opensearchproject/opensearch:2.12.0
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.13.2
     environment:
       discovery.type: single-node
       cluster-name: mentorHub
-      plugins.security.disabled: true
-      OPENSEARCH_INITIAL_ADMIN_PASSWORD: 55CKoK;9|'g{8i<4|Gny6pUX
+      ELASTIC_PASSWORD: o0=eLmmQbsrdEW89a-Id
     ports:
       - "9200:9200"
+    mem_limit: 1g
     healthcheck:
-      test: ["CMD-SHELL", "curl -s http://localhost:9200/_cluster/health | grep -q '\"status\":\"green\"' || exit 1"]
+      test: ["CMD-SHELL", "curl -s --insecure -u elastic:o0=eLmmQbsrdEW89a-Id https://localhost:9200/_cluster/health | grep -q '\"status\":\"green\"' || exit 1"]
       interval: 15s
       timeout: 10s
       retries: 5
+      start_period: 10s
     profiles:
       - all
-      - opensearchonly
+      - elasticonly
       - search
       - search-db
       - search-api
