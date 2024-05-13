@@ -218,7 +218,7 @@ function upProfile {
     done
     echo "upProfile $NEW_PROFILE" >> $INSTALL_PATH/logs
     docker compose "${docker_compose_args[@]}" up --detach
-    echo "$NEW_PROFILE" > "$INSTALL_PATH/CURRENT"
+    echo "$NEW_PROFILE" >> "$INSTALL_PATH/CURRENT"
     echo "upProfile Successful" >> $INSTALL_PATH/logs
 }
 
@@ -441,7 +441,7 @@ case $COMMAND in
 
     getNewProfile
     echo "Setting Profile to $NEW_PROFILE"
-    echo "$NEW_PROFILE" > "$INSTALL_PATH/CURRENT"
+    echo "$NEW_PROFILE" >> "$INSTALL_PATH/CURRENT"
     ;;
 
   "version")
