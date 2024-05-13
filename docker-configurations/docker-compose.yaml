@@ -1,4 +1,4 @@
-version: '3.1'
+# version: '3.1'
 
 services:
   mentorhub-mongodb:
@@ -14,6 +14,7 @@ services:
       timeout: 6s
       retries: 15
     profiles:
+      - all
       - mongoonly
       - mongodb
       - curriculum
@@ -44,6 +45,7 @@ services:
       retries: 5
       start_period: 10s
     profiles:
+      - all
       - elasticonly
       - search
       - search-db
@@ -73,6 +75,7 @@ services:
       - LOAD_TEST_DATA=true
       - DB_NAME=mentorHub
     profiles:
+      - all
       - mongodb
       - curriculum
       - encounter
@@ -93,6 +96,7 @@ services:
     environment:
       HOST: mentorhub-searchdb
     profiles:
+      - all
       - search
       - search-db
       - search-api
@@ -108,6 +112,7 @@ services:
       mentorhub-mongomsm:
         condition: service_completed_successfully
     profiles:
+      - all
       - curriculum
       - curriculum-api
 
@@ -122,6 +127,7 @@ services:
       mentorhub-mongomsm:
         condition: service_completed_successfully
     profiles:
+      - all
       - encounter
       - encounter-api
 
@@ -136,6 +142,7 @@ services:
       mentorhub-mongomsm:
         condition: service_completed_successfully
     profiles:
+      - all
       - partner
       - partner-api
 
@@ -150,6 +157,7 @@ services:
       mentorhub-mongomsm:
         condition: service_completed_successfully
     profiles:
+      - all
       - person
       - person-api
 
@@ -164,6 +172,7 @@ services:
       mentorhub-searchinit:
         condition: service_completed_successfully
     profiles:
+      - all
       - search
       - search-api
 
@@ -177,6 +186,7 @@ services:
       mentorhub-mongomsm:
         condition: service_completed_successfully
     profiles:
+      - all
       - topic
       - topic-api
 
@@ -191,6 +201,7 @@ services:
     depends_on:
       - mentorhub-curriculum-api
     profiles:
+      - all
       - curriculum
 
   mentorhub-encounter-ui:
@@ -204,6 +215,7 @@ services:
     depends_on:
       - mentorhub-encounter-api
     profiles:
+      - all
       - encounter
 
   mentorhub-partner-ui:
@@ -217,6 +229,7 @@ services:
     depends_on:
       - mentorhub-partner-api
     profiles:
+      - all
       - partner
 
   mentorhub-person-ui:
@@ -230,6 +243,7 @@ services:
     depends_on:
       - mentorhub-person-api
     profiles:
+      - all
       - person
 
   mentorhub-search-ui:
@@ -243,6 +257,7 @@ services:
     depends_on:
       - mentorhub-search-api
     profiles:
+      - all
       - search
 
   mentorhub-topic-ui:
@@ -256,4 +271,5 @@ services:
     depends_on:
       - mentorhub-topic-api
     profiles:
+      - all
       - topic
