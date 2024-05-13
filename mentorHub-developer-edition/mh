@@ -143,7 +143,10 @@ function getCurrentProfile {
     echo "getCurrentProfile" >> $INSTALL_PATH/logs
     CURRENT_PROFILES=()
     if [[ -f "$INSTALL_PATH/CURRENT" ]]; then
-        CURRENT_PROFILES=( ${(s:,:)$(cat "$INSTALL_PATH/CURRENT")} )
+        OLD_IFS=$IFS
+        IFS=$' \n,'
+        CURRENT_PROFILES=( $(<"$INSTALL_PATH/CURRENT") )
+        IFS=$OLD_IFS
     fi
     echo "CurrentProfile set: ${CURRENT_PROFILES[@]}" >> $INSTALL_PATH/logs
 }
