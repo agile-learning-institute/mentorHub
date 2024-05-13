@@ -162,12 +162,14 @@ function getNewProfile {
         PROFILES=$(docker compose -f "$INSTALL_PATH/docker-compose.yaml" config --profiles)
 
         # First, check if NEW_PROFILE is already valid
+        OLD_IFS=$IFS
         while IFS= read -r profile; do
             if [[ $NEW_PROFILE == $profile ]]; then
                 validProfile=1
                 break
             fi
         done <<< "$PROFILES"
+        IFS=$OLD_IFS
 
         # If NEW_PROFILE is not valid, prompt the user to select a valid profile
         while [[ $validProfile -eq 0 ]]; do
