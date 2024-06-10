@@ -408,20 +408,9 @@ case $COMMAND in
     update
     ;;
 
-  "reset")
-
-    deleteContainers
-    ;;
-
   "clean")
 
     clean
-    ;;
-
-  "purge")
-
-    deleteContainers
-    deleteImages
     ;;
 
   "logs")
