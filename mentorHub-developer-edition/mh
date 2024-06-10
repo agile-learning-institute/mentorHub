@@ -52,14 +52,8 @@ COMMANDS
         update the mentorHub Developer Edition
         pull a fresh copy of all containers
 
-    reset
-        delete all mh containers - usefull to reset mh if things get hosed
-
     clean
         Delete mentorHub-specific containers and images
-
-    purge
-        delete all docker containers and images
 
     version
         print the mentorHub-DE version
@@ -99,9 +93,7 @@ Commands:
   stop           Stop a profile
   tail           Tail a service log
   update         Update the mentorHub Developer Edition
-  reset          Delete all mh containers
   clean          Delete mentorHub-specific containers and images
-  purge          Delete all mh containers and images
   version        Print the mentorHub-DE version
   logs           Tail the log file (use ^C to escape)
   current        Print the current profile
