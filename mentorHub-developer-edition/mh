@@ -52,14 +52,8 @@ COMMANDS
         update the mentorHub Developer Edition
         pull a fresh copy of all containers
 
-    reset
-        delete all mh containers - usefull to reset mh if things get hosed
-
     clean
         Delete mentorHub-specific containers and images
-
-    purge
-        delete all docker containers and images
 
     version
         print the mentorHub-DE version
@@ -99,9 +93,7 @@ Commands:
   stop           Stop a profile
   tail           Tail a service log
   update         Update the mentorHub Developer Edition
-  reset          Delete all mh containers
   clean          Delete mentorHub-specific containers and images
-  purge          Delete all mh containers and images
   version        Print the mentorHub-DE version
   logs           Tail the log file (use ^C to escape)
   current        Print the current profile
@@ -307,7 +299,7 @@ function update {
 ################################################################################
 function deleteContainers {
     echo "deleteContainers" >> "$INSTALL_PATH/logs"
-    docker container ls -a --format "{{ .Names }}" | while read -r container; do
+    docker compose -f $INSTALL_PATH/docker-compose.yaml ps -a --format '{{ .Names }}' | while read -r container; do
         echo "- removing container $container" >> "$INSTALL_PATH/logs"
         echo "- removing container $container" 
         docker container rm -f "$container" > /dev/null 2>&1
@@ -321,7 +313,7 @@ function deleteContainers {
 ################################################################################
 function deleteImages {
     echo "deleteImages" >> $INSTALL_PATH/logs
-    docker image ls -a --filter "dangling=false" --format "{{ .Repository }}:{{ .Tag }}" | while read -r image; do
+    docker compose -f "$INSTALL_PATH/docker-compose.yaml" --profile '*' config --images | while read -r image; do
         echo "- removing image $image" >> $INSTALL_PATH/logs
         echo "- removing image $image" 
         docker image rm -f "$image"  2>>&1 $INSTALL_PATH/logs
@@ -333,7 +325,6 @@ function deleteImages {
         docker volume rm -f "$volume" 2>>&1 $INSTALL_PATH/logs
     done
 
-    echo "deleteImages Successful" >> $INSTALL_PATH/logs
 }
 
 ################################################################################
@@ -342,23 +333,9 @@ function deleteImages {
 function clean {
     echo "clean" >> $INSTALL_PATH/logs
 
-    docker compose -f $INSTALL_PATH/docker-compose.yaml ps -a --format '{{ .Names }}' | while read -r container; do
-        echo "- removing container $container" >> "$INSTALL_PATH/logs"
-        echo "- removing container $container"
-        docker container rm -f "$container" > /dev/null 2>&1
-    done
+    deleteContainers
 
-    docker compose -f "$INSTALL_PATH/docker-compose.yaml" --profile '*' config --images | while read -r image; do
-        echo "- removing image $image" >> $INSTALL_PATH/logs
-        echo "- removing image $image"
-        docker image rm -f "$image"  2>>&1 $INSTALL_PATH/logs
-    done
-
-    docker volume ls | awk 'NR > 1 {print $2}' | while read -r volume; do
-        echo "- removing volume $volume" >> $INSTALL_PATH/logs
-        echo "- removing volume $volume"
-        docker volume rm -f "$volume" 2>>&1 $INSTALL_PATH/logs
-    done
+    deleteImages
 
     echo "clean Successful" >> $INSTALL_PATH/logs
 
@@ -416,20 +393,9 @@ case $COMMAND in
     update
     ;;
 
-  "reset")
-
-    deleteContainers
-    ;;
-
   "clean")
 
     clean
-    ;;
-
-  "purge")
-
-    deleteContainers
-    deleteImages
     ;;
 
   "logs")
