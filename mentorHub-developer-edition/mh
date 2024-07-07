@@ -59,7 +59,10 @@ COMMANDS
         print the mentorHub-DE version
     
     list-profiles
-        List all available profiles related to mentorhub-DE
+        list all available profiles related to mentorhub-DE
+
+    list-services
+        list all services related to mentorhub
 
     uninstall
         Removes mentorHub-DE completely
@@ -84,6 +87,7 @@ Commands:
   clean          Delete mentorHub-specific containers and images
   version        Print the mentorHub-DE version
   list-profiles  List all available profiles
+  list-services  List all available services
   manual         Show the manual
   uninstall      Remove mh and all associated files
 END
@@ -121,6 +125,16 @@ function listProfiles {
     PROFILES=$(docker compose -f "$INSTALL_PATH/docker-compose.yaml" config --profiles)
     echo "Available profiles:"
     echo $PROFILES
+}
+
+################################################################################
+# Print list of all profiles
+################################################################################
+function listServices {
+    echo "listServices" >> "$INSTALL_PATH/logs"
+    SERVICES=$(docker compose -f "$INSTALL_PATH/docker-compose.yaml" --profile '*' config --services)
+    echo "Available services:"
+    echo $SERVICES
 }
 
 ################################################################################
@@ -360,6 +374,11 @@ case $COMMAND in
   "list-profiles")
 
     listProfiles
+    ;;
+
+    "list-services")
+    
+    listServices
     ;;
 
   "manual")
