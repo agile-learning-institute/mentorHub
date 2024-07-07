@@ -59,10 +59,7 @@ COMMANDS
         print the mentorHub-DE version
     
     list-profiles
-        list all available profiles related to mentorhub-DE
-
-    list-services
-        list all services related to mentorhub
+        List all available profiles related to mentorhub-DE
 
     uninstall
         Removes mentorHub-DE completely
@@ -181,6 +178,11 @@ function upProfile {
     done
     echo "upProfile $NEW_PROFILE" >> $INSTALL_PATH/logs
     docker compose "${docker_compose_args[@]}" up --detach
+    docker_compose_status=$?  # Capture the exit status of the docker compose command
+    if [[ $docker_compose_status -ne 0 ]]; then
+        echo "Docker compose command failed with status $docker_compose_status"
+        listProfiles
+    fi
     if [[ -n $(<"$INSTALL_PATH/CURRENT") ]]; then
         echo "${NEW_PROFILE}" >> "$INSTALL_PATH/CURRENT"
     else 
@@ -232,6 +234,11 @@ function tailServiceLogs {
             docker_compose_args+=("-f" "$profile")
         done
         docker compose "${docker_compose_args[@]}"
+        docker_compose_status=$?  # Capture the exit status of the docker compose command
+        if [[ $docker_compose_status -ne 0 ]]; then
+            echo "Docker compose command failed with status $docker_compose_status"
+            listServices
+        fi
     fi
     echo "tail completed" >> $INSTALL_PATH/logs
 }
