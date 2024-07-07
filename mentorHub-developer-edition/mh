@@ -58,23 +58,8 @@ COMMANDS
     version
         print the mentorHub-DE version
 
-    logs
-        tail the mh log file, ^c to excape
-
-    current
-        print the current profile
-
-    setcurrent [profile]
-        set the current profile
-
     uninstall
         Removes mentorHub-DE completely
-
-PROFILES
-    mongodb - the backing mongo database
-    person-api - the API supporting the person UI and the mongodb
-    person-ui - the SPA for person, and the API and backing database
-
 END
 }
 
@@ -95,9 +80,6 @@ Commands:
   update         Update the mentorHub Developer Edition
   clean          Delete mentorHub-specific containers and images
   version        Print the mentorHub-DE version
-  logs           Tail the log file (use ^C to escape)
-  current        Print the current profile
-  setcurrent     Manually set the current profile
   manual         Show the manual
   uninstall      Remove mh and all associated files
 END
@@ -396,24 +378,6 @@ case $COMMAND in
   "clean")
 
     clean
-    ;;
-
-  "logs")
-
-    tail -f $INSTALL_PATH/logs
-    ;;
-
-  "current")
-
-    getCurrentProfile
-    echo $CURRENT_PROFILES
-    ;;
-
-  "setcurrent")
-
-    getNewProfile
-    echo "Setting Profile to $NEW_PROFILE"
-    echo "$NEW_PROFILE" >> "$INSTALL_PATH/CURRENT"
     ;;
 
   "version")
