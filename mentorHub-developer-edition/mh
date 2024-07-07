@@ -57,6 +57,9 @@ COMMANDS
 
     version
         print the mentorHub-DE version
+    
+    list-profiles
+        List all available profiles related to mentorhub-DE
 
     uninstall
         Removes mentorHub-DE completely
@@ -80,6 +83,7 @@ Commands:
   update         Update the mentorHub Developer Edition
   clean          Delete mentorHub-specific containers and images
   version        Print the mentorHub-DE version
+  list-profiles  List all available profiles
   manual         Show the manual
   uninstall      Remove mh and all associated files
 END
@@ -109,6 +113,15 @@ function checkAndStartDocker {
     fi
 }
 
+################################################################################
+# Print list of all profiles
+################################################################################
+function listProfiles {
+    echo "listProfiles" >> "$INSTALL_PATH/logs"
+    PROFILES=$(docker compose -f "$INSTALL_PATH/docker-compose.yaml" config --profiles)
+    echo "Available profiles:"
+    echo $PROFILES
+}
 ################################################################################
 # Get the currently running profile
 ################################################################################
@@ -383,6 +396,11 @@ case $COMMAND in
   "version")
 
     echo "v1.1.1"
+    ;;
+
+  "list-profiles")
+
+    listProfiles
     ;;
 
   "manual")
