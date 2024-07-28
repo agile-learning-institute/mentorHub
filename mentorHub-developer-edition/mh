@@ -94,8 +94,6 @@ END
 # Make sure Docker is running
 ################################################################################
 function checkAndStartDocker {
-    echo "checkAndStartDocker" >> $INSTALL_PATH/logs
-
     if ! docker info >/dev/null 2>&1; then
         echo "Docker is not running. Attempting to start Docker..."
         if [[ "$(uname -s)" == "Darwin" ]]; then
@@ -118,7 +116,6 @@ function checkAndStartDocker {
 # Print list of all profiles
 ################################################################################
 function listProfiles {
-    echo "listProfiles" >> "$INSTALL_PATH/logs"
     PROFILES=$(docker compose -f "$INSTALL_PATH/docker-compose.yaml" config --profiles)
     echo "Available profiles:"
     echo $PROFILES
@@ -128,7 +125,6 @@ function listProfiles {
 # Print list of all profiles
 ################################################################################
 function listServices {
-    echo "listServices" >> "$INSTALL_PATH/logs"
     SERVICES=$(docker compose -f "$INSTALL_PATH/docker-compose.yaml" --profile '*' config --services)
     echo "Available services:"
     echo $SERVICES
@@ -138,7 +134,6 @@ function listServices {
 # Get the currently running profile
 ################################################################################
 function getCurrentProfile {
-    echo "getCurrentProfile" >> $INSTALL_PATH/logs
     CURRENT_PROFILES=()
     if [[ -f "$INSTALL_PATH/CURRENT" ]]; then
         OLD_IFS=$IFS
@@ -146,16 +141,14 @@ function getCurrentProfile {
         CURRENT_PROFILES=( $(<"$INSTALL_PATH/CURRENT") )
         IFS=$OLD_IFS
     fi
-    echo "CurrentProfile set: ${CURRENT_PROFILES[@]}" >> $INSTALL_PATH/logs
+    echo "CurrentProfile set: ${CURRENT_PROFILES[@]}"
 }
 
 ################################################################################
 # docker compose down of current profile
 ################################################################################
 function downCurrent {
-    checkAndStartDocker
     getCurrentProfile
-    echo "downCurrent ${CURRENT_PROFILES[@]}" >> $INSTALL_PATH/logs
     if [[ -n $CURRENT_PROFILES ]]; then
         docker_compose_args=("--project-directory" "$INSTALL_PATH" "-f" "$INSTALL_PATH/docker-compose.yaml")
         for profile in "${CURRENT_PROFILES[@]}"; do
@@ -164,7 +157,6 @@ function downCurrent {
         docker compose "${docker_compose_args[@]}" down
         docker volume prune -f
         echo > "$INSTALL_PATH/CURRENT"
-        echo "downCurrent Successful" >> $INSTALL_PATH/logs
     fi
 }
 
@@ -176,7 +168,6 @@ function upProfile {
     for profile in "${(s:,:)NEW_PROFILE}"; do
         docker_compose_args+=("--profile" "$profile")
     done
-    echo "upProfile $NEW_PROFILE" >> $INSTALL_PATH/logs
     docker compose "${docker_compose_args[@]}" up --detach
     docker_compose_status=$?  # Capture the exit status of the docker compose command
     if [[ $docker_compose_status -ne 0 ]]; then
@@ -188,7 +179,6 @@ function upProfile {
     else 
         echo "${NEW_PROFILE}" > "$INSTALL_PATH/CURRENT"
     fi
-    echo "upProfile Successful" >> $INSTALL_PATH/logs
 }
 
 ################################################################################
@@ -196,7 +186,6 @@ function upProfile {
 ################################################################################
 function stopCurrent {
     getCurrentProfile
-    echo "stopCurrent $CURRENT_PROFILES" >> $INSTALL_PATH/logs
     if [[ -n $CURRENT_PROFILES ]]; then
         docker_compose_args=("--project-directory" "$INSTALL_PATH" "-f" "$INSTALL_PATH/docker-compose.yaml")
         for profile in "${CURRENT_PROFILES[@]}"; do
@@ -204,7 +193,6 @@ function stopCurrent {
         done
         docker compose "${docker_compose_args[@]}" stop
     fi
-    echo "stopCurrent Successful" >> $INSTALL_PATH/logs
 }
 
 ################################################################################
@@ -212,7 +200,6 @@ function stopCurrent {
 ################################################################################
 function startCurrent {
     getCurrentProfile
-    echo "startProfile $CURRENT_PROFILES" >> $INSTALL_PATH/logs
     if [[ -n $CURRENT_PROFILES ]]; then
         docker_compose_args=("--project-directory" "$INSTALL_PATH" "-f" "$INSTALL_PATH/docker-compose.yaml")
         for profile in "${CURRENT_PROFILES[@]}"; do
@@ -220,7 +207,6 @@ function startCurrent {
         done
         docker compose "${docker_compose_args[@]}" start 
     fi
-    echo "startCurrent Successful" >> $INSTALL_PATH/logs
 }
 
 ################################################################################
@@ -240,7 +226,7 @@ function tailServiceLogs {
             listServices
         fi
     fi
-    echo "tail completed" >> $INSTALL_PATH/logs
+    echo "tail completed"
 }
 
 ################################################################################
@@ -248,56 +234,48 @@ function tailServiceLogs {
 ################################################################################
 function update {
     downCurrent
-    echo "update configurations" >> $INSTALL_PATH/logs
 
     echo "fetching docker-compose.yaml"
     curl -o "$INSTALL_PATH/docker-compose.yaml" https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/docker-configurations/docker-compose.yaml 2>> /dev/null
 
     echo "Pulling Images"
     docker compose -f "$INSTALL_PATH/docker-compose.yaml" --profile '*' config --images | while read -r image; do
-        echo "pulling $image" >> $INSTALL_PATH/logs 
         echo "pulling $image"
-        docker pull "$image" >> $INSTALL_PATH/logs 2>&1
+        docker pull "$image"
     done
 
     echo "Housekeeping orphaned images"
-    docker image prune -f 2>> $INSTALL_PATH/logs
+    docker image prune -f
 
     echo "fetching mh"
     curl -o "$INSTALL_PATH/mh" https://raw.githubusercontent.com/agile-learning-institute/mentorhub/main/mentorHub-developer-edition/mh 2>> /dev/null
 
-    echo "update Successful" >> $INSTALL_PATH/logs
+    echo "update Successful"
 }
 
 ################################################################################
 # force rm all containers
 ################################################################################
 function deleteContainers {
-    echo "deleteContainers" >> "$INSTALL_PATH/logs"
     docker compose -f $INSTALL_PATH/docker-compose.yaml ps -a --format '{{ .Names }}' | while read -r container; do
-        echo "- removing container $container" >> "$INSTALL_PATH/logs"
         echo "- removing container $container" 
         docker container rm -f "$container" > /dev/null 2>&1
     done
     echo > "$INSTALL_PATH/CURRENT"
-    echo "$(date) RESET - Logs Reset" > "$INSTALL_PATH/logs"
 }
 
 ################################################################################
 # force rm all images
 ################################################################################
 function deleteImages {
-    echo "deleteImages" >> $INSTALL_PATH/logs
     docker compose -f "$INSTALL_PATH/docker-compose.yaml" --profile '*' config --images | while read -r image; do
-        echo "- removing image $image" >> $INSTALL_PATH/logs
         echo "- removing image $image" 
-        docker image rm -f "$image"  2>>&1 $INSTALL_PATH/logs
+        docker image rm -f "$image"
     done
 
     docker volume ls | awk 'NR > 1 {print $2}' | while read -r volume; do
-        echo "- removing volume $volume" >> $INSTALL_PATH/logs
         echo "- removing volume $volume"
-        docker volume rm -f "$volume" 2>>&1 $INSTALL_PATH/logs
+        docker volume rm -f "$volume" 
     done
 
 }
@@ -306,16 +284,12 @@ function deleteImages {
 # Clean up images and containers
 ################################################################################
 function clean {
-    echo "clean" >> $INSTALL_PATH/logs
 
     deleteContainers
 
     deleteImages
 
-    echo "clean Successful" >> $INSTALL_PATH/logs
-
     echo > "$INSTALL_PATH/CURRENT"
-    echo "$(date) RESET - Logs Reset" > "$INSTALL_PATH/logs"
 }
 
 ################################################################################
@@ -333,7 +307,8 @@ function uninstall {
 
 ##########################################################################
 # Main 
-echo "$(date) mh start $COMMAND $NEW_PROFILE" >> "$INSTALL_PATH/logs"
+checkAndStartDocker
+echo "$(date) mh start $COMMAND $NEW_PROFILE"
 
 case $COMMAND in
 
