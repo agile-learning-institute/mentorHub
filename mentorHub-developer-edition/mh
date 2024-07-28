@@ -213,7 +213,11 @@ function startCurrent {
 # docker compose logs
 ################################################################################
 function tailServiceLogs {
-    echo "startTail ${NEW_PROFILE[@]}" >> $INSTALL_PATH/logs
+        if [[ -z $NEW_PROFILE ]]; then
+        listServices
+        echo "No service provided, exiting with exit code 1"
+        return 1
+    fi
     if [[ -n $NEW_PROFILE ]]; then
         docker_compose_args=("--project-directory" "$INSTALL_PATH" "logs")
         for profile in "${NEW_PROFILE[@]}"; do
