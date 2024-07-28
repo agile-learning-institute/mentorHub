@@ -174,7 +174,7 @@ function upProfile {
         echo "Docker compose command failed with status $docker_compose_status"
         listProfiles
     fi
-    if [[ -n $(<"$INSTALL_PATH/CURRENT") ]]; then
+    if [[ -s "$INSTALL_PATH/CURRENT" ]]; then
         echo "${NEW_PROFILE}" >> "$INSTALL_PATH/CURRENT"
     else 
         echo "${NEW_PROFILE}" > "$INSTALL_PATH/CURRENT"
