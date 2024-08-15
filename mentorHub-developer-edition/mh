@@ -354,7 +354,7 @@ case $COMMAND in
 
   "version")
 
-    echo "v1.1.1"
+    echo "v2.0.0"
     ;;
 
   "list-profiles")
