@@ -103,7 +103,7 @@ services:
 
   mentorhub-curriculum-api:
     image: ghcr.io/agile-learning-institute/mentorhub-curriculum-api:latest
-    restart: always
+    restart: no
     ports:
       - 8088:8088
     environment:
@@ -118,7 +118,7 @@ services:
 
   mentorhub-encounter-api:
     image: ghcr.io/agile-learning-institute/mentorhub-encounter-api:latest
-    restart: always
+    restart: no
     ports:
       - 8090:8090
     environment:
@@ -133,7 +133,7 @@ services:
 
   mentorhub-partner-api:
     image: ghcr.io/agile-learning-institute/mentorhub-partner-api:latest
-    restart: always
+    restart: no
     ports:
       - 8084:8084
     environment:
@@ -148,7 +148,7 @@ services:
 
   mentorhub-person-api:
     image: ghcr.io/agile-learning-institute/mentorhub-person-api:latest
-    restart: always
+    restart: no
     ports:
       - 8082:8082
     environment:
@@ -163,7 +163,7 @@ services:
 
   mentorhub-search-api:
     image: ghcr.io/agile-learning-institute/mentorhub-search-api:latest
-    restart: always
+    restart: no
     ports:
       - 8081:8081
     environment:
@@ -192,7 +192,7 @@ services:
 
   mentorhub-curriculum-ui:
     image: ghcr.io/agile-learning-institute/mentorhub-curriculum-ui:latest
-    restart: always
+    restart: no
     environment:
       API_HOST: mentorhub-curriculum-api
       API_PORT: 8088
@@ -206,7 +206,7 @@ services:
 
   mentorhub-encounter-ui:
     image: ghcr.io/agile-learning-institute/mentorhub-encounter-ui:latest
-    restart: always
+    restart: no
     environment:
       API_HOST: mentorhub-encounter-api
       API_PORT: 8090
@@ -220,7 +220,7 @@ services:
 
   mentorhub-partner-ui:
     image: ghcr.io/agile-learning-institute/mentorhub-partner-ui:latest
-    restart: always
+    restart: no
     environment:
       API_HOST: mentorhub-partner-api
       API_PORT: 8084
@@ -234,7 +234,7 @@ services:
 
   mentorhub-person-ui:
     image: ghcr.io/agile-learning-institute/mentorhub-person-ui:latest
-    restart: always
+    restart: no
     environment:
       API_HOST: mentorhub-person-api
       API_PORT: 8082
@@ -248,7 +248,7 @@ services:
 
   mentorhub-search-ui:
     image: ghcr.io/agile-learning-institute/mentorhub-search-ui:latest
-    restart: always
+    restart: no
     environment:
       API_HOST: mentorhub-search-api
       API_PORT: 8081
@@ -262,7 +262,7 @@ services:
 
   mentorhub-topic-ui:
     image: ghcr.io/agile-learning-institute/mentorhub-topic-ui:latest
-    restart: always
+    restart: no
     environment:
       API_HOST: mentorhub-topic-api
       API_PORT: 8086
