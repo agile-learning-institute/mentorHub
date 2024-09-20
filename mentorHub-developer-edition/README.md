@@ -73,3 +73,12 @@ sudo nano ~/.bashrc
 ```
 
 This will open a terminal text editor. In the text editor you can use the arrow keys (←↑→↓) to move the cursor. Hold the down (↓) arrow key to until you get to the bottom of the file. You might see something like ![image](https://github.com/agile-learning-institute/mentorHub/assets/67389882/1d7ecdd5-1f32-44d1-9b67-a0947e1f86bd) Navigate your cursor to the line with the long comment, move the cursor to the `e` in `export`, and press `enter` to create a new line. To save and exit, press `control + x` then `y` to confirm, then hit `enter` to confirm again. After that, run `source ~/.bashrc` (or where ever your `.bashrc` file is) and try `mh` again. It should work. If not, try restarting your WSL terminal.
+
+# Contributing
+If you are interested in contributing to the MentorHub Developer Edition you should familarize yourself with the [mh zsh script](./mh) and the [docker compose file](../docker-configurations/docker-compose.yaml). If you are editing these files and want to test your changes locally, you can use the following command
+
+```sh
+make install
+```
+
+This script will copy the mh script and docker-compose file to your ~/Applications/Mentorhub/mentorhub folder, which is the default install locaiton. If you have installed in a different location you will need to manually copy the files to your install location to test things locally.
