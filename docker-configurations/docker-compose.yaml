@@ -1,7 +1,11 @@
-# version: '3.1'
+# version: '3.7'
 
 services:
-  mentorhub-mongodb:
+  ##################################
+  # Backing Services 
+  ##################################
+  # MongoDB backing service
+  mongodb:
     image: mongo:7.0.5
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
@@ -15,49 +19,140 @@ services:
       retries: 15
     profiles:
       - all
-      - mongoonly
       - mongodb
+      - mongoonly
+      - kafka
       - curriculum
       - encounter
       - partner
       - person
+      - search
       - topic
       - curriculum-api
       - encounter-api
       - partner-api
       - person-api
+      - search-api
       - topic-api
       - msm
 
-  mentorhub-searchdb:
+  ##################################
+  # Elasticsearch backing service
+  elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.13.2
     environment:
-      discovery.type: single-node
-      cluster-name: mentorHub
-      ELASTIC_PASSWORD: o0=eLmmQbsrdEW89a-Id
+      - "discovery.type=single-node"
+      - "ES_JAVA_OPTS=-Xms2048m -Xmx2048m"
+      - "xpack.security.enabled=false"
+      - "action.destructive_requires_name=false"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
     ports:
-      - "9200:9200"
-    mem_limit: 1g
-    healthcheck:
-      test: ["CMD-SHELL", "curl -s --insecure -u elastic:o0=eLmmQbsrdEW89a-Id https://localhost:9200/_cluster/health | grep -q '\"status\":\"green\"' || exit 1"]
-      interval: 15s
-      timeout: 10s
-      retries: 5
-      start_period: 10s
+      - 9200:9200
     profiles:
       - all
+      - kafka
+      - elasticsearch
       - elasticonly
-      - search
-      - search-db
       - search-api
+      - search
 
+  ##################################
+  # Kibana for Elasticsearch service
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.13.2
+    ports:
+      - 5601:5601
+    depends_on:
+      - elasticsearch
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+      XPACK_ENCRYPTEDSAVEDOBJECTS_ENCRYPTIONKEY: c69548d9027afcf4d55146b1d425a9f4c69548d9027afcf4d55146b1d425a9f4
+    profiles:
+      - all
+      - kafka
+      - elasticsearch
+      - elasticonly
+      - search-api
+      - search
+
+  ##################################
+  # Zookeeper manager for Kafka cluster
+  zookeeper:
+    image: zookeeper:3.9.2
+    ports:
+      - "2181:2181"
+    profiles:
+      - all
+      - kafka
+      - search-api
+      - search
+
+  ##################################
+  # Kafka event bus
+  kafka:
+    image: confluentinc/cp-kafka:7.3.0  
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      CONFLUENT_SUPPORT_METRICS_ENABLE: "false"
+    depends_on:
+      - zookeeper
+    profiles:
+      - all
+      - kafka
+      - search-api
+      - search
+
+  ##################################
+  # Kafka Connector
+  kafka-connect:
+    image: confluentinc/cp-kafka-connect:7.3.10
+    ports:
+      - "9093:9093"
+    environment:
+      CONNECT_BOOTSTRAP_SERVERS: kafka:9092
+      CONNECT_REST_PORT: 9093
+      CONNECT_GROUP_ID: "mongo-elastic-sync"
+      CONNECT_CONFIG_STORAGE_TOPIC: "connect-configs"
+      CONNECT_OFFSET_STORAGE_TOPIC: "connect-offsets"
+      CONNECT_STATUS_STORAGE_TOPIC: "connect-status"
+      CONNECT_KEY_CONVERTER: "org.apache.kafka.connect.storage.StringConverter"
+      CONNECT_VALUE_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
+      CONNECT_PLUGIN_PATH: "/usr/share/java"
+    depends_on:
+      kafka:
+        condition: service_started
+      mentorhub-mongodb:
+        condition: service_completed_successfully
+      mentorhub-elasticsearch:
+        condition: service_completed_successfully
+    profiles:
+      - all
+      - kafka
+      - search-api
+      - search
+
+  ##################################
+  # Backing Service Configuration Utilities
+  ##################################
+  # Mongo Schema Manager utility - for testing of mentorhub-mongodb
+  # Not a part of the deployment code
   msm:
     image: ghcr.io/agile-learning-institute/msm:latest
     depends_on:
-      mentorhub-mongodb:
+      mongodb:
         condition: service_healthy
     environment:
-      - CONNECTION_STRING=mongodb://root:example@mentorhub-mongodb:27017
+      - CONNECTION_STRING=mongodb://root:example@mongodb:27017
       - LOAD_TEST_DATA=true
       - DB_NAME=mentorHub
     volumes:
@@ -65,51 +160,82 @@ services:
     profiles: 
       - msm
 
-  mentorhub-mongomsm:
+  ##################################
+  # Initilize MongoDB and load test data
+  mentorhub-mongodb:
     image: ghcr.io/agile-learning-institute/mentorhub-msm:latest
     depends_on:
-      mentorhub-mongodb:
+      mongodb:
         condition: service_healthy
     environment:
-      - CONNECTION_STRING=mongodb://root:example@mentorhub-mongodb:27017
+      - CONNECTION_STRING=mongodb://root:example@mongodb:27017
       - LOAD_TEST_DATA=true
       - DB_NAME=mentorHub
     profiles:
       - all
+      - kafka
       - mongodb
       - curriculum
       - encounter
       - partner
       - person
+      - search
       - topic
       - curriculum-api
       - encounter-api
       - partner-api
       - person-api
+      - search-api
       - topic-api
+      - msm
 
-  mentorhub-searchinit:
-    image: ghcr.io/agile-learning-institute/mentorhub-search-searchinit:latest
-    depends_on:
-      mentorhub-searchdb:
-        condition: service_healthy
+  ##################################
+  # Initilize Elasticsearch and load test data
+  mentorhub-elasticsearch:
+    image: ghcr.io/agile-learning-institute/mentorhub-elasticsearch:latest
     environment:
-      HOST: mentorhub-searchdb
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+    depends_on:
+      - elasticsearch
     profiles:
       - all
-      - search
-      - search-db
+      - kafka
+      - elasticsearch
       - search-api
+      - search
 
+  ##################################
+  # Initilize Kafka and configure Kafka Connectors
+  mentorhub-kafka:
+    image: ghcr.io/agile-learning-institute/mentorhub-curriculum-api:latest
+    restart: no
+    environment:
+      ELASTIC_CONNECTION_STRING: elasticsearch://
+      KAFKA_CONNECT_URL: kafka-connect://
+      MONGODB_URI: mongodb://root:example@mongodb:27017/?tls=false&directConnection=true
+    depends_on:
+      mentorhub-mongodb:
+        condition: service_completed_successfully
+      mentorhub-elasticsearch:
+        condition: service_completed_successfully
+      kafka-connect:
+        condition: service_started
+    profiles:
+      - all
+      - kafka
+
+  ##################################
+  # API's 
+  ##################################
   mentorhub-curriculum-api:
     image: ghcr.io/agile-learning-institute/mentorhub-curriculum-api:latest
     restart: no
     ports:
       - 8088:8088
     environment:
-      CONNECTION_STRING: mongodb://root:example@mentorhub-mongodb:27017/?tls=false&directConnection=true
+      CONNECTION_STRING: mongodb://root:example@mongodb:27017/?tls=false&directConnection=true
     depends_on:
-      mentorhub-mongomsm:
+      mentorhub-mongodb:
         condition: service_completed_successfully
     profiles:
       - all
@@ -122,9 +248,9 @@ services:
     ports:
       - 8090:8090
     environment:
-      CONNECTION_STRING: mongodb://root:example@mentorhub-mongodb:27017/?tls=false&directConnection=true
+      CONNECTION_STRING: mongodb://root:example@mongodb:27017/?tls=false&directConnection=true
     depends_on:
-      mentorhub-mongomsm:
+      mentorhub-mongodb:
         condition: service_completed_successfully
     profiles:
       - all
@@ -137,9 +263,9 @@ services:
     ports:
       - 8084:8084
     environment:
-      CONNECTION_STRING: mongodb://root:example@mentorhub-mongodb:27017/?tls=false&directConnection=true
+      CONNECTION_STRING: mongodb://root:example@mongodb:27017/?tls=false&directConnection=true
     depends_on:
-      mentorhub-mongomsm:
+      mentorhub-mongodb:
         condition: service_completed_successfully
     profiles:
       - all
@@ -152,9 +278,9 @@ services:
     ports:
       - 8082:8082
     environment:
-      CONNECTION_STRING: mongodb://root:example@mentorhub-mongodb:27017/?tls=false&directConnection=true
+      CONNECTION_STRING: mongodb://root:example@mongodb:27017/?tls=false&directConnection=true
     depends_on:
-      mentorhub-mongomsm:
+      mentorhub-mongodb:
         condition: service_completed_successfully
     profiles:
       - all
@@ -181,15 +307,18 @@ services:
     ports:
       - 8086:8086
     environment:
-      CONNECTION_STRING: mongodb://root:example@mentorhub-mongodb:27017/?tls=false&directConnection=true
+      CONNECTION_STRING: mongodb://root:example@mongodb:27017/?tls=false&directConnection=true
     depends_on:
-      mentorhub-mongomsm:
+      mentorhub-mongodb:
         condition: service_completed_successfully
     profiles:
       - all
       - topic
       - topic-api
 
+  ##################################
+  # SPA's start here
+  ##################################
   mentorhub-curriculum-ui:
     image: ghcr.io/agile-learning-institute/mentorhub-curriculum-ui:latest
     restart: no
