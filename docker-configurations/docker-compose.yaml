@@ -51,6 +51,12 @@ services:
         hard: -1
     ports:
       - 9200:9200
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9200"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
     profiles:
       - all
       - kafka
@@ -131,7 +137,7 @@ services:
     depends_on:
       kafka:
         condition: service_started
-      mentorhub-mongodb:
+      mentorhub-msm:
         condition: service_completed_successfully
       mentorhub-elasticsearch:
         condition: service_completed_successfully
@@ -144,7 +150,7 @@ services:
   ##################################
   # Backing Service Configuration Utilities
   ##################################
-  # Mongo Schema Manager utility - for testing of mentorhub-mongodb
+  # Mongo Schema Manager utility - for testing of mentorhub-msm
   # Not a part of the deployment code
   msm:
     image: ghcr.io/agile-learning-institute/msm:latest
@@ -162,7 +168,7 @@ services:
 
   ##################################
   # Initilize MongoDB and load test data
-  mentorhub-mongodb:
+  mentorhub-msm:
     image: ghcr.io/agile-learning-institute/mentorhub-msm:latest
     depends_on:
       mongodb:
@@ -194,9 +200,14 @@ services:
   mentorhub-elasticsearch:
     image: ghcr.io/agile-learning-institute/mentorhub-elasticsearch:latest
     environment:
-      ELASTICSEARCH_URL: http://elasticsearch:9200
+      CLIENT_OPTIONS: '{"node":"http://elasticsearch:9200"}'
+      MONGO_CONNECTION_STRING: mongodb://root:example@mongodb:27017
+      LOAD_TEST_DATA: true
     depends_on:
-      - elasticsearch
+      mentorhub-msm:
+        condition: service_completed_successfully
+      elasticsearch:
+        condition: service_healthy
     profiles:
       - all
       - kafka
@@ -214,7 +225,7 @@ services:
       KAFKA_CONNECT_URL: kafka-connect://
       MONGODB_URI: mongodb://root:example@mongodb:27017/?tls=false&directConnection=true
     depends_on:
-      mentorhub-mongodb:
+      mentorhub-msm:
         condition: service_completed_successfully
       mentorhub-elasticsearch:
         condition: service_completed_successfully
@@ -235,7 +246,7 @@ services:
     environment:
       CONNECTION_STRING: mongodb://root:example@mongodb:27017/?tls=false&directConnection=true
     depends_on:
-      mentorhub-mongodb:
+      mentorhub-msm:
         condition: service_completed_successfully
     profiles:
       - all
@@ -250,7 +261,7 @@ services:
     environment:
       CONNECTION_STRING: mongodb://root:example@mongodb:27017/?tls=false&directConnection=true
     depends_on:
-      mentorhub-mongodb:
+      mentorhub-msm:
         condition: service_completed_successfully
     profiles:
       - all
@@ -265,7 +276,7 @@ services:
     environment:
       CONNECTION_STRING: mongodb://root:example@mongodb:27017/?tls=false&directConnection=true
     depends_on:
-      mentorhub-mongodb:
+      mentorhub-msm:
         condition: service_completed_successfully
     profiles:
       - all
@@ -280,7 +291,7 @@ services:
     environment:
       CONNECTION_STRING: mongodb://root:example@mongodb:27017/?tls=false&directConnection=true
     depends_on:
-      mentorhub-mongodb:
+      mentorhub-msm:
         condition: service_completed_successfully
     profiles:
       - all
@@ -309,7 +320,7 @@ services:
     environment:
       CONNECTION_STRING: mongodb://root:example@mongodb:27017/?tls=false&directConnection=true
     depends_on:
-      mentorhub-mongodb:
+      mentorhub-msm:
         condition: service_completed_successfully
     profiles:
       - all
