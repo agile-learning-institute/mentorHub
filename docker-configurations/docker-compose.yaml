@@ -225,7 +225,7 @@ services:
   ##################################
   # Initilize Kafka and configure Kafka Connectors
   mentorhub-kafka:
-    image: ghcr.io/agile-learning-institute/mentorhub-curriculum-api:latest
+    image: ghcr.io/agile-learning-institute/mentorhub-kafka:latest
     restart: no
     environment:
       ELASTIC_CONNECTION_STRING: elasticsearch://
