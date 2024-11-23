@@ -22,6 +22,7 @@ services:
       - mongodb
       - mongoonly
       - kafka
+      - kafkaonly
       - curriculum
       - encounter
       - partner
@@ -60,6 +61,7 @@ services:
     profiles:
       - all
       - kafka
+      - kafkaonly
       - elasticsearch
       - elasticonly
       - search-api
@@ -80,6 +82,7 @@ services:
     profiles:
       - all
       - kafka
+      - kafkaonly
       - elasticsearch
       - elasticonly
       - search-api
@@ -94,6 +97,7 @@ services:
     profiles:
       - all
       - kafka
+      - kafkaonly
       - search-api
       - search
 
@@ -119,6 +123,7 @@ services:
     profiles:
       - all
       - kafka
+      - kafkaonly
       - search-api
       - search
 
@@ -151,6 +156,7 @@ services:
     profiles:
       - all
       - kafka
+      - kafkaonly
       - search-api
       - search
 
@@ -187,6 +193,7 @@ services:
     profiles:
       - all
       - kafka
+      - kafkaonly
       - mongodb
       - curriculum
       - encounter
@@ -218,6 +225,7 @@ services:
     profiles:
       - all
       - kafka
+      - kafkaonly
       - elasticsearch
       - search-api
       - search
@@ -241,6 +249,8 @@ services:
     profiles:
       - all
       - kafka
+      - search-api
+      - search
 
   ##################################
   # API's 
