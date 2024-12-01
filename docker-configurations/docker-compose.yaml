@@ -215,7 +215,7 @@ services:
     image: ghcr.io/agile-learning-institute/mentorhub-elasticsearch:latest
     environment:
       CLIENT_OPTIONS: '{"node":"http://elasticsearch:9200"}'
-      MONGO_CONNECTION_STRING: mongodb://root:example@mongodb:27017
+      MONGO_CONNECTION_STRING: mongodb://mongodb:27017/?replicaSet=rs0
       LOAD_TEST_DATA: true
     depends_on:
       mentorhub-msm:
