@@ -17,6 +17,13 @@ Execute the following command from your terminal window, and identify an install
 /bin/bash <(curl https://raw.githubusercontent.com/agile-learning-institute/mentorHub/main/mentorHub-developer-edition/install)
 ```
 
+## Local access to MongoDB 
+
+Access to the MongoDB from you machine requires configuration of the mongodb host in your /etc/hosts file. You can use the following command to make this change. 
+```sh
+echo '127.0.0.1 mongodb' | sudo tee -a /etc/hosts
+```
+
 ## Use
 
 After installation you can use the ``mh`` command to manage the mentorHub micro-services. Here are a few examples.

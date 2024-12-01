@@ -4,25 +4,26 @@ services:
   ##################################
   # Backing Services 
   ##################################
-  # MongoDB backing service
+  # MongoDB backing service (single node replica set)
   mongodb:
     image: mongo:7.0.5
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
     ports:
-      - "27017:27017"
+      - 27017:27017
+    extra_hosts:
+      - "mongodb:127.0.0.1"
     healthcheck:
-      test: ["CMD", "mongosh", "-u", "root", "-p", "example", "--authenticationDatabase", "admin", "--eval", "db.adminCommand('ping')"]
-      interval: 3s
-      timeout: 6s
-      retries: 15
+      test: echo "try { rs.status() } catch (err) { rs.initiate({_id:'rs0',members:[{_id:0,host:'mongodb:27017'}]}) }" | mongosh --port 27017 --quiet
+      interval: 5s
+      timeout: 30s
+      start_period: 0s
+      retries: 30
+    command: ["--replSet", "rs0", "--bind_ip_all", "--port", "27017"]
     profiles:
       - all
-      - mongodb
-      - mongoonly
       - kafka
       - kafkaonly
+      - mongodb
+      - mongoonly
       - curriculum
       - encounter
       - partner
@@ -170,7 +171,7 @@ services:
       mongodb:
         condition: service_healthy
     environment:
-      - CONNECTION_STRING=mongodb://root:example@mongodb:27017
+      - CONNECTION_STRING=mongodb://mongodb:27017/?replicaSet=rs0
       - LOAD_TEST_DATA=true
       - DB_NAME=mentorHub
     volumes:
@@ -186,7 +187,7 @@ services:
       mongodb:
         condition: service_healthy
     environment:
-      - CONNECTION_STRING=mongodb://root:example@mongodb:27017
+      - CONNECTION_STRING=mongodb://mongodb:27017/?replicaSet=rs0
       - LOAD_TEST_DATA=true
       - DB_NAME=mentorHub
     profiles:
@@ -237,7 +238,7 @@ services:
     environment:
       ELASTIC_CONNECTION_STRING: elasticsearch://
       KAFKA_CONNECT_URL: kafka-connect://
-      MONGODB_URI: mongodb://root:example@mongodb:27017/?tls=false&directConnection=true
+      MONGODB_URI: mongodb://mongodb:27017/?replicaSet=rs0
     depends_on:
       mentorhub-msm:
         condition: service_completed_successfully
@@ -260,7 +261,7 @@ services:
     ports:
       - 8088:8088
     environment:
-      CONNECTION_STRING: mongodb://root:example@mongodb:27017/?tls=false&directConnection=true
+      CONNECTION_STRING: mongodb://mongodb:27017/?replicaSet=rs0
     depends_on:
       mentorhub-msm:
         condition: service_completed_successfully
@@ -275,7 +276,7 @@ services:
     ports:
       - 8090:8090
     environment:
-      CONNECTION_STRING: mongodb://root:example@mongodb:27017/?tls=false&directConnection=true
+      CONNECTION_STRING: mongodb://mongodb:27017/?replicaSet=rs0
     depends_on:
       mentorhub-msm:
         condition: service_completed_successfully
@@ -290,7 +291,7 @@ services:
     ports:
       - 8084:8084
     environment:
-      CONNECTION_STRING: mongodb://root:example@mongodb:27017/?tls=false&directConnection=true
+      CONNECTION_STRING: mongodb://mongodb:27017/?replicaSet=rs0
     depends_on:
       mentorhub-msm:
         condition: service_completed_successfully
@@ -305,7 +306,7 @@ services:
     ports:
       - 8082:8082
     environment:
-      CONNECTION_STRING: mongodb://root:example@mongodb:27017/?tls=false&directConnection=true
+      CONNECTION_STRING: mongodb://mongodb:27017/?replicaSet=rs0
     depends_on:
       mentorhub-msm:
         condition: service_completed_successfully
@@ -334,7 +335,7 @@ services:
     ports:
       - 8086:8086
     environment:
-      CONNECTION_STRING: mongodb://root:example@mongodb:27017/?tls=false&directConnection=true
+      CONNECTION_STRING: mongodb://mongodb:27017/?replicaSet=rs0
     depends_on:
       mentorhub-msm:
         condition: service_completed_successfully
@@ -344,7 +345,7 @@ services:
       - topic-api
 
   ##################################
-  # SPA's start here
+  # SPA's
   ##################################
   mentorhub-curriculum-ui:
     image: ghcr.io/agile-learning-institute/mentorhub-curriculum-ui:latest
