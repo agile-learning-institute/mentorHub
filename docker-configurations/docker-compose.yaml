@@ -128,9 +128,9 @@ services:
       - search
 
   ##################################
-  # Kafka Connector
+  # Kafka Connector (Custom connector with Mongo and Elastic plugins)
   kafka-connect:
-    image: confluentinc/cp-kafka-connect:7.3.10
+    image: ghcr.io/agile-learning-institute/mentorhub-kafka-connect:latest
     ports:
       - "9093:8083"
     environment:
@@ -145,7 +145,6 @@ services:
       CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 1
       CONNECT_KEY_CONVERTER: "org.apache.kafka.connect.storage.StringConverter"
       CONNECT_VALUE_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
-      CONNECT_PLUGIN_PATH: "/usr/share/java"
     depends_on:
       kafka:
         condition: service_started
