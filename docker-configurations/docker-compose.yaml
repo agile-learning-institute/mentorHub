@@ -142,9 +142,9 @@ services:
     depends_on:
       kafka:
         condition: service_started
-      mentorhub-msm:
+      initilize-mongodb:
         condition: service_completed_successfully
-      mentorhub-elasticsearch:
+      initilize-elasticsearch:
         condition: service_completed_successfully
     profiles:
       - all
@@ -153,7 +153,7 @@ services:
   ##################################
   # Backing Service Configuration Utilities
   ##################################
-  # Mongo Schema Manager utility - for testing of mentorhub-msm
+  # Mongo Schema Manager utility - for testing of initilize-mongodb
   # Not a part of the deployment code
   msm:
     image: ghcr.io/agile-learning-institute/msm:latest
@@ -171,7 +171,7 @@ services:
 
   ##################################
   # Initilize MongoDB and load test data
-  mentorhub-msm:
+  initilize-mongodb:
     image: ghcr.io/agile-learning-institute/mentorhub-msm:latest
     depends_on:
       mongodb:
@@ -200,14 +200,14 @@ services:
 
   ##################################
   # Initilize Elasticsearch and load test data
-  mentorhub-elasticsearch:
+  initilize-elasticsearch:
     image: ghcr.io/agile-learning-institute/mentorhub-elasticsearch:latest
     environment:
       CLIENT_OPTIONS: '{"node":"http://elasticsearch:9200"}'
       MONGO_CONNECTION_STRING: mongodb://mongodb:27017/?replicaSet=rs0
       LOAD_TEST_DATA: true
     depends_on:
-      mentorhub-msm:
+      initilize-mongodb:
         condition: service_completed_successfully
       elasticsearch:
         condition: service_healthy
@@ -230,7 +230,7 @@ services:
     environment:
       CONNECTION_STRING: mongodb://mongodb:27017/?replicaSet=rs0
     depends_on:
-      mentorhub-msm:
+      initilize-mongodb:
         condition: service_completed_successfully
     profiles:
       - all
@@ -245,7 +245,7 @@ services:
     environment:
       CONNECTION_STRING: mongodb://mongodb:27017/?replicaSet=rs0
     depends_on:
-      mentorhub-msm:
+      initilize-mongodb:
         condition: service_completed_successfully
     profiles:
       - all
@@ -260,7 +260,7 @@ services:
     environment:
       CONNECTION_STRING: mongodb://mongodb:27017/?replicaSet=rs0
     depends_on:
-      mentorhub-msm:
+      initilize-mongodb:
         condition: service_completed_successfully
     profiles:
       - all
@@ -275,7 +275,7 @@ services:
     environment:
       CONNECTION_STRING: mongodb://mongodb:27017/?replicaSet=rs0
     depends_on:
-      mentorhub-msm:
+      initilize-mongodb:
         condition: service_completed_successfully
     profiles:
       - all
@@ -304,7 +304,7 @@ services:
     environment:
       CONNECTION_STRING: mongodb://mongodb:27017/?replicaSet=rs0
     depends_on:
-      mentorhub-msm:
+      initilize-mongodb:
         condition: service_completed_successfully
     profiles:
       - all
