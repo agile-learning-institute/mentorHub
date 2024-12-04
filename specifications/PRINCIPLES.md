@@ -4,7 +4,7 @@
 
 While there is no single definition for microservices, a consensus view has evolved over time in the industry. Micro Services are small in size, messaging-enabled, bounded by contexts, autonomously developed, independently deployable, decentralized and built and released with automated processes.
 
-The micorservice principles used by the mentorHub platform are:
+The microservice principles used by the mentorHub platform are:
 
 - [The 12 Factor Application guides](#the-12-factor-app)
 - [Operations in Microservice Architectures](#operations-in-cloud-native-world)
@@ -25,15 +25,15 @@ The book “The 12 Factor App” by Adam Wiggins has often been cited as a semin
 1. Dependencies - Declarative, not implied
     - Use private pip, npm, nuget, maven packages to share code shared between repo'
 1. Configuration - Describe “The environment” in “the Environment”
-    - Configuration values from environment variables: see [Service Configurabilityh](#service-configurability)
+    - Configuration values from environment variables: see [Service Configurability](#service-configurability)
 1. Backing Services - Treat as attached by the platform
-    - Containerized backing services support local developement environment
+    - Containerized backing services support local development environment
     - Orchestrated infrastructure provides backing services with K8S at runtime
 1. Build, release run - Simple delivery pipeline consisting of only build-release-run
     - CI Pipelines should be very simple and standardized by technology.
-    - Change management is acomplished with container image tagging.
+    - Change management is accomplished with container image tagging.
 1. Process - Designed and deployed as “Stateless” processes
-    - Dockerized means stateless
+    - Docker containers are stateless.
 1. Concurrency - Scale by adding processes
     - (Process) Containers are scaled by K8S
 1. Port Binding
@@ -44,7 +44,7 @@ The book “The 12 Factor App” by Adam Wiggins has often been cited as a semin
     - Disposability also has implications for service granularity
 1. Parity - Dev / Test / Prod should be as similar as possible
     - Infrastructure as Code used to deploy infrastructure for an Environment (Dev, Test, Prod, etc.)
-    - Infrastructure then deployes containers based on a a matching Image tag
+    - Infrastructure then deploys containers based on a a matching Image tag
     - SRE Automation is used to add a tag to an image based on an existing tag, in this way a container can be "promoted" from one environment to the next. This can also be used to deployed the system to a new "Just in time" environment for use in Training, Sales, or other purposes.
 1. Logs - Write event streams to StdOut, allow the platform to consume/manage them
     - We will use AWS OpenSearch as a log aggregation platform.
@@ -65,7 +65,7 @@ In the book “Cloud Adoption Playbook” written by a team of IBM Distinguished
 
 - Automate Everything
   - If you do it twice, automate it the third time.
-  - Build Runbooks to standarize automation
+  - Build Runbooks to standardize automation
   - Favor Simplicity
 
 ## Separation of Concerns
@@ -93,7 +93,7 @@ One of the defining characteristics of a Microservice is that it is “autonomou
   - Business Logic, including Advanced Computation, Neural Algorithms, etc.
   - Validation of data - multi-field or complex validation constraints
     - Some validation will be “duplicated” in the UI
-    - The data layer implements well defined schemas constraints and the API can deligate enforcement of these to the database.
+    - The data layer implements well defined schemas constraints and the API can delegate enforcement of these to the database.
 - The Operations (SRE Guild)
   - CI/CD with K8S, Helm, Argo
   - Private/Public Docker Container registries
@@ -136,13 +136,13 @@ Configuration options should be specified on container startup, and managed by K
 
 Service disposability has two very different meanings within an architecture. The first is pretty straight forward, in an orchestrated container environment the developer should assume that the process will be stopped and started frequently. While the application and containers may in fact have rather long run life, the principle of fast start / stop operations is a key attribute of a service that can be orchestrated effectively.
 
-The second and more esoteric aspect of disposability has to do with the size of the service. The principle is that recreating a service from scracth may be eaiser than untangling complex code written by a long-gone developer. This principle has a direct impact on the autonomous development aspects of a microservice architecture and dove-tails with the configurability principles.
+The second and more esoteric aspect of disposability has to do with the size of the service. The principle is that recreating a service from scratch may be easier than untangling complex code written by a long-gone developer. This principle has a direct impact on the autonomous development aspects of a microservice architecture and dove-tails with the configurability principles.
 
 ## Service Observability
 
 While the Docker environment itself can provide visibility into container resource utilization (Memory, CPU, Network and Disk) there are typically additional pieces of information that should be observable within the system. We have adopted a standard of implementing two standard endpoints that expose this additional information.
 
-The Health endpoint is designed to provide information about the health of the service, and follows the standard endpoint definition used by the Promethius monitoring project. This will include information about the state of backing services (Database, ServiceBus, Integration Endpoints etc.) as well as the performance of the services (Usage, Response Time, etc.)
+The Health endpoint is designed to provide information about the health of the service, and follows the standard endpoint definition used by the Prometheus monitoring project. This will include information about the state of backing services (Database, ServiceBus, Integration Endpoints etc.) as well as the performance of the services (Usage, Response Time, etc.)
 
 The Config endpoint is designed to provide information about the services configuration at runtime. This includes version and release information, non-secret connection data, git hashes, dependency information, or other information that describes the API that is running.
 

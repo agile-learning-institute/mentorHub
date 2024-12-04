@@ -15,12 +15,12 @@ The Roadmap below identifies that a significant portion of the "SRE First" **Now
 - [x] Sree the SRE opens an admin view in a SPA and then they can review Versions of different components of the system, configuration values, and other information helpful during incident response.
 - [x] Tonya the Tester issues a single bash command and then the solution is available for local testing.
 - [ ] A new container is deployed to a registry, and tagged for the DEV environment and then the development environment deploys the new container.
-- [ ] Sree the SRE documents the infrastructure for an environment and runs a script and then a new cloud enviornment is provisioned and configured to deploy images with a unique tag.
-- [ ] Sree the SRE runs a "promote" runbook, and then a new tag is associated with images that contain another tag. i.e. Promte all current Dev containers to Test.
+- [ ] Sree the SRE documents the infrastructure for an environment and runs a script and then a new cloud environment is provisioned and configured to deploy images with a unique tag.
+- [ ] Sree the SRE runs a "promote" runbook, and then a new tag is associated with images that contain another tag. i.e. Promote all current Dev containers to Test.
 
 ## Next
 
-- [ ] Mentor colaborates with the apprentice to update their curriculum and then the system suggests content and warns if the work assigned exceeds the members committed capacity. Suggestions can be based on the following factors:
+- [ ] Mentor collaborates with the apprentice to update their curriculum and then the system suggests content and warns if the work assigned exceeds the members committed capacity. Suggestions can be based on the following factors:
   - Current skills in the topic
   - Desired specialty
   - Member goals
@@ -35,7 +35,7 @@ The Roadmap below identifies that a significant portion of the "SRE First" **Now
 
 - [ ] Sree the SRE runs a runbook script and then services from one environment are promoted into another.
 
-- [ ] Sree the SRE reviews a Promethius/Grafana monitoring portal including health information from system APIs, and then they can view performance and throughput metrics to support incident response.
+- [ ] Sree the SRE reviews a Prometheus/Grafana monitoring portal including health information from system APIs, and then they can view performance and throughput metrics to support incident response.
 
 - [ ] Sam the Software Engineer creates black-box testing for their components and then they can be more confident in the performance of their code, and they can provide a starting place for the SQA team to build automated end-to-end testing.
 
