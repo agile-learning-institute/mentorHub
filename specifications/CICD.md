@@ -2,13 +2,10 @@
 
 ## Overview
 
-Repo Structure Standards have a /src/docker folder with the following files:
-
-- /src/docker/docker-build.sh
-- /src/docker/Dockerfile
-
-docker-build.sh uses docker build to create a single image targeted to the users architecture. Multi-Architecture images are created and pushed to our GitHub Container Registry by GitHub Actions CI.
-These GitHub actions build and push containers with a :latest tag
+Repo Structure Standards 
+- Each repo should use it's native dependency management tool (npm, pipenv, maven, etc.) to support automations like container creation and testing. 
+- The Dockerfile should be at the root of the repo, sample Dockerfiles can be found in the [docker-configurations](../docker-configurations/) folder. 
+- Multi-Architecture images (AMD and ARM) are created and pushed to our GitHub Container Registry by GitHub Actions CI. All Dockerfiles should support these CPU architectures. These GitHub actions build and push containers with a :latest tag
 
 ## Dockerfile Templates
 
