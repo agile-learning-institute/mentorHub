@@ -290,7 +290,7 @@ services:
     environment:
       HOST: mentorhub-searchdb
     depends_on:
-      mentorhub-searchinit:
+      initilize-elasticsearch:
         condition: service_completed_successfully
     profiles:
       - all
