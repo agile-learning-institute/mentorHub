@@ -20,10 +20,10 @@ services:
     command: ["--replSet", "rs0", "--bind_ip_all", "--port", "27017"]
     profiles:
       - all
-      - kafka
-      - kafkaonly
+      - kafka-connect
       - mongodb
       - mongoonly
+      - elasticsearch
       - curriculum
       - encounter
       - partner
@@ -58,11 +58,10 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-      start_period: 10s
+      start_period: 15s
     profiles:
       - all
-      - kafka
-      - kafkaonly
+      - kafka-connect
       - elasticsearch
       - elasticonly
       - search-api
@@ -75,15 +74,15 @@ services:
     ports:
       - 5601:5601
     depends_on:
-      - elasticsearch
+      elasticsearch:
+        condition: service_healthy
     environment:
       ELASTICSEARCH_URL: http://elasticsearch:9200
       ELASTICSEARCH_HOSTS: http://elasticsearch:9200
       XPACK_ENCRYPTEDSAVEDOBJECTS_ENCRYPTIONKEY: c69548d9027afcf4d55146b1d425a9f4c69548d9027afcf4d55146b1d425a9f4
     profiles:
       - all
-      - kafka
-      - kafkaonly
+      - kafka-connect
       - elasticsearch
       - elasticonly
       - search-api
@@ -97,10 +96,7 @@ services:
       - "2181:2181"
     profiles:
       - all
-      - kafka
-      - kafkaonly
-      - search-api
-      - search
+      - kafka-connect
 
   ##################################
   # Kafka event bus
@@ -123,10 +119,7 @@ services:
       - zookeeper
     profiles:
       - all
-      - kafka
-      - kafkaonly
-      - search-api
-      - search
+      - kafka-connect
 
   ##################################
   # Kafka Connector (Custom connector with Mongo and Elastic plugins)
@@ -155,10 +148,7 @@ services:
         condition: service_completed_successfully
     profiles:
       - all
-      - kafka
-      - kafkaonly
-      - search-api
-      - search
+      - kafka-connect
 
   ##################################
   # Backing Service Configuration Utilities
@@ -192,8 +182,7 @@ services:
       - DB_NAME=mentorHub
     profiles:
       - all
-      - kafka
-      - kafkaonly
+      - kafka-connect
       - mongodb
       - curriculum
       - encounter
@@ -222,33 +211,11 @@ services:
         condition: service_completed_successfully
       elasticsearch:
         condition: service_healthy
+      mongodb:
+        condition: service_healthy
     profiles:
       - all
-      - kafka
-      - kafkaonly
-      - elasticsearch
-      - search-api
-      - search
-
-  ##################################
-  # Initilize Kafka and configure Kafka Connectors
-  mentorhub-kafka:
-    image: ghcr.io/agile-learning-institute/mentorhub-kafka:latest
-    restart: no
-    environment:
-      ELASTIC_CONNECTION_STRING: elasticsearch://
-      KAFKA_CONNECT_URL: kafka-connect://
-      MONGODB_URI: mongodb://mongodb:27017/?replicaSet=rs0
-    depends_on:
-      mentorhub-msm:
-        condition: service_completed_successfully
-      mentorhub-elasticsearch:
-        condition: service_completed_successfully
-      kafka-connect:
-        condition: service_started
-    profiles:
-      - all
-      - kafka
+      - kafka-connect
       - search-api
       - search
 
