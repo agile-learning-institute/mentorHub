@@ -20,18 +20,17 @@ Integration domains use request(sync)/reply(source) collections to implement asy
 
 ```mermaid
 flowchart LR
-    APIG((URL Router))
-    BUS(AWS Event Stream)
-    --> DataLake[(Data Lake)]
+    APIG((API Gateway))
+    BUS(Kafka Connect)
+    BUS --> DataLake[(Data Lake)]
 
     APIG --> SearchUI([mentorHub-search-ui])
     subgraph Search
         SearchUI
         --> SearchAPI(mentorHub-search-api)
-        --> SearchService[(OpenSearch)]
-        Lambda --> SearchService
+        --> SearchService[(ElasticSearch)]
     end
-    Lambda <--> BUS
+    SearchService --> BUS
     
     APIG
     --> PersonUI([mentorHub-person-ui])
