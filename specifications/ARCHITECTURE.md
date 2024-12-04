@@ -20,7 +20,7 @@ Integration domains use request(sync)/reply(source) collections to implement asy
 
 ```mermaid
 flowchart LR
-    APIG((API Gateway))
+    APIG((Browser))
     BUS(Kafka Connect)
     BUS --> DataLake[(Data Lake)]
 
