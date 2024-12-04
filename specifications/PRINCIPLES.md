@@ -91,16 +91,15 @@ One of the defining characteristics of a Microservice is that it is “autonomou
   - A Stateless, Restful API
   - Enforcing Access control with Bearer Tokens
   - Business Logic, including Advanced Computation, Neural Algorithms, etc.
-  - Complete validation of data - multi-field or complex validation constraints
-    - Some validation will be “duplicated” or auto-generated based on JSON schema constraints
-    - Some validation will only be done by API layer. Validation constraints at the Data layer should be relaxed relative to the constraints enforced by the API.
+  - Validation of data - multi-field or complex validation constraints
+    - Some validation will be “duplicated” in the UI
+    - The data layer implements well defined schemas constraints and the API can deligate enforcement of these to the database.
 - The Operations (SRE Guild)
-  - CI/CD with K8S, Helm?, Argo?
-  - ? Private ? Docker Container registry
-  - ? Private ? Dependency Registries (Pypl, npm, nuget, maven)
-  - Dependency Governance?
-  - Open Source Service Implementations
-    - KeyCloak Identity Service
+  - CI/CD with K8S, Helm, Argo
+  - Private/Public Docker Container registries
+  - Private/Public Dependency Registries (Pypl, npm, nuget, maven) if needed
+  - Dependency Governance - license, security, quality reporting
+  - Identity Services - KeyCloak or Auth0
   
 ## Development Contracts
 
@@ -116,18 +115,20 @@ Data Engineers frequently use service bus architectures to support publish/subsc
 
 ## Service Granularity
 
-If a Microservice architecture divides the application into microservices one of the first questions that comes up is service granularity. In our opinion, is easy to get carried away and break an application up into dozens of services ( or serverless functions! ) when they would be better addressed with a single API on a single Model. We start by breaking an application up into services that can be independently developed, tested and deployed. We strive for services that are very simple and have 1 user interface, that communicates with 1 API, that uses 1 database. While not all solutions will use this pattern, deviations from this pattern should deserve extra consideration.
+If a Microservice architecture divides the application into microservices one of the first questions that comes up is service granularity. We start by breaking an application up into services that can be independently developed, tested and deployed. We strive for services that are very simple and have 1 user interface, that communicates with 1 API, that uses 1 database. While not all solutions will use this pattern, deviations from this pattern should deserve extra consideration.
 
 When identifying bounded domains there are a number of factors that can influence service size. Isolation of subsystems that have special security or performance requirements is one driving factor. Isolating identity services that have special data protection measures, and isolation of Personally Identifiable Information (PII) from access credentials is a best practice. Isolation of search use cases is another common division based on the impact of search on database performance, and allows for optimization of data structures to support search. Integrations are a third common pattern for isolation based on avoiding run-time dependencies on external services.
 
 Another factor that will influence the granularity of services is the principle of independently developed, tested and deployed components. If a problem space is large enough to require multiple developers to work on any component of that service then that service is probably too large.
 
+It is easy to get carried away and break an application up into dozens of services ( or serverless functions! ) when they would be better addressed with a single API on a single Model. The mentorHub architecture uses fairly fine grained microservices, both for reasons of disposability and in order to provide more members the chance to "own" a code base. 
+
 ## Service Configurability
 
 Microservices are by nature small, and should be viewed as bespoke components of the system. In general, it’s best to minimize configuration options and the development, testing and release complications associated with them. That being said, every service will have need of “secret” configuration values, or other values that describe the environment the service is running in. Our services will always look to environment variables to provide this information. Services that want to support other configuration approaches are encouraged to use this hierarchy, that is if the first is not found, move on to the second and so forth:
 
-- Discrete environment variable values (configuration options)
 - Discrete configuration files (secure secrets)
+- Discrete environment variable values (configuration options)
 
 Configuration options should be specified on container startup, and managed by K8S. Use of configuration options should be limited to required environmental values. Adding configuration options will require special consideration when designing, building, and running automated testing.
 
