@@ -293,6 +293,7 @@ services:
       - 8081:8081
     environment:
       HOST: mentorhub-searchdb
+      CONNECTION_STRING: '{"node":"http://elasticsearch:9200"}'
     depends_on:
       initialize-elasticsearch:
         condition: service_completed_successfully
