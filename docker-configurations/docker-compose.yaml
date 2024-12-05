@@ -24,6 +24,7 @@ services:
       - mongodb
       - mongoonly
       - elasticsearch
+      - elasticonly
       - curriculum
       - encounter
       - partner
@@ -184,6 +185,7 @@ services:
       - all
       - kafka-connect
       - elasticsearch
+      - elasticonly
       - mongodb
       - curriculum
       - encounter
