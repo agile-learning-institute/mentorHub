@@ -183,6 +183,7 @@ services:
     profiles:
       - all
       - kafka-connect
+      - elasticsearch
       - mongodb
       - curriculum
       - encounter
@@ -215,6 +216,7 @@ services:
         condition: service_healthy
     profiles:
       - all
+      - elasticsearch
       - kafka-connect
       - search-api
       - search
