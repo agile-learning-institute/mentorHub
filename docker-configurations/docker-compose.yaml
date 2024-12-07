@@ -48,6 +48,7 @@ services:
       - "ES_JAVA_OPTS=-Xms2048m -Xmx2048m"
       - "xpack.security.enabled=false"
       - "action.destructive_requires_name=false"
+      - "network.bind_host=0.0.0.0"
     ulimits:
       memlock:
         soft: -1
