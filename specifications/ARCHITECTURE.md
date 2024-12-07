@@ -30,7 +30,7 @@ flowchart LR
         --> SearchAPI(mentorHub-search-api)
         --> SearchService[(ElasticSearch)]
     end
-    SearchService --> BUS
+    SearchService <--> BUS
     
     APIG
     --> PersonUI([mentorHub-person-ui])
