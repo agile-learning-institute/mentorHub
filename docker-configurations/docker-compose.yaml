@@ -229,7 +229,7 @@ services:
     ports:
       - 8088:8088
     environment:
-      CONNECTION_STRING: mongodb://mongodb:27017/?replicaSet=rs0
+      MONGO_CONNECTION_STRING: mongodb://mongodb:27017/?replicaSet=rs0
     depends_on:
       initialize-mongodb:
         condition: service_completed_successfully
@@ -244,7 +244,7 @@ services:
     ports:
       - 8090:8090
     environment:
-      CONNECTION_STRING: mongodb://mongodb:27017/?replicaSet=rs0
+      MONGO_CONNECTION_STRING: mongodb://mongodb:27017/?replicaSet=rs0
     depends_on:
       initialize-mongodb:
         condition: service_completed_successfully
@@ -259,7 +259,7 @@ services:
     ports:
       - 8084:8084
     environment:
-      CONNECTION_STRING: mongodb://mongodb:27017/?replicaSet=rs0
+      MONGO_CONNECTION_STRING: mongodb://mongodb:27017/?replicaSet=rs0
     depends_on:
       initialize-mongodb:
         condition: service_completed_successfully
@@ -274,7 +274,7 @@ services:
     ports:
       - 8082:8082
     environment:
-      CONNECTION_STRING: mongodb://mongodb:27017/?replicaSet=rs0
+      MONGO_CONNECTION_STRING: mongodb://mongodb:27017/?replicaSet=rs0
     depends_on:
       initialize-mongodb:
         condition: service_completed_successfully
@@ -289,7 +289,6 @@ services:
     ports:
       - 8081:8081
     environment:
-      HOST: mentorhub-searchdb
       ELASTIC_CLIENT_OPTIONS: '{"node":"http://elasticsearch:9200"}'
     depends_on:
       initialize-elasticsearch:
@@ -304,7 +303,7 @@ services:
     ports:
       - 8086:8086
     environment:
-      CONNECTION_STRING: mongodb://mongodb:27017/?replicaSet=rs0
+      MONGO_CONNECTION_STRING: mongodb://mongodb:27017/?replicaSet=rs0
     depends_on:
       initialize-mongodb:
         condition: service_completed_successfully
